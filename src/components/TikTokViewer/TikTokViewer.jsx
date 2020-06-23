@@ -25,8 +25,6 @@ class TikTokViewer extends Component {
         {this.state.title}
         {this.state.html}
         <Buttons />
-        // <button className="previous">Previous</button>
-        // <button className="next">Next</button>
       </div>
     );
   };

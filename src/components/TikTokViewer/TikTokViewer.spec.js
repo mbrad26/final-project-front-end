@@ -17,13 +17,4 @@ describe('TikTokViewer', () => {
   it('should render Buttons component', () => {
     expect(wrapper.containsMatchingElement(<Buttons />)).toEqual(true)
   });
-
-
-  // it('should render a button', () => {
-  //   expect(wrapper.find('button.previous').length).toEqual(1);
-  // })
-  //
-  // it('should render a button', () => {
-  //   expect(wrapper.find('button.next').length).toEqual(1);
-  // })
 });
