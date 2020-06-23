@@ -4,7 +4,7 @@ import App from './App';
 import TikTokViewer from '../TikTokViewer/TikTokViewer';
 
 describe('App', () => {
-  
+
   it('should render a div', () => {
     let wrapper = shallow(<App />);
     expect(wrapper.find('div.App').length).toEqual(1);

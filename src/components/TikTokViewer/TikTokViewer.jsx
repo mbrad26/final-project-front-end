@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Buttons from '../Buttons/Buttons'
 
 class TikTokViewer extends Component {
   state = {
@@ -23,8 +24,9 @@ class TikTokViewer extends Component {
       <div className="tik-tok-viewer" data-cy="tik-tok">
         {this.state.title}
         {this.state.html}
-        <button className="previous">Previous</button>
-        <button className="next">Next</button>
+        <Buttons />
+        // <button className="previous">Previous</button>
+        // <button className="next">Next</button>
       </div>
     );
   };
