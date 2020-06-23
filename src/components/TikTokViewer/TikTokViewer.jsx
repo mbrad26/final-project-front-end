@@ -5,7 +5,7 @@ class TikTokViewer extends Component {
   state = {
     suffix: "https://vm.tiktok.com/JeJCFTp/",
     title: null,
-    thumbnail_url: null,
+    html: null,
   };
 
   componentDidMount = () => {
@@ -13,9 +13,8 @@ class TikTokViewer extends Component {
     axios.get(prefix + this.state.suffix).then((response) => {
       this.setState({
         title: response.data.title,
-        thumbnail_url: response.data.thumbnail_url,
+        html: response.data.html
       });
-      console.log(this.state.thumbnail_url);
     });
   };
 
@@ -23,6 +22,9 @@ class TikTokViewer extends Component {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
         {this.state.title}
+        {this.state.html}
+        <button className="previous">Previous</button>
+        <button className="next">Next</button>
       </div>
     );
   };
