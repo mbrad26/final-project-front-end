@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
+import TikTokViewer from '../TikTokViewer/TikTokViewer'
 
 function App() {
   return (
     <div className="App">
-      Hello world.
+      <TikTokViewer />
     </div>
   );
 }
