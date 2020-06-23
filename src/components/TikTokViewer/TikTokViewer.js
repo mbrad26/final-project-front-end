@@ -4,7 +4,9 @@ class TikTokViewer extends Component {
 
   render = () => {
     return (
-        <div>Hello world.</div>
+        <div className="tik-tok-viewer">
+          Hello world.
+        </div>
       )
   }
 
