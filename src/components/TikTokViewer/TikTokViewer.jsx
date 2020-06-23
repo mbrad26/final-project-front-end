@@ -23,7 +23,6 @@ class TikTokViewer extends Component {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
         {this.state.title}
-        {this.state.html}
         <Buttons />
       </div>
     );

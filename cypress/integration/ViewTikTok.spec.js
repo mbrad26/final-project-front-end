@@ -25,11 +25,14 @@ describe("Viewing Tik Tok", () => {
       "https://www.tiktok.com/oembed?url=https://vm.tiktok.com/JeJCFTp/",
       response
     ).as("tikToks");
+
     cy.visit("http://localhost:3000");
+
     cy.wait("@tikToks").then((xhr) => {
+
       cy.get("[data-cy=tik-tok]").should(
-        "have.text",
-        "Spooky season dance, try it, it’s so fun #fyp #duetthis #dance #halloween #foryou"
+          "contain",
+          "Spooky season dance, try it, it’s so fun #fyp #duetthis #dance #halloween #foryou"
       );
     });
   });
