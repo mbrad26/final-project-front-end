@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Buttons from '../Buttons/Buttons'
+import Buttons from '../Buttons/Buttons';
+import './TikTokViewer.css';
+
 
 class TikTokViewer extends Component {
   state = {
