@@ -5,8 +5,8 @@ class Buttons extends Component {
   render() {
     return (
       <div className='buttons-container'>
-        <button className="previous">Previous</button>
-        <button className="next">Next</button>
+        <button className="previous" onClick={this.props.handlePrevious}>Previous</button>
+        <button className="next" onClick={this.props.handleNext}>Next</button>
       </div>
     )
   }

@@ -5,10 +5,18 @@ import './TikTokViewer.css'
 
 
 class TikTokViewer extends Component {
+
   state = {
-    suffix: "https://www.tiktok.com/@lzz03/video/6840824663585639686",
+    playlist: [
+  	'https://www.tiktok.com/@lzz03/video/6840824663585639686',
+  	'https://www.tiktok.com/@pegleg89/video/6825998203897285893',
+  	'https://www.tiktok.com/@bboyrockbittu/video/6840874385415343361',
+  	'https://www.tiktok.com/@itsoraida/video/6841342984550731014',
+  	'https://www.tiktok.com/@pinknews/video/6841577503472061702'
+    ],
     title: null,
     url: null,
+    currentClip: 0
   };
 
   tikTokApi = (url) => {
@@ -25,14 +33,14 @@ class TikTokViewer extends Component {
   }
 
   componentDidMount = () => {
-    this.tikTokApi(this.state.suffix);
+    this.tikTokApi(this.state.playlist[0]);
   };
 
   render = () => {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
-        {this.state.title}
-        <video src={this.state.url} controls autoPlay loop muted />
+        {this.state.title}<br />
+        <video src={this.state.url} controls height='300' width='169'/>
         <Buttons />
       </div>
     );

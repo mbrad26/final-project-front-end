@@ -3,7 +3,7 @@ describe("Viewing Tik Tok", () => {
     cy.server();
     cy.route(
       "GET",
-      "https://www.tiktok.com/oembed?url=https://vm.tiktok.com/JeJCFTp/",
+      "https://www.tiktok.com/oembed?url=https://www.tiktok.com/@lzz03/video/6840824663585639686",
       'fixture:tikTok'
     ).as("tikToks");
 
@@ -20,5 +20,6 @@ describe("Viewing Tik Tok", () => {
     cy.get(".next")
       .click()
 
+    cy.get(".previous")
+      .click()
   });
-});
