@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
-import TikTokViewer from '../TikTokViewer/TikTokViewer.jsx'
+import TikTokViewer from '../TikTokViewer/TikTokViewer.jsx';
+import Navbar from '../Navbar/Navbar.jsx';
 
 function App() {
   return (
-    <div className="App">
+    <div className="app-container">
+      <Navbar />
       <TikTokViewer />
     </div>
   );
