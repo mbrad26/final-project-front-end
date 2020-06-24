@@ -16,5 +16,9 @@ describe("Viewing Tik Tok", () => {
           "Spooky season dance, try it, it’s so fun #fyp #duetthis #dance #halloween #foryou"
       );
     });
+
+    cy.get(".next")
+      .click()
+
   });
 });

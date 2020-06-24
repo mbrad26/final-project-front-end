@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import App from './App';
 import TikTokViewer from '../TikTokViewer/TikTokViewer';
 import Navbar from '../Navbar/Navbar';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 
 describe('App', () => {
 
@@ -16,11 +18,19 @@ describe('App', () => {
     expect(wrapper.find('div.app-container').length).toEqual(1);
   });
 
-  it('should render TikTok component', () => {
-    expect(wrapper.containsMatchingElement(<TikTokViewer />)).toEqual(true);
-  });
-
   it('should render Navbar component', () => {
     expect(wrapper.containsMatchingElement(<Navbar />)).toEqual(true);
+  })
+});
+
+describe('Mounted App', () => {
+  it('should render TikTokViewer component', () => {
+    const wrapper = mount(
+                  <MemoryRouter initialEntries={[ '/' ]}>
+                    <App/>
+                  </MemoryRouter>
+                );
+
+    expect(wrapper.containsMatchingElement(<TikTokViewer />)).toEqual(true);
   })
 });
