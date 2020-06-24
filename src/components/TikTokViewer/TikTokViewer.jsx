@@ -19,6 +19,24 @@ class TikTokViewer extends Component {
     currentClip: 0
   };
 
+  handleNext = () => {
+
+    this.setState({
+      currentClip: ++this.state.currentClip
+    })
+    this.tikTokApi(this.state.playlist[this.state.currentClip])
+
+  }
+
+  handlePrevious = () => {
+
+    this.setState({
+      currentClip: --this.state.currentClip
+    })
+    this.tikTokApi(this.state.playlist[this.state.currentClip])
+
+  }
+
   tikTokApi = (url) => {
     const prefix = "https://www.tiktok.com/oembed?url=";
     axios.get(prefix + url).then((response) => {
@@ -40,8 +58,8 @@ class TikTokViewer extends Component {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
         {this.state.title}<br />
-        <video src={this.state.url} controls height='300' width='169'/>
-        <Buttons />
+        <video src={this.state.url} controls muted autoPlay loop height='480' width='250'/>
+        <Buttons handleNext={this.handleNext} handlePrevious={this.handlePrevious} />
       </div>
     );
   };
