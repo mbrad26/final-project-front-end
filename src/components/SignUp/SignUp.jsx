@@ -14,6 +14,7 @@ class SignUp extends Component {
       <div className='form-container'>
         Sign Up
         <form>
+          <input name='username' placeholder='Username' required/>
         </form>
       </div>
     )

@@ -23,4 +23,10 @@ describe('SignUp', () => {
     expect(wrapper.state('password')).toEqual('');
     expect(wrapper.state('password_confirmation')).toEqual('');
   });
+
+  it('should render a input area for username', () => {
+    expect(wrapper.find('input').at(0).props().name).toBe('username');
+    expect(wrapper.find('input').at(0).props().placeholder).toBe('Username');
+    expect(wrapper.find('input').at(0).props()).toHaveProperty('required');
+  });
 });
