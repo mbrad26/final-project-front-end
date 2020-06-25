@@ -53,4 +53,10 @@ describe('SignUp', () => {
     expect(wrapper.find('input').at(3).props().placeholder).toBe('Password Confirmation');
     expect(wrapper.find('input').at(3).props()).toHaveProperty('required');
   });
+
+  it('should render a input area for password confirmation', () => {
+    expect(wrapper.find('button').props().type).toBe('submit');
+    expect(wrapper.find('button').props().className).toBe('signup')
+    expect(wrapper.find('button').text()).toBe('Sign Up')
+  });
 });
