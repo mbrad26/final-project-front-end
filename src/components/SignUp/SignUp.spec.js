@@ -37,4 +37,20 @@ describe('SignUp', () => {
     expect(wrapper.find('input').at(1).props().placeholder).toBe('Email');
     expect(wrapper.find('input').at(1).props()).toHaveProperty('required');
   });
+
+  it('should render a input area for password', () => {
+    expect(wrapper.find('input').at(2).props().type).toBe('password');
+    expect(wrapper.find('input').at(2).props().minlength).toBe("6");
+    expect(wrapper.find('input').at(2).props().name).toBe('password');
+    expect(wrapper.find('input').at(2).props().placeholder).toBe('Password');
+    expect(wrapper.find('input').at(2).props()).toHaveProperty('required');
+  });
+
+  it('should render a input area for password confirmation', () => {
+    expect(wrapper.find('input').at(3).props().type).toBe('password');
+    expect(wrapper.find('input').at(3).props().minlength).toBe("6");
+    expect(wrapper.find('input').at(3).props().name).toBe('confirm-password');
+    expect(wrapper.find('input').at(3).props().placeholder).toBe('Password Confirmation');
+    expect(wrapper.find('input').at(3).props()).toHaveProperty('required');
+  });
 });
