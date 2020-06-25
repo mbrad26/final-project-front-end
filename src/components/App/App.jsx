@@ -11,8 +11,8 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/' component={TikTokViewer} />
-          <Route path='/signup' component={SignUp} />
+          <Route path='/' exact component={TikTokViewer} />
+          <Route path='/signup' exact component={SignUp} />
         </Switch>
       </Router>
     </div>

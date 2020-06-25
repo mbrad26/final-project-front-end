@@ -21,6 +21,7 @@ describe('Navbar', () => {
 
   it('should have a Sign Up link', () => {
     expect(wrapper.find(Link).at(1).props().to).toBe('/signup');
+    expect(wrapper.find(Link).at(1).props().id).toBe('register-account')
     expect(wrapper.find(Link).at(1).text()).toBe('Sign Up')
   });
 });

@@ -2,7 +2,7 @@ describe('User registration', () => {
   it('register a new user account', () => {
     cy.visit("http://localhost:3000")
 
-    cy.get('.register-account').click()
+    cy.get('#register-account').click()
     cy.location('pathname').should('eq', '/signup')
 
     cy.get('form')
