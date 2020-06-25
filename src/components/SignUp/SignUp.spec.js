@@ -63,4 +63,20 @@ describe('SignUp', () => {
     expect(wrapper.find('button').props().className).toBe('signup')
     expect(wrapper.find('button').text()).toBe('Sign Up')
   });
+
+  describe('#handleChange', () => {
+    it('is called when a change is detected', () => {
+      const spy = jest.spyOn(wrapper.instance(), 'handleChange');
+      wrapper.instance().forceUpdate();
+
+      expect(spy).toHaveBeenCalledTimes(0);
+      
+      for(let i=0; i<4; i++) {
+
+        wrapper.find('input').at(i).simulate('change');
+      }
+
+      expect(spy).toHaveBeenCalledTimes(4);
+    });
+  });
 });
