@@ -10,10 +10,11 @@
     "cypress": "^4.8.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "nyc": "^15.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router": "5.2.0",
-    "react-router-dom": "5.2.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-test-renderer": "^16.13.1"
   },

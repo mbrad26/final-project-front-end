@@ -46,12 +46,5 @@ describe('TikTokViewer', () => {
 
     });
 
-
-
-
-
   });
-
 });
-
-

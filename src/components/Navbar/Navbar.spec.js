@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Navbar from './Navbar';
-import { MemoryRouter } from 'react-router';
 
 describe('Navbar', () => {
   let wrapper;
@@ -13,8 +12,4 @@ describe('Navbar', () => {
   it('should render a nav', () => {
     expect(wrapper.find('nav').length).toEqual(1);
   });
-});
-
-describe('Mounted Navbar', () => {
-
 });
