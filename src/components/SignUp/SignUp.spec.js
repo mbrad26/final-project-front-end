@@ -25,8 +25,16 @@ describe('SignUp', () => {
   });
 
   it('should render a input area for username', () => {
+    expect(wrapper.find('input').at(0).props().type).toBe('text');
     expect(wrapper.find('input').at(0).props().name).toBe('username');
     expect(wrapper.find('input').at(0).props().placeholder).toBe('Username');
     expect(wrapper.find('input').at(0).props()).toHaveProperty('required');
+  });
+
+  it('should render a input area for email', () => {
+    expect(wrapper.find('input').at(1).props().type).toBe('email');
+    expect(wrapper.find('input').at(1).props().name).toBe('email');
+    expect(wrapper.find('input').at(1).props().placeholder).toBe('Email');
+    expect(wrapper.find('input').at(1).props()).toHaveProperty('required');
   });
 });
