@@ -65,15 +65,22 @@ describe('SignUp', () => {
   });
 
   describe('#handleChange', () => {
+    let mockEvent;
+
+    beforeEach(() => {
+      mockEvent = {
+        target: {
+          value: 'changedvalue'
+        }
+      };
+    });
+
     it('should be called when a change is detected', () => {
       const spy = jest.spyOn(wrapper.instance(), 'handleChange');
       wrapper.instance().forceUpdate();
-
       expect(spy).toHaveBeenCalledTimes(0);
-
       for(let i=0; i<4; i++) {
-
-        wrapper.find('input').at(i).simulate('change', { target: { value: 'changedvalue' } });
+        wrapper.find('input').at(i).simulate('change', mockEvent);
       }
 
       expect(spy).toHaveBeenCalledTimes(4);
@@ -82,13 +89,13 @@ describe('SignUp', () => {
     it('updates the state with event value', () => {
       for(let i=0; i<4; i++) {
         const input = wrapper.find('input').at(i)
-        input.simulate('change', { target: { value: 'helloworld' } })
+        input.simulate('change', mockEvent)
       }
 
-      expect(wrapper.state('username')).toEqual('helloworld')
-      expect(wrapper.state('email')).toEqual('helloworld')
-      expect(wrapper.state('password')).toEqual('helloworld')
-      expect(wrapper.state('password_confirmation')).toEqual('helloworld')
+      expect(wrapper.state('username')).toEqual('changedvalue');
+      expect(wrapper.state('email')).toEqual('changedvalue');
+      expect(wrapper.state('password')).toEqual('changedvalue');
+      expect(wrapper.state('password_confirmation')).toEqual('changedvalue');
     });
 
   });
