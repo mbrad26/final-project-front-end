@@ -26,6 +26,7 @@ describe('SignUp', () => {
 
   it('should render a input area for username', () => {
     expect(wrapper.find('input').at(0).props().type).toBe('text');
+    expect(wrapper.find('input').at(0).props().value).toBe('')
     expect(wrapper.find('input').at(0).props().name).toBe('username');
     expect(wrapper.find('input').at(0).props().placeholder).toBe('Username');
     expect(wrapper.find('input').at(0).props()).toHaveProperty('required');
@@ -33,6 +34,7 @@ describe('SignUp', () => {
 
   it('should render a input area for email', () => {
     expect(wrapper.find('input').at(1).props().type).toBe('email');
+    expect(wrapper.find('input').at(1).props().value).toBe('')
     expect(wrapper.find('input').at(1).props().name).toBe('email');
     expect(wrapper.find('input').at(1).props().placeholder).toBe('Email');
     expect(wrapper.find('input').at(1).props()).toHaveProperty('required');
@@ -40,7 +42,8 @@ describe('SignUp', () => {
 
   it('should render a input area for password', () => {
     expect(wrapper.find('input').at(2).props().type).toBe('password');
-    expect(wrapper.find('input').at(2).props().minlength).toBe("6");
+    expect(wrapper.find('input').at(2).props().value).toBe('')
+    expect(wrapper.find('input').at(2).props().minLength).toBe("6");
     expect(wrapper.find('input').at(2).props().name).toBe('password');
     expect(wrapper.find('input').at(2).props().placeholder).toBe('Password');
     expect(wrapper.find('input').at(2).props()).toHaveProperty('required');
@@ -48,7 +51,8 @@ describe('SignUp', () => {
 
   it('should render a input area for password confirmation', () => {
     expect(wrapper.find('input').at(3).props().type).toBe('password');
-    expect(wrapper.find('input').at(3).props().minlength).toBe("6");
+    expect(wrapper.find('input').at(3).props().value).toBe('')
+    expect(wrapper.find('input').at(3).props().minLength).toBe("6");
     expect(wrapper.find('input').at(3).props().name).toBe('confirm-password');
     expect(wrapper.find('input').at(3).props().placeholder).toBe('Password Confirmation');
     expect(wrapper.find('input').at(3).props()).toHaveProperty('required');
