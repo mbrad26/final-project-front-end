@@ -9,7 +9,7 @@ describe('User registration', () => {
     cy.get('input[name="username"]').type('username')
     cy.get('input[name="email"]').type('email@example.com')
     cy.get('input[name="password"]').type('password')
-    cy.get('input[name="confirm-password"]').type('password')
+    cy.get('input[name="password_confirmation"]').type('password')
     cy.get('.signup').click()
 
     cy.location('pathname').should('eq', '/')

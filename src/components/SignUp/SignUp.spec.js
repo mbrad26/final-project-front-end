@@ -53,7 +53,7 @@ describe('SignUp', () => {
     expect(wrapper.find('input').at(3).props().type).toBe('password');
     expect(wrapper.find('input').at(3).props().value).toBe('')
     expect(wrapper.find('input').at(3).props().minLength).toBe("6");
-    expect(wrapper.find('input').at(3).props().name).toBe('confirm-password');
+    expect(wrapper.find('input').at(3).props().name).toBe('password_confirmation');
     expect(wrapper.find('input').at(3).props().placeholder).toBe('Password Confirmation');
     expect(wrapper.find('input').at(3).props()).toHaveProperty('required');
   });
@@ -65,18 +65,31 @@ describe('SignUp', () => {
   });
 
   describe('#handleChange', () => {
-    it('is called when a change is detected', () => {
+    it('should be called when a change is detected', () => {
       const spy = jest.spyOn(wrapper.instance(), 'handleChange');
       wrapper.instance().forceUpdate();
 
       expect(spy).toHaveBeenCalledTimes(0);
-      
+
       for(let i=0; i<4; i++) {
 
-        wrapper.find('input').at(i).simulate('change');
+        wrapper.find('input').at(i).simulate('change', { target: { value: 'changedvalue' } });
       }
 
       expect(spy).toHaveBeenCalledTimes(4);
     });
+
+    it('updates the state with event value', () => {
+      for(let i=0; i<4; i++) {
+        const input = wrapper.find('input').at(i)
+        input.simulate('change', { target: { value: 'helloworld' } })
+      }
+
+      expect(wrapper.state('username')).toEqual('helloworld')
+      expect(wrapper.state('email')).toEqual('helloworld')
+      expect(wrapper.state('password')).toEqual('helloworld')
+      expect(wrapper.state('password_confirmation')).toEqual('helloworld')
+    });
+
   });
 });
