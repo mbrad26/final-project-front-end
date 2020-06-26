@@ -21,16 +21,18 @@ class SignUp extends Component {
   }
 
   handleSubmit = (event) => {
-  //   const url = 'https://localhost:3001';
-  //   axios.post(url, {
-  //     user: {
-  //       username: this.state.username,
-  //       email: this.state.email,
-  //       password: this.state.password,
-  //       password_confirmation: this.state.password_confirmation
-  //     }
-  //   }, { withCredentials: true}
-  // );
+    const url = 'https://localhost:3001';
+    axios.post(url, {
+      user: {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+        password_confirmation: this.state.password_confirmation
+      }
+    }, { withCredentials: true}
+  );
+  event.preventDefault();
+
   }
 
   render () {

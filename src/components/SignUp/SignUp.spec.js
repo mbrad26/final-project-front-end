@@ -108,6 +108,7 @@ describe('#handleSubmit', () => {
   let wrapper;
 
   beforeEach(() => {
+    // jest.resetAllMocks();
     wrapper = mount(<SignUp />)
   });
 
@@ -131,9 +132,17 @@ describe('#handleSubmit', () => {
       }
     }
 
-    axios.post.mockImplementation(() => Promise.resolve({ mockData }))
+    axios.post.mockImplementationOnce(() => Promise.resolve({ mockData }))
 
     expect(axios.post).toHaveBeenCalledTimes(1);
   });
 
+  it('should prevent form default action', () => {
+    const event = { preventDefault: () => {} }
+    jest.spyOn(event, 'preventDefault')
+
+    wrapper.instance().handleSubmit(event)
+
+    expect(event.preventDefault).toHaveBeenCalled();
+  });
 });
