@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Buttons from './Buttons';
 
-
 describe('Buttons', () => {
   let wrapper;
 
@@ -14,11 +13,11 @@ describe('Buttons', () => {
     expect(wrapper.find('div').length).toEqual(1);
   });
 
-  it('should render a button', () => {
+  it('should render a previous button', () => {
     expect(wrapper.find('button.previous').length).toEqual(1);
   })
 
-  it('should render a button', () => {
+  it('should render a next button', () => {
     expect(wrapper.find('button.next').length).toEqual(1);
   })
 

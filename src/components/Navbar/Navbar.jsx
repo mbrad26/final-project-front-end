@@ -6,6 +6,7 @@ function Navbar() {
   return (
     <nav>
       <Link to='/'>Home</Link>
+      <Link to='/signup' id='register-account'>Sign Up</Link>
       <Link to='/tiktok'>TikTok</Link>
     </nav>
   )
