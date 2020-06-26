@@ -68,7 +68,6 @@ describe('SignUp', () => {
     let mockEvent;
 
     beforeEach(() => {
-      // jest.resetAllMocks();
       mockEvent = {
         target: {
           value: 'changedvalue',
