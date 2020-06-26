@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import SignUp from './SignUp';
 
 describe('SignUp', () => {
@@ -68,9 +68,10 @@ describe('SignUp', () => {
     let mockEvent;
 
     beforeEach(() => {
+      // jest.resetAllMocks();
       mockEvent = {
         target: {
-          value: 'changedvalue'
+          value: 'changedvalue',
         }
       };
     });
@@ -79,8 +80,10 @@ describe('SignUp', () => {
       const spy = jest.spyOn(wrapper.instance(), 'handleChange');
       wrapper.instance().forceUpdate();
       expect(spy).toHaveBeenCalledTimes(0);
+
       for(let i=0; i<4; i++) {
         wrapper.find('input').at(i).simulate('change', mockEvent);
+        expect(spy).toHaveBeenCalledWith(mockEvent);
       }
 
       expect(spy).toHaveBeenCalledTimes(4);
@@ -88,15 +91,30 @@ describe('SignUp', () => {
 
     it('updates the state with event value', () => {
       for(let i=0; i<4; i++) {
-        const input = wrapper.find('input').at(i)
+        let input = wrapper.find('input').at(i)
         input.simulate('change', mockEvent)
+
+        input = wrapper.find('input').at(i)
+
+        expect(input.props().value).toEqual('changedvalue');
       }
-
-      expect(wrapper.state('username')).toEqual('changedvalue');
-      expect(wrapper.state('email')).toEqual('changedvalue');
-      expect(wrapper.state('password')).toEqual('changedvalue');
-      expect(wrapper.state('password_confirmation')).toEqual('changedvalue');
     });
+  });
+});
 
+describe('#handleSubmit', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = mount(<SignUp />)
+  });
+
+  it('should be called when form is being submited', () => {
+    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit')
+    wrapper.instance().forceUpdate();
+
+    wrapper.find('button').first().simulate('submit');
+
+    expect(spy).toHaveBeenCalled();
   });
 });
