@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import SignUp from './SignUp';
+import * as axios from 'axios';
+
+jest.mock('axios');
 
 describe('SignUp', () => {
   let wrapper;
@@ -116,4 +119,21 @@ describe('#handleSubmit', () => {
 
     expect(spy).toHaveBeenCalled();
   });
+
+  it('should make a POST request to the back-end', () => {
+    const mockData = {
+      status: 200,
+      user: {
+        username: 'JOHN1000',
+        email: 'email@email.com',
+        password: 'password',
+        password_confirmation: 'password'
+      }
+    }
+
+    axios.post.mockImplementation(() => Promise.resolve({ mockData }))
+
+    expect(axios.post).toHaveBeenCalledTimes(1);
+  });
+
 });
