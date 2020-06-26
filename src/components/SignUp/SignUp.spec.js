@@ -1,9 +1,11 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import SignUp from './SignUp';
 import * as axios from 'axios';
 
 jest.mock('axios');
+// jest.mock("/signin");
 
 describe('SignUp', () => {
   let wrapper;
@@ -122,6 +124,8 @@ describe('#handleSubmit', () => {
   });
 
   it('should make a POST request to the back-end', () => {
+    const event = { preventDefault: () => {} }
+    jest.spyOn(event, 'preventDefault');
     const mockData = {
       status: 200,
       user: {
@@ -132,9 +136,10 @@ describe('#handleSubmit', () => {
       }
     }
 
-    axios.post.mockImplementationOnce(() => Promise.resolve({ mockData }))
+    axios.post.mockImplementationOnce(() => Promise.resolve({ mockData }));
+    wrapper.instance().handleSubmit(event)
 
-    expect(axios.post).toHaveBeenCalledTimes(1);
+    expect(axios.post).toHaveBeenCalled();
   });
 
   it('should prevent form default action', () => {
@@ -145,4 +150,22 @@ describe('#handleSubmit', () => {
 
     expect(event.preventDefault).toHaveBeenCalled();
   });
+
+  describe('when signup unsuccessful', () => {
+    it("should render '/signup'", () => {
+      axios.post.mockImplementationOnce(() => Promise.resolve({ status: 404 }));
+
+      expect(wrapper.containsMatchingElement(<Redirect to={'/signin'} />)).toEqual(false)
+    });
+  });
+  //
+  // describe('when signup successful', () => {
+  //   it("should render '/signin'", () => {
+  //     jest.spyOn(event, 'preventDefault')
+  //
+  //     axios.post.mockImplementationOnce(() => Promise.resolve({ status: 404 }));
+  //
+  //     expect(wrapper.containsMatchingElement(<Redirect to={'/signin'} />)).toEqual(false)
+  //   });
+  // });
 });
