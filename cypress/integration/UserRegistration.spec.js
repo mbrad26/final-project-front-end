@@ -10,6 +10,12 @@ describe('User registration', () => {
     cy.get('input[name="email"]').type('email@example.com')
     cy.get('input[name="password"]').type('password')
     cy.get('input[name="password_confirmation"]').type('password')
+    cy.server();
+    cy.route(
+      "POST",
+      "https://postman-echo.com/post",
+      'fixture:userRegistration'
+    )
     cy.get('.signup').click()
 
     cy.location('pathname').should('eq', '/')

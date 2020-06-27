@@ -126,21 +126,15 @@ describe('#handleSubmit', () => {
 
   it('should make a POST request to the back-end', () => {
     const event = { preventDefault: jest.fn() }
-    const mockData = {
-      "status": "SUCCESS",
-      "user": {
-        "username": "JOHN1000",
-        "email": "email@email.com",
-        "password": "password",
-        "password_confirmation": "password"
-      }
-    }
+    const mockData = { "status": 200,}
+    const mockAxios = axios.post.mockResolvedValue({ data: { mockData } });
+
+    console.log(axios.post);
+    console.log(axios.post.then);
 
     wrapper.find('button').simulate('submit', event);
 
-    axios.post.mockResolvedValue({ data: { mockData } });
-
-    expect(axios.post).toHaveBeenCalled();
+    expect(mockAxios).toHaveBeenCalled();
   });
 
   it('should prevent form default action', () => {

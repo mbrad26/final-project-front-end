@@ -9,7 +9,7 @@ class SignUp extends Component {
     email: '',
     password: '',
     password_confirmation: '',
-    redirect: null,
+    redirect:  null,
   }
 
   handleChange = (event) => {
@@ -22,23 +22,27 @@ class SignUp extends Component {
     })
   }
 
-  handleSubmit = (event) => {
-    const url = 'https://postman-echo.com/post';
-    axios.post(url, {
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    const url = 'http://httpbin.org/post';
+    await axios.post(url, {
       user: {
         username: this.state.username,
         email: this.state.email,
         password: this.state.password,
         password_confirmation: this.state.password_confirmation
       }
-    }
+    }, { withCredentials: true }
   )
-  // .then(response => {
-  //   if (response.data.status === 'SUCCESS') {
-  //     this.setState({ redirect: '/' })
-  //   }
-  // })
-  event.preventDefault();
+  .then(response => {
+    console.log(response);
+    console.log(response.status);
+    if (response.status === 200) {
+      this.setState({ redirect: '/' })
+    }
+  })
+  .catch(() => console.log('ERROR'))
+
   }
 
   render () {

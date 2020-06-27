@@ -19,19 +19,22 @@ class SignIn extends Component {
   }
 
   handleSubmit = (event) => {
-    const url = 'https://postman-echo.com/post';
+    const url = 'http://httpbin.org/post';
     axios.post(url, {
       user: {
         username: this.state.username,
         password: this.state.password,
       }
-    }
+    }, { withCredentials: true }
   )
   // .then(response => {
-  //   if (response.data.status === 'SUCCESS') {
+  //   console.log(response);
+  //   console.log(response.status);
+  //   if (response.status === 200) {
   //     this.setState({ redirect: '/account' })
   //   }
   // })
+  // .catch(() => console.log('ERROR'))
   event.preventDefault();
   }
 
