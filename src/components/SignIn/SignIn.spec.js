@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import { Redirect } from 'react-router-dom';
 import SignIn from './SignIn';
+import * as axios from 'axios';
+
+jest.mock('axios');
 
 describe('Sign', () => {
   let wrapper;
@@ -81,15 +85,60 @@ describe('#handleSubmit', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<SignIn />)
+    wrapper = mount(<SignIn />);
   });
 
   it('should be called when form is being submited', () => {
+    const event = { preventDefault: jest.fn() }
     const spy = jest.spyOn(wrapper.instance(), 'handleSubmit')
-    wrapper.instance().forceUpdate();
+    wrapper.instance().forceUpdate(); //force re-render
+    // wrapper.setState({}) //force re-render
+    expect(spy).toHaveBeenCalledTimes(0);
 
-    wrapper.find('button').first().simulate('submit');
+    wrapper.find('button').simulate('submit', event);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should make a POST request to the back-end', () => {
+    const event = { preventDefault: jest.fn() }
+    const mockData = {
+      "status": "SUCCESS",
+      "user": {
+        "username": "JOHN1000",
+        "password": "password",
+      }
+    }
+
+    wrapper.find('button').simulate('submit', event);
+
+    axios.post.mockResolvedValue({ data: { mockData } });
+
+    expect(axios.post).toHaveBeenCalled();
+  });
+
+  it('should prevent form default action', () => {
+    const event = { preventDefault: () => {} }
+    const spy = jest.spyOn(event, 'preventDefault')
+
+    wrapper.instance().handleSubmit(event)
 
     expect(spy).toHaveBeenCalled();
   });
+
+  describe('when signin unsuccessful', () => {
+    it("should render '/'", () => {
+      axios.post.mockImplementationOnce(() => Promise.resolve({ status: 'ERROR' }));
+
+      expect(wrapper.containsMatchingElement(<Redirect to={'/'} />)).toEqual(false)
+    });
+  });
+
+  // describe('when signup successful', () => {
+  //   it("should redirect to '/account'", () => {
+  //     axios.post.mockImplementationOnce(() => Promise.resolve({ status: 'SUCCESS' }));
+  //
+  //     expect(wrapper.containsMatchingElement(<Redirect to={'/account'} />)).toEqual(true)
+  //   });
+  // });
 });
