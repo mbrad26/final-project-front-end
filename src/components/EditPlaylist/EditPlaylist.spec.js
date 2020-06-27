@@ -61,6 +61,7 @@ describe("EditPlaylist", () => {
       ]);
     });
   });
+
   describe("handleChange", () => {
     let mockEvent;
 
@@ -78,7 +79,6 @@ describe("EditPlaylist", () => {
       expect(spy).toHaveBeenCalledTimes(0);
       wrapper.find("#input").simulate("change", mockEvent);
       expect(spy).toHaveBeenCalledWith(mockEvent);
-
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
@@ -87,5 +87,29 @@ describe("EditPlaylist", () => {
       expect(wrapper.state("value")).toEqual("changedvalue");
     });
   });
-  describe("handleSubmit", () => {});
+  describe("handleSubmit", () => {
+    let mockEvent;
+
+    beforeEach(() => {
+      mockEvent = {
+        target: {
+          value: "changedvalue",
+        },
+      };
+    });
+
+    it("should be called when a change is detected", () => {
+      const spy = jest.spyOn(wrapper.instance(), "handleSubmit");
+      wrapper.instance().forceUpdate();
+      wrapper.find("#input").simulate("change", mockEvent);
+      wrapper
+        .find("form")
+        .first()
+        .simulate("submit", {
+          preventDefault: () => {},
+        });
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(wrapper.state("newTikToks")).toEqual(["changedvalue"]);
+    });
+  });
 });

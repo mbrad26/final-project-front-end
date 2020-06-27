@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class EditPlaylist extends Component {
-  state = { tikToks: [], uuid: this.props.match.params.uuid, value: "" };
+  state = {
+    tikToks: [],
+    uuid: this.props.match.params.uuid,
+    value: "",
+    newTikToks: [],
+  };
 
   componentDidMount = () => {
     if (this.state.uuid !== "new") {
@@ -11,12 +16,13 @@ class EditPlaylist extends Component {
   };
 
   delete = (index) => {
+    // delete tiktok from array
     let newArray = this.state.tikToks;
     newArray.splice(index, 1);
     this.setState({
       tikToks: newArray,
     });
-    // API CALL TO DELETE TiKTOK FROM PLAYLIST GOES HERE
+    // API CALL TO DELETE TiKTOK FROM PLAYLIST on DB goes here
   };
 
   api = () => {
@@ -34,8 +40,14 @@ class EditPlaylist extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.value);
-    // API Request to add tik tok
+    let array = this.state.newTikToks;
+    array.push(this.state.value);
+    this.setState({
+      newTikToks: array,
+      value: "",
+    });
+    // all new tiktoks to add are saved array in state.newTikToks
+    // API Request to tik tok to get API
   };
 
   handleChange = (event) => {
@@ -75,7 +87,9 @@ class EditPlaylist extends Component {
               required
               id="input"
             />
-            <button type="submit">Add</button>
+            <input type="submit" id="submit">
+              Add
+            </input>
           </form>
         </div>
         {elements}
