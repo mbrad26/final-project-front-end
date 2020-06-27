@@ -37,7 +37,7 @@ class SignIn extends Component {
 
   render () {
     if(this.state.redirect) {
-      <Redirect to={this.state.redirect} />
+      return <Redirect to={this.state.redirect} />
     } else {
       return (
         <div className='form-container'>

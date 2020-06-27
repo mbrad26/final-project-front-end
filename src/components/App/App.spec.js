@@ -6,6 +6,7 @@ import Navbar from '../Navbar/Navbar';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { MemoryRouter } from 'react-router';
 import SignUp from '../SignUp/SignUp';
+import SignIn from '../SignIn/SignIn.jsx';
 
 describe('App', () => {
 
@@ -25,14 +26,14 @@ describe('App', () => {
 });
 
 describe('Mounted App', () => {
-  it('should render TikTokViewer component', () => {
+  it('should render SignIn component', () => {
     const wrapper = mount(
                   <MemoryRouter initialEntries={[ '/' ]}>
                     <App />
                   </MemoryRouter>
                 );
 
-    expect(wrapper.containsMatchingElement(<TikTokViewer />)).toEqual(true);
+    expect(wrapper.containsMatchingElement(<SignIn />)).toEqual(true);
   })
 
   it('should render SignUp component', () => {
