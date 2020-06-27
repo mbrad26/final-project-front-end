@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import TikTokViewer from "./TikTokViewer";
 import Buttons from "../Buttons/Buttons";
 
@@ -26,6 +26,14 @@ describe("TikTokViewer", () => {
 
   it("should render Buttons component", () => {
     expect(wrapper.containsMatchingElement(<Buttons />)).toEqual(true);
+  });
+
+  it("runs component did mount function", () => {
+    wrapper = mount(<TikTokViewer />);
+    const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
+    wrapper.instance().forceUpdate();
+    wrapper.instance().componentDidMount();
+    expect(spy).toHaveBeenCalled();
   });
 
   describe("handle next", () => {

@@ -1,14 +1,28 @@
 import React, { Component } from "react";
 import PlaylistHeader from "../PlaylistHeader/PlaylistHeader.jsx";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class Account extends Component {
   state = {
     user: this.props.user,
     userPlaylists: [],
+    redirect: null,
   };
 
-  componentDidMount() {}
+  componentDidMount = () => {
+    axios
+      .get("https://chronomy.herokuapp.com/placeholder/playlists/")
+      .then((response) => {
+        this.setState({ userPlaylists: response.data });
+      });
+  };
+
+  addPlaylist = () => {
+    this.setState({
+      redirect: "/editPlaylist/new",
+    });
+  };
 
   render() {
     let elements = [];
@@ -18,17 +32,24 @@ class Account extends Component {
           key={this.state.userPlaylists[i].id}
           id={this.state.userPlaylists[i].id}
           title={this.state.userPlaylists[i].title}
-          link={this.state.userPlaylists[i].link}
+          uuid={this.state.userPlaylists[i].uuid}
         />
       );
     }
 
-    return (
-      <div className="account">
-        <h3 className="pageTitle">My Playlists</h3>
-        <div className="playlists">{elements}</div>
-      </div>
-    );
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    } else {
+      return (
+        <div className="account">
+          <button className="button" onClick={this.addPlaylist}>
+            Add Playlist
+          </button>
+          <h3 className="pageTitle">My Playlists</h3>
+          <div className="playlists">{elements}</div>
+        </div>
+      );
+    }
   }
 }
 
