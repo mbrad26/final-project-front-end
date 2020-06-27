@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import SignUp from './LogIn';
+import SignIn from './SignIn';
 
-describe('LogIn', () => {
+describe('Sign', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<LogIn />)
+    wrapper = shallow(<SignIn />)
   });
 
   it('should render a div', () => {
@@ -56,16 +56,16 @@ describe('LogIn', () => {
       wrapper.instance().forceUpdate();
       expect(spy).toHaveBeenCalledTimes(0);
 
-      for(let i=0; i<4; i++) {
+      for(let i=0; i<2; i++) {
         wrapper.find('input').at(i).simulate('change', mockEvent);
         expect(spy).toHaveBeenCalledWith(mockEvent);
       }
 
-      expect(spy).toHaveBeenCalledTimes(4);
+      expect(spy).toHaveBeenCalledTimes(2);
     });
 
     it('updates the state with event value', () => {
-      for(let i=0; i<4; i++) {
+      for(let i=0; i<2; i++) {
         let input = wrapper.find('input').at(i)
         input.simulate('change', mockEvent)
 
@@ -81,7 +81,7 @@ describe('#handleSubmit', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = mount(<LogIn />)
+    wrapper = mount(<SignIn />)
   });
 
   it('should be called when form is being submited', () => {

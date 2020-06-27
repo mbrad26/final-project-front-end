@@ -109,7 +109,6 @@ describe('#handleSubmit', () => {
   let wrapper;
 
   beforeEach(() => {
-    // jest.resetAllMocks();
     wrapper = mount(<SignUp />);
   });
 
@@ -123,7 +122,6 @@ describe('#handleSubmit', () => {
     wrapper.find('button').simulate('submit', event);
 
     expect(spy).toHaveBeenCalledTimes(1);
-    // spy.mockClear();
   });
 
   it('should make a POST request to the back-end', () => {
@@ -137,10 +135,10 @@ describe('#handleSubmit', () => {
         "password_confirmation": "password"
       }
     }
-    // wrapper = await mount(<SignUp />)
 
+    wrapper.find('button').simulate('submit', event);
+    
     axios.post.mockResolvedValue({ data: { mockData } });
-    wrapper.find('button').simulate('submit', event)
 
     expect(axios.post).toHaveBeenCalled();
   });
@@ -152,7 +150,6 @@ describe('#handleSubmit', () => {
     wrapper.instance().handleSubmit(event)
 
     expect(spy).toHaveBeenCalled();
-    // spy.mockClear();
   });
 
   describe('when signup unsuccessful', () => {

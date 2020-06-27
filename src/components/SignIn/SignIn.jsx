@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './LogIn.css';
+import './SignIn.css';
 
-class LogIn extends Component {
+class SignIn extends Component {
   state = {
     username: '',
     password: '',
@@ -32,5 +32,4 @@ class LogIn extends Component {
   }
 }
 
-export default SignUp;
-
+export default SignIn;
