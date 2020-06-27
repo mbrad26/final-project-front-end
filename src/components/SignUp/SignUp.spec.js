@@ -5,7 +5,6 @@ import SignUp from './SignUp';
 import * as axios from 'axios';
 
 jest.mock('axios');
-// jest.mock("/signin");
 
 describe('SignUp', () => {
   let wrapper;
@@ -111,61 +110,64 @@ describe('#handleSubmit', () => {
 
   beforeEach(() => {
     // jest.resetAllMocks();
-    wrapper = mount(<SignUp />)
+    wrapper = mount(<SignUp />);
   });
 
   it('should be called when form is being submited', () => {
+    const event = { preventDefault: jest.fn() }
     const spy = jest.spyOn(wrapper.instance(), 'handleSubmit')
-    wrapper.instance().forceUpdate();
+    wrapper.instance().forceUpdate(); //force re-render
+    // wrapper.setState({}) //force re-render
+    expect(spy).toHaveBeenCalledTimes(0);
 
-    wrapper.find('button').first().simulate('submit');
+    wrapper.find('button').simulate('submit', event);
 
-    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
+    // spy.mockClear();
   });
 
   it('should make a POST request to the back-end', () => {
-    const event = { preventDefault: () => {} }
-    jest.spyOn(event, 'preventDefault');
+    const event = { preventDefault: jest.fn() }
     const mockData = {
-      status: 200,
-      user: {
-        username: 'JOHN1000',
-        email: 'email@email.com',
-        password: 'password',
-        password_confirmation: 'password'
+      "status": "SUCCESS",
+      "user": {
+        "username": "JOHN1000",
+        "email": "email@email.com",
+        "password": "password",
+        "password_confirmation": "password"
       }
     }
+    // wrapper = await mount(<SignUp />)
 
-    axios.post.mockImplementationOnce(() => Promise.resolve({ mockData }));
-    wrapper.instance().handleSubmit(event)
+    axios.post.mockResolvedValue({ data: { mockData } });
+    wrapper.find('button').simulate('submit', event)
 
     expect(axios.post).toHaveBeenCalled();
   });
 
   it('should prevent form default action', () => {
     const event = { preventDefault: () => {} }
-    jest.spyOn(event, 'preventDefault')
+    const spy = jest.spyOn(event, 'preventDefault')
 
     wrapper.instance().handleSubmit(event)
 
-    expect(event.preventDefault).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
+    // spy.mockClear();
   });
 
   describe('when signup unsuccessful', () => {
-    it("should render '/signup'", () => {
-      axios.post.mockImplementationOnce(() => Promise.resolve({ status: 404 }));
+    it("should render '/'", () => {
+      axios.post.mockImplementationOnce(() => Promise.resolve({ status: 'ERROR' }));
 
-      expect(wrapper.containsMatchingElement(<Redirect to={'/signin'} />)).toEqual(false)
+      expect(wrapper.containsMatchingElement(<Redirect to={'/'} />)).toEqual(false)
     });
   });
-  //
+
   // describe('when signup successful', () => {
-  //   it("should render '/signin'", () => {
-  //     jest.spyOn(event, 'preventDefault')
+  //   it("should redirect to '/signin'", () => {
+  //     axios.post.mockImplementationOnce(() => Promise.resolve({ status: 'SUCCESS' }));
   //
-  //     axios.post.mockImplementationOnce(() => Promise.resolve({ status: 404 }));
-  //
-  //     expect(wrapper.containsMatchingElement(<Redirect to={'/signin'} />)).toEqual(false)
+  //     expect(wrapper.containsMatchingElement(<Redirect to={'/signin'} />)).toEqual(true)
   //   });
   // });
 });

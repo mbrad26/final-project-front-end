@@ -23,7 +23,7 @@ class SignUp extends Component {
   }
 
   handleSubmit = (event) => {
-    const url = 'https://chronomy.herokuapp.com/placeholder/playlist/40c5b468-13af-483d-8728-eb4f85a9f765';
+    const url = 'https://postman-echo.com/post';
     axios.post(url, {
       user: {
         username: this.state.username,
@@ -31,15 +31,20 @@ class SignUp extends Component {
         password: this.state.password,
         password_confirmation: this.state.password_confirmation
       }
-    }, { withCredentials: true}
-  );
+    }
+  )
+  // .then(response => {
+  //   if (response.data.status === 'SUCCESS') {
+  //     this.setState({ redirect: '/' })
+  //   }
+  // })
   event.preventDefault();
   }
 
   render () {
-    // if(this.state.redirect) {
-    //   return <Redirect to={this.state.redirect} />
-    // } else {
+    if(this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    } else {
       return (
         <div className='form-container'>
           Sign Up
@@ -52,7 +57,7 @@ class SignUp extends Component {
           </form>
         </div>
       )
-    // }
+    }
   }
 }
 
