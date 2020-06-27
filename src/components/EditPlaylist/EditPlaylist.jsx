@@ -34,8 +34,11 @@ class EditPlaylist extends Component {
         this.setState({
           tikToks: response.data,
         });
-        console.log(response.data);
       });
+  };
+
+  save = () => {
+    //api request to save
   };
 
   handleSubmit = (event) => {
@@ -74,6 +77,15 @@ class EditPlaylist extends Component {
       );
     }
 
+    let added = [];
+    for (let i = 0; i < this.state.newTikToks.length; i++) {
+      added.push(
+        <div className="aded" key={i} id={"added" + i}>
+          <p>{this.state.newTikToks[i]}</p>
+        </div>
+      );
+    }
+
     return (
       <div className="edit-playlist">
         <div className="add">
@@ -87,10 +99,17 @@ class EditPlaylist extends Component {
               required
               id="input"
             />
-            <input type="submit" id="submit">
+            <button type="submit" id="submit">
               Add
-            </input>
+            </button>
           </form>
+          <div className="added-tik-toks">
+            <h5>Added Tik-Toks:</h5>
+            <div>{added}</div>
+            <button className="save-button" onClick={this.save}>
+              Save/Update Playlist
+            </button>
+          </div>
         </div>
         {elements}
       </div>

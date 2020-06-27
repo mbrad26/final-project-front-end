@@ -4,6 +4,7 @@ import EditPlaylist from "./EditPlaylist.jsx";
 
 describe("EditPlaylist", () => {
   let wrapper;
+  let mockEvent;
 
   beforeEach(() => {
     wrapper = shallow(
@@ -12,6 +13,11 @@ describe("EditPlaylist", () => {
         match={{ params: { uuid: "jhjegfdsjhgfsdfgdf" } }}
       />
     );
+    mockEvent = {
+      target: {
+        value: "changedvalue",
+      },
+    };
     wrapper.setState({
       tikToks: [
         {
@@ -88,28 +94,50 @@ describe("EditPlaylist", () => {
     });
   });
   describe("handleSubmit", () => {
-    let mockEvent;
-
-    beforeEach(() => {
-      mockEvent = {
-        target: {
-          value: "changedvalue",
-        },
-      };
-    });
-
     it("should be called when a change is detected", () => {
       const spy = jest.spyOn(wrapper.instance(), "handleSubmit");
       wrapper.instance().forceUpdate();
       wrapper.find("#input").simulate("change", mockEvent);
-      wrapper
-        .find("form")
-        .first()
-        .simulate("submit", {
-          preventDefault: () => {},
-        });
+      wrapper.find("form").first().simulate("submit", {
+        preventDefault: jest.fn(),
+      });
       expect(spy).toHaveBeenCalledTimes(1);
       expect(wrapper.state("newTikToks")).toEqual(["changedvalue"]);
+    });
+  });
+
+  describe("added tiktoks", () => {
+    it("contains Added TikToks text", () => {
+      expect(
+        wrapper
+          .find(".added-tik-toks")
+          .first()
+          .text()
+          .includes("Added Tik-Toks")
+      ).toBe(true);
+    });
+    it("adds new tiktok urls to the page", () => {
+      wrapper.find("#input").simulate("change", mockEvent);
+      wrapper.find("form").first().simulate("submit", {
+        preventDefault: jest.fn(),
+      });
+      expect(
+        wrapper.find(".added-tik-toks").first().text().includes("changedvalue")
+      ).toBe(true);
+    });
+  });
+
+  describe("save/update", () => {
+    it("has save button", () => {
+      expect(
+        wrapper.find(".save-button").text().includes("Save/Update Playlist")
+      ).toBe(true);
+    });
+    it("calls save function when pressed", () => {
+      const spy = jest.spyOn(wrapper.instance(), "save");
+      wrapper.instance().forceUpdate();
+      wrapper.find(".save-button").simulate("click");
+      expect(spy).toHaveBeenCalledTimes(1);
     });
   });
 });
