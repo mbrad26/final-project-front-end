@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { Redirect } from 'react-router-dom';
+import { Redirect, BrowserRouter as Router } from 'react-router-dom';
 import SignIn from './SignIn';
 import * as axios from 'axios';
 
@@ -10,15 +10,15 @@ describe('Sign', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<SignIn />)
+    wrapper = shallow(<SignIn />);
   });
 
   it('should render a div', () => {
-    expect(wrapper.find('div').length).toEqual(1)
+    expect(wrapper.find('div').length).toEqual(1);
   });
 
   it('should contain a form', () => {
-    expect(wrapper.find('form').length).toEqual(1)
+    expect(wrapper.find('form').length).toEqual(1);
   })
 
   it('has an initial state', () => {
@@ -28,7 +28,7 @@ describe('Sign', () => {
 
   it('should render a input area for username', () => {
     expect(wrapper.find('input').at(0).props().type).toBe('text');
-    expect(wrapper.find('input').at(0).props().value).toBe('')
+    expect(wrapper.find('input').at(0).props().value).toBe('');
     expect(wrapper.find('input').at(0).props().name).toBe('username');
     expect(wrapper.find('input').at(0).props().placeholder).toBe('Username');
     expect(wrapper.find('input').at(0).props()).toHaveProperty('required');
@@ -36,7 +36,7 @@ describe('Sign', () => {
 
   it('should render a input area for password', () => {
     expect(wrapper.find('input').at(1).props().type).toBe('password');
-    expect(wrapper.find('input').at(1).props().value).toBe('')
+    expect(wrapper.find('input').at(1).props().value).toBe('');
     expect(wrapper.find('input').at(1).props().minLength).toBe("6");
     expect(wrapper.find('input').at(1).props().name).toBe('password');
     expect(wrapper.find('input').at(1).props().placeholder).toBe('Password');
@@ -88,13 +88,15 @@ describe('Sign', () => {
 
 describe('#handleSubmit', () => {
   let wrapper;
+  let event;
 
   beforeEach(() => {
+    event = { preventDefault: jest.fn() };
     wrapper = mount(<SignIn />);
+    jest.clearAllMocks();
   });
 
   it('should be called when form is being submited', () => {
-    const event = { preventDefault: jest.fn() }
     const spy = jest.spyOn(wrapper.instance(), 'handleSubmit')
     wrapper.instance().forceUpdate(); //force re-render
     // wrapper.setState({}) //force re-render
@@ -106,43 +108,37 @@ describe('#handleSubmit', () => {
   });
 
   it('should make a POST request to the back-end', () => {
-    const event = { preventDefault: jest.fn() }
-    const mockData = {
-      "status": "SUCCESS",
-      "user": {
-        "username": "JOHN1000",
-        "password": "password",
-      }
-    }
+    const mockData = { "status": 200, };
 
     wrapper.find('button').simulate('submit', event);
     axios.post.mockResolvedValue({ data: { mockData } });
 
-    expect(axios.post).toHaveBeenCalled();
+    expect(axios.post).toHaveBeenCalledTimes(1);
   });
 
   it('should prevent form default action', () => {
-    const event = { preventDefault: () => {} }
-    const spy = jest.spyOn(event, 'preventDefault')
+    const spy = jest.spyOn(event, 'preventDefault');
 
-    wrapper.instance().handleSubmit(event)
+    wrapper.instance().handleSubmit(event);
 
     expect(spy).toHaveBeenCalled();
   });
 
   describe('when signin unsuccessful', () => {
     it("should render '/'", () => {
-      axios.post.mockImplementationOnce(() => Promise.resolve({ status: 'ERROR' }));
-
-      expect(wrapper.containsMatchingElement(<Redirect to={'/'} />)).toEqual(false)
+      expect(wrapper.containsMatchingElement(<Redirect to={'/account'} />)).toEqual(false);
     });
   });
 
-  // describe('when signup successful', () => {
-  //   it("should redirect to '/account'", () => {
-  //     axios.post.mockImplementationOnce(() => Promise.resolve({ status: 'SUCCESS' }));
-  //
-  //     expect(wrapper.containsMatchingElement(<Redirect to={'/account'} />)).toEqual(true)
-  //   });
-  // });
+  describe('when signin successful', () => {
+    it("should redirect to '/account'", () => {
+      wrapper.setState({ redirect: '/account' });
+
+      expect(wrapper.containsMatchingElement(
+        <Router>
+          <Redirect to={'/account'} />
+        </Router>
+      )).toEqual(true);
+    });
+  });
 });

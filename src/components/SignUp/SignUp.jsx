@@ -40,7 +40,6 @@ class SignUp extends Component {
     }
   })
   .catch(() => console.log('ERROR'))
-
   }
 
   render () {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, BrowserRouter as Router } from 'react-router-dom';
 import './SignIn.css';
 import axios from 'axios';
 
@@ -18,33 +18,37 @@ class SignIn extends Component {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
+    event.preventDefault();
     const url = 'http://httpbin.org/post';
-    axios.post(url, {
+    await axios.post(url, {
       user: {
         username: this.state.username,
         password: this.state.password,
       }
     }, { withCredentials: true }
   )
-  // .then(response => {
-  //   console.log(response);
-  //   console.log(response.status);
-  //   if (response.status === 200) {
-  //     this.setState({ redirect: '/account' })
-  //   }
-  // })
-  // .catch(() => console.log('ERROR'))
-  event.preventDefault();
+  .then(response => {
+    console.log(response);
+    console.log(response.status);
+    if (response.status === 200) {
+      this.setState({ redirect: '/account' })
+    }
+  })
+  .catch(() => console.log('ERROR'))
   }
 
   render () {
     if(this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
+      return (
+        <Router>
+          <Redirect to={this.state.redirect} />
+        </Router>
+      )
     } else {
       return (
         <div className='form-container'>
-          Log In
+          Sign In
           <form onSubmit={this.handleSubmit}>
             <input type='text' value={this.state.username} onChange={this.handleChange} name='username' placeholder='Username' required />
             <input type='password' value={this.state.password} onChange={this.handleChange} name='password' placeholder='Password' minLength='6' required />
