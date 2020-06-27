@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, BrowserRouter as Router } from 'react-router-dom';
 import './SignUp.css';
 import axios from 'axios';
 
@@ -35,8 +35,6 @@ class SignUp extends Component {
     }, { withCredentials: true }
   )
   .then(response => {
-    console.log(response);
-    console.log(response.status);
     if (response.status === 200) {
       this.setState({ redirect: '/' })
     }
@@ -47,7 +45,11 @@ class SignUp extends Component {
 
   render () {
     if(this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
+      return (
+        <Router>
+          <Redirect to={this.state.redirect} />
+        </Router>
+      )
     } else {
       return (
         <div className='form-container'>

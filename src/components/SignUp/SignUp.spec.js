@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, BrowserRouter as Router } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import SignUp from './SignUp';
 import * as axios from 'axios';
@@ -10,16 +10,17 @@ describe('SignUp', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<SignUp />)
+    wrapper = shallow(<SignUp />);
+    jest.clearAllMocks();
   });
 
   it('should render a div', () => {
-    expect(wrapper.find('div').length).toEqual(1)
+    expect(wrapper.find('div').length).toEqual(1);
   });
 
   it('should contain a form', () => {
-    expect(wrapper.find('form').length).toEqual(1)
-  })
+    expect(wrapper.find('form').length).toEqual(1);
+  });
 
   it('has an initial state', () => {
     expect(wrapper.state('username')).toEqual('');
@@ -30,7 +31,7 @@ describe('SignUp', () => {
 
   it('should render a input area for username', () => {
     expect(wrapper.find('input').at(0).props().type).toBe('text');
-    expect(wrapper.find('input').at(0).props().value).toBe('')
+    expect(wrapper.find('input').at(0).props().value).toBe('');
     expect(wrapper.find('input').at(0).props().name).toBe('username');
     expect(wrapper.find('input').at(0).props().placeholder).toBe('Username');
     expect(wrapper.find('input').at(0).props()).toHaveProperty('required');
@@ -38,7 +39,7 @@ describe('SignUp', () => {
 
   it('should render a input area for email', () => {
     expect(wrapper.find('input').at(1).props().type).toBe('email');
-    expect(wrapper.find('input').at(1).props().value).toBe('')
+    expect(wrapper.find('input').at(1).props().value).toBe('');
     expect(wrapper.find('input').at(1).props().name).toBe('email');
     expect(wrapper.find('input').at(1).props().placeholder).toBe('Email');
     expect(wrapper.find('input').at(1).props()).toHaveProperty('required');
@@ -46,7 +47,7 @@ describe('SignUp', () => {
 
   it('should render a input area for password', () => {
     expect(wrapper.find('input').at(2).props().type).toBe('password');
-    expect(wrapper.find('input').at(2).props().value).toBe('')
+    expect(wrapper.find('input').at(2).props().value).toBe('');
     expect(wrapper.find('input').at(2).props().minLength).toBe("6");
     expect(wrapper.find('input').at(2).props().name).toBe('password');
     expect(wrapper.find('input').at(2).props().placeholder).toBe('Password');
@@ -55,7 +56,7 @@ describe('SignUp', () => {
 
   it('should render a input area for password confirmation', () => {
     expect(wrapper.find('input').at(3).props().type).toBe('password');
-    expect(wrapper.find('input').at(3).props().value).toBe('')
+    expect(wrapper.find('input').at(3).props().value).toBe('');
     expect(wrapper.find('input').at(3).props().minLength).toBe("6");
     expect(wrapper.find('input').at(3).props().name).toBe('password_confirmation');
     expect(wrapper.find('input').at(3).props().placeholder).toBe('Password Confirmation');
@@ -75,7 +76,7 @@ describe('SignUp', () => {
       mockEvent = {
         target: {
           value: 'changedvalue',
-        }
+        },
       };
     });
 
@@ -94,10 +95,10 @@ describe('SignUp', () => {
 
     it('updates the state with event value', () => {
       for(let i=0; i<4; i++) {
-        let input = wrapper.find('input').at(i)
-        input.simulate('change', mockEvent)
+        let input = wrapper.find('input').at(i);
+        input.simulate('change', mockEvent);
 
-        input = wrapper.find('input').at(i)
+        input = wrapper.find('input').at(i);
 
         expect(input.props().value).toEqual('changedvalue');
       }
@@ -107,14 +108,16 @@ describe('SignUp', () => {
 
 describe('#handleSubmit', () => {
   let wrapper;
+  let event;
 
   beforeEach(() => {
+    event = { preventDefault: jest.fn() };
     wrapper = mount(<SignUp />);
+    jest.clearAllMocks();
   });
 
   it('should be called when form is being submited', () => {
-    const event = { preventDefault: jest.fn() }
-    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit')
+    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit');
     wrapper.instance().forceUpdate(); //force re-render
     // wrapper.setState({}) //force re-render
     expect(spy).toHaveBeenCalledTimes(0);
@@ -125,40 +128,37 @@ describe('#handleSubmit', () => {
   });
 
   it('should make a POST request to the back-end', () => {
-    const event = { preventDefault: jest.fn() }
-    const mockData = { "status": 200,}
+    const mockData = { "status": 200, };
     const mockAxios = axios.post.mockResolvedValue({ data: { mockData } });
-
-    console.log(axios.post);
-    console.log(axios.post.then);
 
     wrapper.find('button').simulate('submit', event);
 
-    expect(mockAxios).toHaveBeenCalled();
+    expect(mockAxios).toHaveBeenCalledTimes(1);
   });
 
   it('should prevent form default action', () => {
-    const event = { preventDefault: () => {} }
-    const spy = jest.spyOn(event, 'preventDefault')
+    const spy = jest.spyOn(event, 'preventDefault');
 
-    wrapper.instance().handleSubmit(event)
+    wrapper.instance().handleSubmit(event);
 
     expect(spy).toHaveBeenCalled();
   });
 
   describe('when signup unsuccessful', () => {
-    it("should render '/'", () => {
-      axios.post.mockImplementationOnce(() => Promise.resolve({ status: 'ERROR' }));
-
-      expect(wrapper.containsMatchingElement(<Redirect to={'/'} />)).toEqual(false)
+    it("should render '/signup'", () => {
+      expect(wrapper.containsMatchingElement(<Redirect to={'/'} />)).toEqual(false);
     });
   });
 
-  // describe('when signup successful', () => {
-  //   it("should redirect to '/signin'", () => {
-  //     axios.post.mockImplementationOnce(() => Promise.resolve({ status: 'SUCCESS' }));
-  //
-  //     expect(wrapper.containsMatchingElement(<Redirect to={'/signin'} />)).toEqual(true)
-  //   });
-  // });
+  describe('when signup successful', () => {
+    it("should redirect to '/'", () => {
+      wrapper.setState({ redirect: '/' });
+
+      expect(wrapper.containsMatchingElement(
+        <Router>
+          <Redirect to={'/'} />
+        </Router>
+      )).toEqual(true);
+    });
+  });
 });
