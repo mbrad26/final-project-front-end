@@ -62,10 +62,10 @@ describe('SignUp', () => {
     expect(wrapper.find('input').at(3).props()).toHaveProperty('required');
   });
 
-  it('should render a input area for password confirmation', () => {
+  it('should render a submit button', () => {
     expect(wrapper.find('button').props().type).toBe('submit');
-    expect(wrapper.find('button').props().className).toBe('signup')
-    expect(wrapper.find('button').text()).toBe('Sign Up')
+    expect(wrapper.find('button').props().className).toBe('signup');
+    expect(wrapper.find('button').text()).toBe('Sign Up');
   });
 
   describe('#handleChange', () => {
@@ -137,7 +137,7 @@ describe('#handleSubmit', () => {
     }
 
     wrapper.find('button').simulate('submit', event);
-    
+
     axios.post.mockResolvedValue({ data: { mockData } });
 
     expect(axios.post).toHaveBeenCalled();

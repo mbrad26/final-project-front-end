@@ -45,7 +45,7 @@ class SignIn extends Component {
           <form onSubmit={this.handleSubmit}>
             <input type='text' value={this.state.username} onChange={this.handleChange} name='username' placeholder='Username' required />
             <input type='password' value={this.state.password} onChange={this.handleChange} name='password' placeholder='Password' minLength='6' required />
-            <button type="submit" className='signup'>Log In</button>
+            <button type="submit" className='signin'>Sign In</button>
           </form>
         </div>
       );
