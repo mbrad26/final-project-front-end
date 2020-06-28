@@ -20,6 +20,11 @@ describe('App', () => {
     expect(wrapper.find('div.app-container').length).toEqual(1);
   });
 
+  it('has an initial state', () => {
+    expect(wrapper.state('userLogInStatus')).toEqual(false);
+    expect(wrapper.state('user')).toEqual({});
+  });
+
   it('should render Navbar component', () => {
     expect(wrapper.containsMatchingElement(<Navbar />)).toEqual(true);
   })

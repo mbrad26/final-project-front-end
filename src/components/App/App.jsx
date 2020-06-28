@@ -8,6 +8,11 @@ import SignIn from '../SignIn/SignIn.jsx';
 
 class App extends Component {
 
+  state = {
+    userLogInStatus: false,
+    user: {},
+  }
+
   render = () => {
     return (
       <div className="app-container">
