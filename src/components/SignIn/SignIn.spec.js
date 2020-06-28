@@ -89,10 +89,14 @@ describe('Sign', () => {
 describe('#handleSubmit', () => {
   let wrapper;
   let event;
+  let propsTest;
 
   beforeEach(() => {
     event = { preventDefault: jest.fn() };
-    wrapper = mount(<SignIn />);
+    propsTest = {
+      userLogInStatus: false,
+    };
+    wrapper = mount(<SignIn {...propsTest} />);
     jest.clearAllMocks();
   });
 
@@ -139,6 +143,8 @@ describe('#handleSubmit', () => {
   describe('when signin successful', () => {
     it("should redirect to '/account'", () => {
       wrapper.setState({ redirect: '/account' });
+      // propsTest.userLogInStatus = true;
+      // wrapper = mount(<SignIn {...propsTest} />);
 
       expect(wrapper.containsMatchingElement(
         <Router>

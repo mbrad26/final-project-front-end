@@ -26,20 +26,20 @@ class SignUp extends Component {
     event.preventDefault();
     const url = 'http://httpbin.org/post';
     await axios.post(url, {
-      user: {
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password,
-        password_confirmation: this.state.password_confirmation
+        user: {
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password,
+          password_confirmation: this.state.password_confirmation
+        }
+      }, { withCredentials: true }
+    )
+    .then(response => {
+      if (response.status === 200) {
+        this.setState({ redirect: '/' });
       }
-    }, { withCredentials: true }
-  )
-  .then(response => {
-    if (response.status === 200) {
-      this.setState({ redirect: '/' })
-    }
-  })
-  .catch(() => console.log('ERROR'))
+    })
+    .catch(() => console.log('ERROR'));
   }
 
   render = () => {

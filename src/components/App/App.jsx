@@ -21,13 +21,7 @@ class App extends Component {
         <Router>
           <Navbar userLogInStatus={this.state.userLogInStatus} user={this.state.user}/>
           <Switch>
-            <Route
-              path='/'
-              exact
-              render={props => (
-                <SignIn {...props} userLogInStatus={this.state.userLogInStatus}/>
-              )}
-              />
+            <Route path='/' exact component={SignIn} />
             <Route path='/signup' exact component={SignUp} />
           </Switch>
         </Router>

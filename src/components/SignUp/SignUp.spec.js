@@ -144,14 +144,22 @@ describe('#handleSubmit', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  describe('when signup unsuccessful', () => {
+  describe('when signin unsuccessful', () => {
     it("should render '/signup'", () => {
+      const error = new Error('Sign Up failed!');
+      axios.post.mockRejectedValueOnce({ status: 401, error: error });
+
+      wrapper.instance().handleSubmit(event);
+
       expect(wrapper.containsMatchingElement(<Redirect to={'/'} />)).toEqual(false);
+      expect(axios.post).toHaveBeenCalledTimes(1);
     });
   });
 
-  describe('when signup successful', () => {
-    it("should redirect to '/'", () => {
+  describe('when sign up successful', () => {
+    it("should redirect to '/account'", async () => {
+      await axios.post.mockResolvedValueOnce({ status: 200, data: {} });
+      wrapper.instance().handleSubmit(event);
       wrapper.setState({ redirect: '/' });
 
       expect(wrapper.containsMatchingElement(
