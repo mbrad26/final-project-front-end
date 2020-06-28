@@ -65,7 +65,7 @@ describe('SignUp', () => {
 
   it('should render a submit button', () => {
     expect(wrapper.find('button').props().type).toBe('submit');
-    expect(wrapper.find('button').props().className).toBe('signup');
+    expect(wrapper.find('button').props().id).toBe('signup');
     expect(wrapper.find('button').text()).toBe('Sign Up');
   });
 

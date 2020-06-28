@@ -8,7 +8,7 @@ const Navbar = (props) => {
     return (
       <nav>
         <Link to='/'>Home</Link>
-        <Link to='/'>Sign Out</Link>
+        <Link to='/' id='sign-out'>Sign Out</Link>
       </nav>
     );
   } else {

@@ -16,7 +16,7 @@ describe('User registration', () => {
       'http://httpbin.org/post',
       'fixture:userRegistration'
     )
-    cy.get('.signup').click();
+    cy.get('#signup').click();
 
     cy.location('pathname').should('eq', '/');
   });
