@@ -74,14 +74,14 @@ describe('Sign', () => {
     });
 
     it('updates the state with event value', () => {
-      for(let i=0; i<2; i++) {
-        let input = wrapper.find('input').at(i)
-        input.simulate('change', mockEvent)
+      wrapper.find('input').forEach((item, i) => {
+        let name = `${item.props().name}`;
+        let value = 'changedvalue';
 
-        input = wrapper.find('input').at(i)
+        item.simulate('change', { target: { name, value } });
 
-        expect(input.props().value).toEqual('changedvalue');
-      }
+        expect(wrapper.find('input').at(i).props().value).toEqual('changedvalue');
+      });
     });
   });
 });

@@ -12,9 +12,7 @@ class SignIn extends Component {
 
   handleChange = (event) => {
     this.setState({
-      // [event.target.name]: event.target.value,
-      username: event.target.value,
-      password: event.target.value,
+      [event.target.name]: event.target.value,
     })
   }
 
