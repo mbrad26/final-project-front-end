@@ -126,7 +126,13 @@ describe('#handleSubmit', () => {
 
   describe('when signin unsuccessful', () => {
     it("should render '/'", () => {
+      const error = new Error('Sign In failed!');
+      axios.post.mockRejectedValueOnce({ status: 401, error: error });
+
+      wrapper.instance().handleSubmit(event);
+
       expect(wrapper.containsMatchingElement(<Redirect to={'/account'} />)).toEqual(false);
+      expect(axios.post).toHaveBeenCalledTimes(1);
     });
   });
 

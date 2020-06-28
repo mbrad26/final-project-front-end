@@ -5,6 +5,9 @@ import './TikTokViewer.css'
 
 
 class TikTokViewer extends Component {
+  constructor(props) {
+    super(props)
+  }
 
   state = {
     playlist: [
@@ -59,7 +62,7 @@ class TikTokViewer extends Component {
       <div className="tik-tok-viewer" data-cy="tik-tok">
         {this.state.title}<br />
         <video src={this.state.url} controls muted autoPlay loop height='480' width='250'/>
-        <Buttons handleNext={this.handleNext} handlePrevious={this.handlePrevious} />
+        <Buttons {...this.props} handleNext={this.handleNext} handlePrevious={this.handlePrevious} />
       </div>
     );
   };

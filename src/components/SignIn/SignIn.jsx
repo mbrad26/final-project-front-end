@@ -38,7 +38,7 @@ class SignIn extends Component {
   .catch(() => console.log('ERROR'))
   }
 
-  render () {
+  render = () => {
     if(this.state.redirect) {
       return (
         <Router>
@@ -49,7 +49,7 @@ class SignIn extends Component {
       return (
         <div className='form-container'>
           Sign In
-          <form className='signin-form' onSubmit={this.handleSubmit}>
+          // <form className='signin-form' onSubmit={this.handleSubmit}>
             <input type='text' value={this.state.username} onChange={this.handleChange} name='username' placeholder='Username' required />
             <input type='password' value={this.state.password} onChange={this.handleChange} name='password' placeholder='Password' minLength='6' required />
             <button type="submit" className='signin'>Sign In</button>

@@ -42,7 +42,7 @@ class SignUp extends Component {
   .catch(() => console.log('ERROR'))
   }
 
-  render () {
+  render = () => {
     if(this.state.redirect) {
       return (
         <Router>
