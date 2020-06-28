@@ -36,6 +36,17 @@ describe('App', () => {
     expect(wrapper.find(Navbar).props().user).toBe(propsTest.user);
   });
 
+  it('sends the correct props to the SignIn component', () => {
+    wrapper = mount(<App />);
+    const propsTest = {
+      userLogInStatus: false,
+      user: {},
+    }
+    wrapper.setState(propsTest);
+
+    expect(wrapper.find(Route).at(0).find(SignIn).props().userLogInStatus).toBe(propsTest.userLogInStatus);
+  });
+
   it('should render Navbar component', () => {
     expect(wrapper.containsMatchingElement(<Navbar />)).toEqual(true);
   })
@@ -48,7 +59,6 @@ describe('Mounted App', () => {
                     <App />
                   </MemoryRouter>
                 );
-
     expect(wrapper.containsMatchingElement(<SignIn />)).toEqual(true);
   })
 
