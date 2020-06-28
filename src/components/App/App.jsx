@@ -5,6 +5,7 @@ import TikTokViewer from '../TikTokViewer/TikTokViewer.jsx';
 import Navbar from '../Navbar/Navbar.jsx';
 import SignUp from '../SignUp/SignUp.jsx';
 import SignIn from '../SignIn/SignIn.jsx';
+import Error from '../Error/Error.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class App extends Component {
           <Switch>
             <Route path='/' exact component={SignIn} />
             <Route path='/signup' exact component={SignUp} />
+            <Route component={Error} />
           </Switch>
         </Router>
       </div>

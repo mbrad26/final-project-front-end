@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { MemoryRouter } from 'react-router';
 import SignUp from '../SignUp/SignUp';
 import SignIn from '../SignIn/SignIn.jsx';
+import Error from '../Error/Error.jsx';
 
 describe('App', () => {
 
@@ -49,7 +50,7 @@ describe('App', () => {
 
   it('should render Navbar component', () => {
     expect(wrapper.containsMatchingElement(<Navbar />)).toEqual(true);
-  })
+  });
 });
 
 describe('Mounted App', () => {
@@ -70,5 +71,15 @@ describe('Mounted App', () => {
                 );
 
     expect(wrapper.containsMatchingElement(<SignUp />)).toEqual(true)
+  });
+
+  it('should render Error component', () => {
+    const wrapper = mount(
+                  <MemoryRouter>
+                    <Route component={Error} />
+                  </MemoryRouter>
+                );
+
+    expect(wrapper.containsMatchingElement(<Error />)).toEqual(true);
   });
 });
