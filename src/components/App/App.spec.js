@@ -25,6 +25,17 @@ describe('App', () => {
     expect(wrapper.state('user')).toEqual({});
   });
 
+  it('sends the correct props to the Navbar component', () => {
+    const propsTest = {
+      userLogInStatus: false,
+      user: {},
+    }
+    wrapper.setState(propsTest);
+
+    expect(wrapper.find(Navbar).props().userLogInStatus).toBe(propsTest.userLogInStatus);
+    expect(wrapper.find(Navbar).props().user).toBe(propsTest.user);
+  });
+
   it('should render Navbar component', () => {
     expect(wrapper.containsMatchingElement(<Navbar />)).toEqual(true);
   })

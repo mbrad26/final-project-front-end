@@ -7,17 +7,19 @@ import SignUp from '../SignUp/SignUp.jsx';
 import SignIn from '../SignIn/SignIn.jsx';
 
 class App extends Component {
-
-  state = {
-    userLogInStatus: false,
-    user: {},
+  constructor(props) {
+    super(props);
+    this.state = {
+      userLogInStatus: false,
+      user: {},
+    }
   }
 
   render = () => {
     return (
       <div className="app-container">
         <Router>
-          <Navbar />
+          <Navbar userLogInStatus={this.state.userLogInStatus} user={this.state.user}/>
           <Switch>
             <Route path='/' exact component={SignIn} />
             <Route path='/signup' exact component={SignUp} />
