@@ -1,13 +1,17 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Navbar from './Navbar';
 
 describe('Navbar', () => {
   let wrapper;
+  let propsTest;
 
   beforeEach(() => {
-    wrapper = shallow(<Navbar />)
+    propsTest = {
+      userLogInStatus: false,
+    };
+    wrapper = shallow(<Navbar {...propsTest} />);
   });
 
   it('should render a nav', () => {
@@ -15,13 +19,23 @@ describe('Navbar', () => {
   });
 
   it('should have a Home link', () => {
-    expect(wrapper.find(Link).at(0).props().to).toBe('/');
-    expect(wrapper.find(Link).at(0).text()).toBe('Home');
+    expect(wrapper.find(NavLink).at(0).props().to).toBe('/');
+    expect(wrapper.find(NavLink).at(0).text()).toBe('Home');
   });
 
   it('should have a Sign Up link', () => {
-    expect(wrapper.find(Link).at(1).props().to).toBe('/signup');
-    expect(wrapper.find(Link).at(1).props().id).toBe('register-account')
-    expect(wrapper.find(Link).at(1).text()).toBe('Sign Up')
+    expect(wrapper.find(NavLink).at(1).props().to).toBe('/signup');
+    expect(wrapper.find(NavLink).at(1).props().id).toBe('register-account')
+    expect(wrapper.find(NavLink).at(1).text()).toBe('Sign Up')
+  });
+
+  describe('when user has signed in', () => {
+    it('should have a Sign Out link', () => {
+      propsTest.userLogInStatus = true
+      wrapper = shallow(<Navbar {...propsTest} />);
+
+      expect(wrapper.find(NavLink).at(1).props().to).toBe('/');
+      expect(wrapper.find(NavLink).at(1).text()).toBe('Sign Out');
+    });
   });
 });
