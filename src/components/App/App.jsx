@@ -22,8 +22,8 @@ class App extends Component {
         <Router>
           <Navbar userLogInStatus={this.state.userLogInStatus} user={this.state.user}/>
           <Switch>
-            <Route path='/' exact component={SignIn} />
-            <Route path='/signup' exact component={SignUp} />
+            <Route exact path='/' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
             <Route component={Error} />
           </Switch>
         </Router>

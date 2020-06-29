@@ -4,6 +4,7 @@ import './Navbar.css';
 
 const Navbar = (props) => {
 
+  console.log('User userLogInStatus: ' + props.userLogInStatus);
   if(props.userLogInStatus) {
     return (
       <nav>
@@ -20,11 +21,10 @@ const Navbar = (props) => {
     );
   }
 
-
   // return (
   //     <nav>
-  //       <Link to='/'>Home</Link>
-  //       <Link to='/signup' id='register-account'>Sign Up</Link>
+  //       <NavLink to='/'>Home</NavLink>
+  //       <NavLink to='/signup' id='register-account'>Sign Up</NavLink>
   //     </nav>
   //   );
 }
