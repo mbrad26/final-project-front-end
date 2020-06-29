@@ -10,15 +10,14 @@ import SignIn from '../SignIn/SignIn.jsx';
 import Error from '../Error/Error.jsx';
 
 describe('App', () => {
-
   let wrapper;
 
   beforeEach(() => {
     wrapper = shallow(<App />);
   });
 
-  it('should render a div', () => {
-    expect(wrapper.find('div.app-container').length).toEqual(1);
+  it("should render a div", () => {
+    expect(wrapper.find("div.app-container").length).toEqual(1);
   });
 
   it('has an initial state', () => {
@@ -63,14 +62,15 @@ describe('Mounted App', () => {
     expect(wrapper.containsMatchingElement(<SignIn />)).toEqual(true);
   })
 
-  it('should render SignUp component', () => {
-    const wrapper = mount(
-                  <MemoryRouter initialEntries={[ '/signup' ]}>
-                    <Route path='/signup' component={SignUp} />
-                  </MemoryRouter>
-                );
 
-    expect(wrapper.containsMatchingElement(<SignUp />)).toEqual(true)
+  it("should render SignUp component", () => {
+    const wrapper = mount(
+      <MemoryRouter initialEntries={["/signup"]}>
+        <Route path="/signup" component={SignUp} />
+      </MemoryRouter>
+    );
+
+    expect(wrapper.containsMatchingElement(<SignUp />)).toEqual(true);
   });
 
   it('should render Error component', () => {

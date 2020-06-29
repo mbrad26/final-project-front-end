@@ -1,7 +1,8 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import TikTokViewer from './TikTokViewer';
-import Buttons from '../Buttons/Buttons';
+
+import React from "react";
+import { shallow, mount } from "enzyme";
+import TikTokViewer from "./TikTokViewer";
+import Buttons from "../Buttons/Buttons";
 
 describe('TikTokViewer', () => {
   let wrapper;
@@ -18,33 +19,28 @@ describe('TikTokViewer', () => {
     expect(wrapper.containsMatchingElement(<Buttons />)).toEqual(true)
   });
 
-  describe('handleNext Function', () => {
+  it("runs component did mount function", () => {
+    wrapper = mount(<TikTokViewer />);
+    const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
+    wrapper.instance().forceUpdate();
+    wrapper.instance().componentDidMount();
+    expect(spy).toHaveBeenCalled();
+  });
 
-    it('should change the component state', () => {
-
-      wrapper.setState({
-            playlist: [
-    'https://www.tiktok.com/@lzz03/video/6840824663585639686',
-    'https://www.tiktok.com/@pegleg89/video/6825998203897285893',
-    'https://www.tiktok.com/@bboyrockbittu/video/6840874385415343361',
-    'https://www.tiktok.com/@itsoraida/video/6841342984550731014',
-    'https://www.tiktok.com/@pinknews/video/6841577503472061702'
-    ],
-        title: 'Blinding Lights Challenge',
-        url: 'http://example.com/tiktoker1',
-        currentClip: 1
-      });
-
-      const instance = wrapper.instance();
-
+  describe("handle next", () => {
+    it("updates state when clicked", () => {
+      let instance = wrapper.instance();
+      instance.handleNext();
+      expect(wrapper.state().currentClip).toBe(1);
+      expect(wrapper.state().title).toBe("title2");
+      expect(wrapper.state().src).toBe("testUrl2");
+      instance.handleNext();
+      expect(wrapper.state().currentClip).toBe(2);
+      expect(wrapper.state().title).toBe("title3");
+      expect(wrapper.state().src).toBe("testUrl3");
       instance.handleNext();
 
-      // expect(wrapper.state('title')).not.toEqual('Blinding Lights Challenge');
-      // expect(wrapper.state('url')).not.toEqual('http://example.com/tiktoker1');
-      // expect(wrapper.state('title')).toEqual('❤️❤️#viral #goviral #tiktokindia #trending');
       expect(wrapper.state('currentClip')).toEqual(2);
-
     });
-
   });
 });

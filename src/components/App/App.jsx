@@ -6,6 +6,8 @@ import Navbar from '../Navbar/Navbar.jsx';
 import SignUp from '../SignUp/SignUp.jsx';
 import SignIn from '../SignIn/SignIn.jsx';
 import Error from '../Error/Error.jsx';
+import Account from "../Account/Account.jsx";
+import EditPlaylist from "../EditPlaylist/EditPlaylist.jsx";
 
 class App extends Component {
   constructor(props) {
@@ -24,6 +26,9 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={SignIn} />
             <Route path='/signup' component={SignUp} />
+            <Route path="/tiktok" exact component={TikTokViewer} />
+            <Route path="/account" exact component={Account} />
+            <Route path="/editPlaylist/:uuid" exact component={EditPlaylist} />
             <Route component={Error} />
           </Switch>
         </Router>

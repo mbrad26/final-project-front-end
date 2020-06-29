@@ -6,7 +6,7 @@ import * as axios from 'axios';
 
 jest.mock('axios');
 
-describe('SignUp', () => {
+describe("SignUp", () => {
   let wrapper;
 
   beforeEach(() => {
@@ -22,11 +22,11 @@ describe('SignUp', () => {
     expect(wrapper.find('form').length).toEqual(1);
   });
 
-  it('has an initial state', () => {
-    expect(wrapper.state('username')).toEqual('');
-    expect(wrapper.state('email')).toEqual('');
-    expect(wrapper.state('password')).toEqual('');
-    expect(wrapper.state('password_confirmation')).toEqual('');
+  it("has an initial state", () => {
+    expect(wrapper.state("username")).toEqual("");
+    expect(wrapper.state("email")).toEqual("");
+    expect(wrapper.state("password")).toEqual("");
+    expect(wrapper.state("password_confirmation")).toEqual("");
   });
 
   it('should render a input area for username', () => {
@@ -69,24 +69,24 @@ describe('SignUp', () => {
     expect(wrapper.find('button').text()).toBe('Sign Up');
   });
 
-  describe('#handleChange', () => {
+  describe("#handleChange", () => {
     let mockEvent;
 
     beforeEach(() => {
       mockEvent = {
         target: {
-          value: 'changedvalue',
+          value: "changedvalue",
         },
       };
     });
 
-    it('should be called when a change is detected', () => {
-      const spy = jest.spyOn(wrapper.instance(), 'handleChange');
+    it("should be called when a change is detected", () => {
+      const spy = jest.spyOn(wrapper.instance(), "handleChange");
       wrapper.instance().forceUpdate();
       expect(spy).toHaveBeenCalledTimes(0);
 
-      for(let i=0; i<4; i++) {
-        wrapper.find('input').at(i).simulate('change', mockEvent);
+      for (let i = 0; i < 4; i++) {
+        wrapper.find("input").at(i).simulate("change", mockEvent);
         expect(spy).toHaveBeenCalledWith(mockEvent);
       }
 
@@ -106,7 +106,7 @@ describe('SignUp', () => {
   });
 });
 
-describe('#handleSubmit', () => {
+describe("#handleSubmit", () => {
   let wrapper;
   let event;
 
