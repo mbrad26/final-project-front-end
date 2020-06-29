@@ -7,6 +7,7 @@ class EditPlaylist extends Component {
     uuid: this.props.match.params.uuid,
     value: "",
     newTikToks: [],
+    title: "test title",
   };
 
   componentDidMount = () => {
@@ -33,6 +34,7 @@ class EditPlaylist extends Component {
       .then((response) => {
         this.setState({
           tikToks: response.data,
+          // save title here too
         });
       });
   };
@@ -56,6 +58,12 @@ class EditPlaylist extends Component {
   handleChange = (event) => {
     this.setState({
       value: event.target.value,
+    });
+  };
+
+  handleChangeTitle = (event) => {
+    this.setState({
+      title: event.target.value,
     });
   };
 
@@ -88,8 +96,19 @@ class EditPlaylist extends Component {
 
     return (
       <div className="edit-playlist">
+        <label>Playlist Title: {this.state.title}</label>
+        <br></br>
+        <input
+          type="text"
+          value={this.state.title}
+          onChange={this.handleChangeTitle}
+          name="titleInput"
+          placeholder={this.state.title}
+          id="title"
+        />
         <div className="add">
           <form onSubmit={this.handleSubmit}>
+            <label>Add TikTok</label>
             <input
               type="text"
               value={this.state.value}
