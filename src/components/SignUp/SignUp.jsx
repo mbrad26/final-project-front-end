@@ -20,7 +20,7 @@ class SignUp extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const url = 'http://httpbin.org/post';
+    const url = 'http://localhost:3001/registrations';
     await axios.post(url, {
         user: {
           username: this.state.username,
@@ -31,7 +31,7 @@ class SignUp extends Component {
       }, { withCredentials: true }
     )
     .then(response => {
-      if (response.status === 200) {
+      if (response.data.status === 200) {
         this.setState({ redirect: '/' });
       }
     })
