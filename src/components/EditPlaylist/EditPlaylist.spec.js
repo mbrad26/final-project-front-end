@@ -49,6 +49,8 @@ describe("EditPlaylist", () => {
     );
   });
 
+  // Need to add test for adding/changing title
+
   it("contains delete button for each tiktok", () => {
     expect(wrapper.find(".delete-button").length).toEqual(2);
   });
