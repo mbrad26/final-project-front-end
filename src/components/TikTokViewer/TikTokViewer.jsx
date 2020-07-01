@@ -9,6 +9,7 @@ class TikTokViewer extends Component {
     currentClip: 0,
     title: "",
     src: "",
+    uuid: this.props.match.params.uuid,
   };
 
   handleNext = () => {
@@ -17,7 +18,6 @@ class TikTokViewer extends Component {
     } else {
       this.setState({ currentClip: this.state.currentClip + 1 });
     }
-
     this._update();
   };
 
@@ -27,29 +27,29 @@ class TikTokViewer extends Component {
     } else {
       this.setState({ currentClip: this.state.currentClip - 1 });
     }
-
     this._update();
   };
 
   _update = () => {
     this.setState({
       title: this.state.tikToks[this.state.currentClip].title,
-      src: this.state.tikToks[this.state.currentClip].video_url,
+      src: this.state.tikToks[this.state.currentClip].mp4_url,
     });
   };
 
-  componentDidMount = () => {
-    axios
-      .get(
-        "https://chronomy.herokuapp.com/placeholder/playlist/40c5b468-13af-483d-8728-eb4f85a9f765"
-      )
+  componentDidMount = async () => {
+    let url = "http://chronomy.herokuapp.com/playlists/" + this.state.uuid;
+    await axios
+      .get(url, { withCredentials: true })
       .then((response) => {
         this.setState({
-          tikToks: response.data,
-          title: response.data[0].title,
-          src: response.data[0].video_url,
+          tikToks: response.data.tiktoks,
+          title: response.data.tiktoks[0].title,
+          src: response.data.tiktoks[0].mp4_url,
         });
-      });
+        console.log(this.state.tikToks);
+      })
+      .catch((error) => console.log(error));
   };
 
   render = () => {
