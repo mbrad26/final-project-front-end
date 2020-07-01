@@ -7,7 +7,7 @@ class EditPlaylist extends Component {
     uuid: this.props.match.params.uuid,
     value: "",
     newTikToks: [],
-    title: "test title",
+    title: "",
   };
 
   componentDidMount = () => {
@@ -28,19 +28,39 @@ class EditPlaylist extends Component {
 
   api = () => {
     axios
-      .get(
-        "https://chronomy.herokuapp.com/placeholder/playlist/40c5b468-13af-483d-8728-eb4f85a9f765"
-      )
-      .then((response) => {
-        this.setState({
-          tikToks: response.data,
-          // save title here too
-        });
-      });
+      .get("localhost:3001/playlists/" + this.state.uuid)
+      .then((response) => {});
   };
 
   save = () => {
+    // let allTiktoks = this.state.newArray;
+    // this.state.tikToks.map((tiktok) => {
+    //   allTiktoks.push(tiktok["mp4_url"]);
+    // });
+    // console.log(allTiktoks);
+    let json = {
+      playlist: {
+        title: this.state.title,
+        tiktoks: this.state.newTikToks,
+      },
+    };
+    console.log(json);
+    axios({
+      method: "post",
+      url: "http://localhost:3001/playlists",
+      data: json,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     //api request to save
+
+    //get the state.tiktoks urls,
+    // get the new tiktoks urls
+    // save them in one big array and send
   };
 
   handleSubmit = (event) => {
@@ -51,6 +71,7 @@ class EditPlaylist extends Component {
       newTikToks: array,
       value: "",
     });
+    console.log(this.state.newTikToks);
     // all new tiktoks to add are saved array in state.newTikToks
     // API Request to tik tok to get API
   };

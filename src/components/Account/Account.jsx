@@ -10,12 +10,14 @@ class Account extends Component {
     redirect: null,
   };
 
-  componentDidMount = () => {
-    axios
-      .get("https://chronomy.herokuapp.com/placeholder/playlists/")
+  componentDidMount = async () => {
+    let url = "http://localhost:3001/playlists_by_user";
+    await axios
+      .get(url, { withCredentials: true })
       .then((response) => {
-        this.setState({ userPlaylists: response.data });
-      });
+        console.log(response);
+      })
+      .catch(() => console.log("ERROR"));
   };
 
   addPlaylist = () => {
