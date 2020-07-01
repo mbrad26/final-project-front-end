@@ -2,15 +2,23 @@
   background: black;
 }
 
+
+
 .content {
   background: black;
   height: 100%;
   width: 100%;
+  position: relative;
+
+  color: white;
 }
 
 .embed-responsive-9by16 {
+  text-align: center;
+  margin: auto;
   width: 55%;
   padding-top: 97.5%;
+
 }
 
 video {
@@ -49,4 +57,17 @@ video {
 .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+
+.tik-tok-title {
+  color: white;
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 70px;
+  left: 20px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 120%;
 }

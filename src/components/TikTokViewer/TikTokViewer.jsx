@@ -54,14 +54,16 @@ class TikTokViewer extends Component {
   render = () => {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
-      <button type="button" className="previous btn-block btn-lg" onClick={this.handlePrevious}><i class="arrow up"></i></button>  
+        <button type="button" className="previous btn-block btn-lg" onClick={this.handlePrevious}><i class="arrow up"></i></button>  
         <div className="content">
           <div className="embed-responsive embed-responsive-9by16">
             <video className="embed-responsive-item" src={this.state.src} controls loop />
+            <div className="tik-tok-title bottom-left">{this.state.title} this is really long and goes over a lot of lines this is really long and goes over a lot of lines this is really long and goes over a lot of lines</div>
           </div>
+          
         </div>
         <button className="next btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
-        <div className="tik-tok-title">{this.state.title}</div>
+        
       </div>
     );
   };
