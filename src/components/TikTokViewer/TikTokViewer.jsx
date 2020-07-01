@@ -54,13 +54,14 @@ class TikTokViewer extends Component {
   render = () => {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
-        {this.state.title}
-        <br />
-        <video src={this.state.src} controls loop height="480" width="250" />
-        <Buttons
-          handleNext={this.handleNext}
-          handlePrevious={this.handlePrevious}
-        />
+        <div className="tik-tok-title">{this.state.title}</div>
+        <div className="video-and-buttons">
+          <button className="previous" onClick={this.handlePrevious}>Previous</button>
+          <br />
+          <video src={this.state.src} controls loop height="480" width="250" />
+          <br />
+          <button className="next" onClick={this.handleNext}>Next</button>
+          </div>
       </div>
     );
   };
