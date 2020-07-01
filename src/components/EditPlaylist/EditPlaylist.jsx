@@ -17,27 +17,28 @@ class EditPlaylist extends Component {
   };
 
   delete = (index) => {
-    // delete tiktok from array
     let newArray = this.state.tikToks;
     newArray.splice(index, 1);
     this.setState({
       tikToks: newArray,
     });
-    // API CALL TO DELETE TiKTOK FROM PLAYLIST on DB goes here
   };
 
   api = async () => {
-    console.log(this.state.uuid);
     let url = "http://chronomy.herokuapp.com/playlists/" + this.state.uuid;
     await axios
       .get(url, { withCredentials: true })
       .then((response) => {
-        console.log(response.data.tiktoks);
+        let title = "Untitled";
+        if (response.data.playlist.title != "") {
+          title = response.data.playlist.title;
+        }
         this.setState({
           tikToks: response.data.tiktoks,
+          title: title,
         });
       })
-      .catch(() => console.log("ERROR"));
+      .catch((error) => console.log(error));
   };
 
   save_new_playlist = async () => {
@@ -54,6 +55,7 @@ class EditPlaylist extends Component {
         { withCredentials: true }
       )
       .then((response) => {
+        //redirect
         console.log(response.data);
       })
       .catch((error) => console.log(error));
@@ -76,6 +78,7 @@ class EditPlaylist extends Component {
         { withCredentials: true }
       )
       .then((response) => {
+        //redirect
         console.log(response.data);
       })
       .catch((error) => console.log(error));
@@ -95,9 +98,6 @@ class EditPlaylist extends Component {
       newTikToks: array,
       value: "",
     });
-    console.log(this.state.newTikToks);
-    // all new tiktoks to add are saved array in state.newTikToks
-    // API Request to tik tok to get API
   };
 
   handleChange = (event) => {
@@ -112,12 +112,16 @@ class EditPlaylist extends Component {
     });
   };
 
+  tiktok_title_check = (title) => {
+    return title == "" ? "Untitled" : title;
+  };
+
   render() {
     let elements = [];
     for (let i = 0; i < this.state.tikToks.length; i++) {
       elements.push(
         <div className="tik-tok" key={i} id={"tikTok" + i}>
-          <h5>{this.state.tikToks[i].title}</h5>
+          <h5>{this.tiktok_title_check(this.state.tikToks[i].title)}</h5>
           <button
             className="delete-button"
             onClick={() => {
@@ -145,7 +149,6 @@ class EditPlaylist extends Component {
         <br></br>
         <input
           type="text"
-          value={this.state.title}
           onChange={this.handleChangeTitle}
           name="titleInput"
           placeholder={this.state.title}
