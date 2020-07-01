@@ -47,7 +47,6 @@ class TikTokViewer extends Component {
           title: response.data.tiktoks[0].title,
           src: response.data.tiktoks[0].mp4_url,
         });
-        console.log(this.state.tikToks);
       })
       .catch((error) => console.log(error));
   };

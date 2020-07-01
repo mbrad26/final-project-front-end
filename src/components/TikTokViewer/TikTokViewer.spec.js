@@ -2,12 +2,20 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import TikTokViewer from "./TikTokViewer";
 import Buttons from "../Buttons/Buttons";
+import { MemoryRouter } from "react-router";
 
 describe("TikTokViewer", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<TikTokViewer />);
+    wrapper = shallow(
+      <MemoryRouter>
+        <TikTokViewer
+          required={true}
+          match={{ params: { uuid: "jhjegfdsjhgfsdfgdf" } }}
+        />
+      </MemoryRouter>
+    ).dive();
     wrapper.setState({
       tikToks: [
         { title: "title1", video_url: "testUrl1" },
@@ -21,6 +29,7 @@ describe("TikTokViewer", () => {
   });
 
   it("should render a div", () => {
+    console.log(wrapper.debug());
     expect(wrapper.find("div").length).toEqual(1);
   });
 
