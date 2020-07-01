@@ -58,7 +58,9 @@ class TikTokViewer extends Component {
         <div className="video-and-buttons">
           <button className="previous" onClick={this.handlePrevious}>Previous</button>
           <br />
-          <video src={this.state.src} controls loop height="480" width="250" />
+
+            <video class="embed-responsive-item" src={this.state.src} controls loop height="480" width="250" />
+
           <br />
           <button className="next" onClick={this.handleNext}>Next</button>
           </div>
