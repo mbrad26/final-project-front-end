@@ -1,4 +1,14 @@
+.tik-tok-viewer {
+  background: black;
+}
+
+.content {
+  background: black;
+  height: 100%;
+  width: 100%;
+}
+
 .embed-responsive-9by16 {
   width: 55%;
-  padding-top: 100%;
+  padding-top: 97.5%;
 }
