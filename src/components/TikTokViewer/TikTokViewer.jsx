@@ -75,6 +75,7 @@ class TikTokViewer extends Component {
         // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>PLAY</button>
         // <button className="play btn-block btn-lg" onClick={this.muteVideo.bind(this)}>{this.state.muteUnmute}</button>
 // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
+        // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
         
   render = () => {
     return (
@@ -82,12 +83,11 @@ class TikTokViewer extends Component {
         <button type="button" className="previous btn-block btn-lg" onClick={this.handlePrevious}><i class="arrow up"></i></button>  
         <div className="content">
           <div className="embed-responsive embed-responsive-9by16">
-            <video className="embed-responsive-item" ref="vidRef" src={this.state.src} loop />
+            <video className="embed-responsive-item" ref="vidRef" src={this.state.src} loop playsInline autoPlay muted />
             <div className="tik-tok-title bottom-left">{this.state.title}</div>
           </div>
           
         </div>
-        <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
         
         <button className="next btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
         
