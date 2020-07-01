@@ -18,6 +18,12 @@ class App extends Component {
     };
   }
 
+  handleUserLogInStatus = (bool) => {
+    this.setState({
+      userLogInStatus: bool,
+    });
+  };
+
   render = () => {
     return (
       <div className="app-container">
@@ -25,13 +31,38 @@ class App extends Component {
           <Navbar
             userLogInStatus={this.state.userLogInStatus}
             user={this.state.user}
+            handleUserLogInStatus={this.handleUserLogInStatus}
           />
           <Switch>
-            <Route exact path="/" component={SignIn} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/tiktok/:uuid" exact component={TikTokViewer} />
-            <Route path="/account" exact component={Account} />
-            <Route path="/editPlaylist/:uuid" exact component={EditPlaylist} />
+            <Route
+              exact
+              path="/"
+              render={(props) => (
+                <SignIn
+                  {...props}
+                  handleUserLogInStatus={this.handleUserLogInStatus}
+                />
+              )}
+            />
+            <Route
+              path="/signup"
+              render={(props) => (
+                <SignUp
+                  {...props}
+                  handleUserLogInStatus={this.handleUserLogInStatus}
+                />
+              )}
+            />
+            <Route
+              path="/tiktok/:uuid"
+              render={(props) => <TikTokViewer {...props} />}
+            />
+            <Route path="/account" render={(props) => <Account {...props} />} />
+            <Route
+              path="/editPlaylist/:uuid"
+              exact
+              render={(props) => <EditPlaylist {...props} />}
+            />
             <Route component={Error} />
           </Switch>
         </Router>

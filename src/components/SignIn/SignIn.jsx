@@ -7,7 +7,6 @@ class SignIn extends Component {
   state = {
     username: "",
     password: "",
-    redirect: null,
   };
 
   handleChange = (event) => {
@@ -31,51 +30,40 @@ class SignIn extends Component {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response);
-        console.log(response.status);
-        if (response.data.status === 200) {
-          this.setState({ redirect: "/account" });
-        }
+        this.props.handleUserLogInStatus(true);
+        this.props.history.push("/account");
       })
-      .catch(() => console.log("ERROR"));
+      .catch((error) => console.log(error));
   };
 
   render = () => {
-    if (this.state.redirect) {
-      return (
-        <Router>
-          <Redirect to={this.state.redirect} />
-        </Router>
-      );
-    } else {
-      return (
-        <div className="form-container">
-          Sign In
-          <form className="signin-form" onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              value={this.state.username}
-              onChange={this.handleChange}
-              name="username"
-              placeholder="Username"
-              required
-            />
-            <input
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              name="password"
-              placeholder="Password"
-              minLength="6"
-              required
-            />
-            <button type="submit" id="signin">
-              Sign In
-            </button>
-          </form>
-        </div>
-      );
-    }
+    return (
+      <div className="form-container">
+        Sign In
+        <form className="signin-form" onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            value={this.state.username}
+            onChange={this.handleChange}
+            name="username"
+            placeholder="Username"
+            required
+          />
+          <input
+            type="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            name="password"
+            placeholder="Password"
+            minLength="6"
+            required
+          />
+          <button type="submit" id="signin">
+            Sign In
+          </button>
+        </form>
+      </div>
+    );
   };
 }
 

@@ -1,10 +1,10 @@
-import React from 'react';
-import { Redirect, BrowserRouter as Router } from 'react-router-dom';
-import { shallow, mount } from 'enzyme';
-import SignUp from './SignUp';
-import * as axios from 'axios';
+import React from "react";
+import { Redirect, BrowserRouter as Router } from "react-router-dom";
+import { shallow, mount } from "enzyme";
+import SignUp from "./SignUp";
+import * as axios from "axios";
 
-jest.mock('axios');
+jest.mock("axios");
 
 describe("SignUp", () => {
   let wrapper;
@@ -14,12 +14,12 @@ describe("SignUp", () => {
     jest.clearAllMocks();
   });
 
-  it('should render a div', () => {
-    expect(wrapper.find('div').length).toEqual(1);
+  it("should render a div", () => {
+    expect(wrapper.find("div").length).toEqual(1);
   });
 
-  it('should contain a form', () => {
-    expect(wrapper.find('form').length).toEqual(1);
+  it("should contain a form", () => {
+    expect(wrapper.find("form").length).toEqual(1);
   });
 
   it("has an initial state", () => {
@@ -29,44 +29,48 @@ describe("SignUp", () => {
     expect(wrapper.state("password_confirmation")).toEqual("");
   });
 
-  it('should render a input area for username', () => {
-    expect(wrapper.find('input').at(0).props().type).toBe('text');
-    expect(wrapper.find('input').at(0).props().value).toBe('');
-    expect(wrapper.find('input').at(0).props().name).toBe('username');
-    expect(wrapper.find('input').at(0).props().placeholder).toBe('Username');
-    expect(wrapper.find('input').at(0).props()).toHaveProperty('required');
+  it("should render a input area for username", () => {
+    expect(wrapper.find("input").at(0).props().type).toBe("text");
+    expect(wrapper.find("input").at(0).props().value).toBe("");
+    expect(wrapper.find("input").at(0).props().name).toBe("username");
+    expect(wrapper.find("input").at(0).props().placeholder).toBe("Username");
+    expect(wrapper.find("input").at(0).props()).toHaveProperty("required");
   });
 
-  it('should render a input area for email', () => {
-    expect(wrapper.find('input').at(1).props().type).toBe('email');
-    expect(wrapper.find('input').at(1).props().value).toBe('');
-    expect(wrapper.find('input').at(1).props().name).toBe('email');
-    expect(wrapper.find('input').at(1).props().placeholder).toBe('Email');
-    expect(wrapper.find('input').at(1).props()).toHaveProperty('required');
+  it("should render a input area for email", () => {
+    expect(wrapper.find("input").at(1).props().type).toBe("email");
+    expect(wrapper.find("input").at(1).props().value).toBe("");
+    expect(wrapper.find("input").at(1).props().name).toBe("email");
+    expect(wrapper.find("input").at(1).props().placeholder).toBe("Email");
+    expect(wrapper.find("input").at(1).props()).toHaveProperty("required");
   });
 
-  it('should render a input area for password', () => {
-    expect(wrapper.find('input').at(2).props().type).toBe('password');
-    expect(wrapper.find('input').at(2).props().value).toBe('');
-    expect(wrapper.find('input').at(2).props().minLength).toBe("6");
-    expect(wrapper.find('input').at(2).props().name).toBe('password');
-    expect(wrapper.find('input').at(2).props().placeholder).toBe('Password');
-    expect(wrapper.find('input').at(2).props()).toHaveProperty('required');
+  it("should render a input area for password", () => {
+    expect(wrapper.find("input").at(2).props().type).toBe("password");
+    expect(wrapper.find("input").at(2).props().value).toBe("");
+    expect(wrapper.find("input").at(2).props().minLength).toBe("6");
+    expect(wrapper.find("input").at(2).props().name).toBe("password");
+    expect(wrapper.find("input").at(2).props().placeholder).toBe("Password");
+    expect(wrapper.find("input").at(2).props()).toHaveProperty("required");
   });
 
-  it('should render a input area for password confirmation', () => {
-    expect(wrapper.find('input').at(3).props().type).toBe('password');
-    expect(wrapper.find('input').at(3).props().value).toBe('');
-    expect(wrapper.find('input').at(3).props().minLength).toBe("6");
-    expect(wrapper.find('input').at(3).props().name).toBe('password_confirmation');
-    expect(wrapper.find('input').at(3).props().placeholder).toBe('Password Confirmation');
-    expect(wrapper.find('input').at(3).props()).toHaveProperty('required');
+  it("should render a input area for password confirmation", () => {
+    expect(wrapper.find("input").at(3).props().type).toBe("password");
+    expect(wrapper.find("input").at(3).props().value).toBe("");
+    expect(wrapper.find("input").at(3).props().minLength).toBe("6");
+    expect(wrapper.find("input").at(3).props().name).toBe(
+      "password_confirmation"
+    );
+    expect(wrapper.find("input").at(3).props().placeholder).toBe(
+      "Password Confirmation"
+    );
+    expect(wrapper.find("input").at(3).props()).toHaveProperty("required");
   });
 
-  it('should render a submit button', () => {
-    expect(wrapper.find('button').props().type).toBe('submit');
-    expect(wrapper.find('button').props().id).toBe('signup');
-    expect(wrapper.find('button').text()).toBe('Sign Up');
+  it("should render a submit button", () => {
+    expect(wrapper.find("button").props().type).toBe("submit");
+    expect(wrapper.find("button").props().id).toBe("signup");
+    expect(wrapper.find("button").text()).toBe("Sign Up");
   });
 
   describe("#handleChange", () => {
@@ -93,14 +97,16 @@ describe("SignUp", () => {
       expect(spy).toHaveBeenCalledTimes(4);
     });
 
-    it('updates the state with event value', () => {
-      wrapper.find('input').forEach((item, i) => {
+    it("updates the state with event value", () => {
+      wrapper.find("input").forEach((item, i) => {
         let name = `${item.props().name}`;
-        let value = 'changedvalue';
+        let value = "changedvalue";
 
-        item.simulate('change', { target: { name, value } });
+        item.simulate("change", { target: { name, value } });
 
-        expect(wrapper.find('input').at(i).props().value).toEqual('changedvalue');
+        expect(wrapper.find("input").at(i).props().value).toEqual(
+          "changedvalue"
+        );
       });
     });
   });
@@ -116,57 +122,55 @@ describe("#handleSubmit", () => {
     jest.clearAllMocks();
   });
 
-  it('should be called when form is being submited', () => {
-    const spy = jest.spyOn(wrapper.instance(), 'handleSubmit');
+  it("should be called when form is being submited", () => {
+    const spy = jest.spyOn(wrapper.instance(), "handleSubmit");
     wrapper.instance().forceUpdate(); //force re-render
     // wrapper.setState({}) //force re-render
     expect(spy).toHaveBeenCalledTimes(0);
 
-    wrapper.find('button').simulate('submit', event);
+    wrapper.find("button").simulate("submit", event);
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  it('should make a POST request to the back-end', () => {
-    const mockData = { "status": 200, };
+  it("should make a POST request to the back-end", () => {
+    const mockData = { status: 200 };
     const mockAxios = axios.post.mockResolvedValue({ data: { mockData } });
 
-    wrapper.find('button').simulate('submit', event);
+    wrapper.find("button").simulate("submit", event);
 
     expect(mockAxios).toHaveBeenCalledTimes(1);
   });
 
-  it('should prevent form default action', () => {
-    const spy = jest.spyOn(event, 'preventDefault');
+  it("should prevent form default action", () => {
+    const spy = jest.spyOn(event, "preventDefault");
 
     wrapper.instance().handleSubmit(event);
 
     expect(spy).toHaveBeenCalled();
   });
 
-  describe('when signin unsuccessful', () => {
+  describe("when signin unsuccessful", () => {
     it("should render '/signup'", () => {
-      const error = new Error('Sign Up failed!');
+      const error = new Error("Sign Up failed!");
       axios.post.mockRejectedValueOnce({ status: 401, error: error });
 
       wrapper.instance().handleSubmit(event);
 
-      expect(wrapper.containsMatchingElement(<Redirect to={'/'} />)).toEqual(false);
+      expect(wrapper.containsMatchingElement(<Redirect to={"/"} />)).toEqual(
+        false
+      );
       expect(axios.post).toHaveBeenCalledTimes(1);
     });
   });
 
-  describe('when sign up successful', () => {
+  describe("when sign up successful", () => {
     it("should redirect to '/account'", async () => {
+      let mockFn = jest.fn();
+      SignUp.prototype.handleUserLoginStatus = mockFn;
       await axios.post.mockResolvedValueOnce({ status: 200, data: {} });
       wrapper.instance().handleSubmit(event);
-      wrapper.setState({ redirect: '/' });
-
-      expect(wrapper.containsMatchingElement(
-        <Router>
-          <Redirect to={'/'} />
-        </Router>
-      )).toEqual(true);
+      expect(global.window.location.pathname).toEqual("/account");
     });
   });
 });
