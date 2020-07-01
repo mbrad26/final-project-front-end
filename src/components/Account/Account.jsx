@@ -10,17 +10,40 @@ class Account extends Component {
     redirect: null,
   };
 
-  componentDidMount = () => {
-    axios
-      .get("https://chronomy.herokuapp.com/placeholder/playlists/")
+  componentDidMount = async () => {
+    let url = "http://chronomy.herokuapp.com/playlists_by_user";
+    await axios
+      .get(url, { withCredentials: true })
       .then((response) => {
-        this.setState({ userPlaylists: response.data });
-      });
+        this.title_check(response.data.playlists_by_user);
+      })
+      .catch(() => console.log("ERROR"));
+  };
+
+  title_check = (array) => {
+    console.log(array);
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].title == "") {
+        array[i].title = "Untitled";
+      }
+    }
+    this.setState({
+      userPlaylists: array,
+    });
   };
 
   addPlaylist = () => {
     this.setState({
       redirect: "/editPlaylist/new",
+    });
+  };
+
+  remove_playlist = (uuid) => {
+    let array = this.state.userPlaylists.filter((playlist) => {
+      return playlist.uuid != uuid;
+    });
+    this.setState({
+      userPlaylists: array,
     });
   };
 
@@ -33,6 +56,7 @@ class Account extends Component {
           id={this.state.userPlaylists[i].id}
           title={this.state.userPlaylists[i].title}
           uuid={this.state.userPlaylists[i].uuid}
+          remove_playlist={this.remove_playlist}
         />
       );
     }
