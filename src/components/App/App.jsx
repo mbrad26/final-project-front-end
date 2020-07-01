@@ -29,8 +29,8 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={SignIn} />
             <Route path="/signup" component={SignUp} />
-            <Route path="/tiktok/:uuid" exact component={TikTokViewer} />
             <Route path="/account" exact component={Account} />
+            <Route path="/tiktok/:uuid" exact component={TikTokViewer} />
             <Route path="/editPlaylist/:uuid" exact component={EditPlaylist} />
             <Route component={Error} />
           </Switch>
