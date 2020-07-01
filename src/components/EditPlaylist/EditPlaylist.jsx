@@ -154,7 +154,7 @@ class EditPlaylist extends Component {
         />
         <div className="add">
           <form onSubmit={this.handleSubmit}>
-            <label>Add TikTok</label>
+            <label>Unsaved TikToks:</label>
             <input
               type="text"
               value={this.state.value}
