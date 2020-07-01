@@ -2,25 +2,19 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import TikTokViewer from "./TikTokViewer";
 import Buttons from "../Buttons/Buttons";
-import { MemoryRouter } from "react-router";
 
 describe("TikTokViewer", () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper = shallow(
-      <MemoryRouter>
-        <TikTokViewer
-          required={true}
-          match={{ params: { uuid: "jhjegfdsjhgfsdfgdf" } }}
-        />
-      </MemoryRouter>
-    ).dive();
+      <TikTokViewer required={true} match={{ params: { uuid: "new" } }} />
+    );
     wrapper.setState({
       tikToks: [
-        { title: "title1", video_url: "testUrl1" },
-        { title: "title2", video_url: "testUrl2" },
-        { title: "title3", video_url: "testUrl3" },
+        { title: "title1", mp4_url: "testUrl1" },
+        { title: "title2", mp4_url: "testUrl2" },
+        { title: "title3", mp4_url: "testUrl3" },
       ],
       currentClip: 0,
       title: "",
@@ -29,7 +23,6 @@ describe("TikTokViewer", () => {
   });
 
   it("should render a div", () => {
-    console.log(wrapper.debug());
     expect(wrapper.find("div").length).toEqual(1);
   });
 
@@ -38,7 +31,9 @@ describe("TikTokViewer", () => {
   });
 
   it("runs component did mount function", () => {
-    wrapper = mount(<TikTokViewer />);
+    wrapper = mount(
+      <TikTokViewer required={true} match={{ params: { uuid: "new" } }} />
+    );
     const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
     wrapper.instance().forceUpdate();
     wrapper.instance().componentDidMount();
