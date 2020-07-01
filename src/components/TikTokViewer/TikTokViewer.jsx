@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import Buttons from "../Buttons/Buttons";
 import "./TikTokViewer.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import {FaCaretDown, FaCaretUp} from 'react-icons/fa/index';
-
-
 
 class TikTokViewer extends Component {
   state = {
