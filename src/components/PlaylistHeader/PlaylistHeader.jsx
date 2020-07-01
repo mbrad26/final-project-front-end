@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 class PlaylistHeader extends Component {
   state = {
@@ -9,8 +10,14 @@ class PlaylistHeader extends Component {
     redirect: null,
   };
 
-  delete = () => {
-    //API Request to delete
+  delete = async () => {
+    let url = "http://chronomy.herokuapp.com/playlists/" + this.state.uuid;
+    await axios
+      .delete(url, { withCredentials: true })
+      .then((response) => {
+        this.props.remove_playlist(this.state.uuid);
+      })
+      .catch((error) => console.log(error));
   };
 
   edit = () => {

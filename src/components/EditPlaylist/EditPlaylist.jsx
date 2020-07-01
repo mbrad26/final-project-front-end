@@ -7,7 +7,7 @@ class EditPlaylist extends Component {
     uuid: this.props.match.params.uuid,
     value: "",
     newTikToks: [],
-    title: "test title",
+    title: "",
   };
 
   componentDidMount = () => {
@@ -17,30 +17,77 @@ class EditPlaylist extends Component {
   };
 
   delete = (index) => {
-    // delete tiktok from array
     let newArray = this.state.tikToks;
     newArray.splice(index, 1);
     this.setState({
       tikToks: newArray,
     });
-    // API CALL TO DELETE TiKTOK FROM PLAYLIST on DB goes here
   };
 
-  api = () => {
-    axios
-      .get(
-        "https://chronomy.herokuapp.com/placeholder/playlist/40c5b468-13af-483d-8728-eb4f85a9f765"
+  api = async () => {
+    let url = "http://chronomy.herokuapp.com/playlists/" + this.state.uuid;
+    await axios
+      .get(url, { withCredentials: true })
+      .then((response) => {
+        let title = "Untitled";
+        if (response.data.playlist.title != "") {
+          title = response.data.playlist.title;
+        }
+        this.setState({
+          tikToks: response.data.tiktoks,
+          title: title,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  save_new_playlist = async () => {
+    let url = "http://chronomy.herokuapp.com/playlists/";
+    await axios
+      .post(
+        url,
+        {
+          playlist: {
+            title: this.state.title,
+            tiktoks: this.state.newTikToks,
+          },
+        },
+        { withCredentials: true }
       )
       .then((response) => {
-        this.setState({
-          tikToks: response.data,
-          // save title here too
-        });
-      });
+        //redirect
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  update_playlist = async () => {
+    let array = this.state.tikToks
+      .map((tiktok) => tiktok.original_url)
+      .concat(this.state.newTikToks);
+    let url = "http://chronomy.herokuapp.com/playlists/" + this.state.uuid;
+    await axios
+      .put(
+        url,
+        {
+          playlist: {
+            title: this.state.title,
+            tiktoks: array,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        //redirect
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
   };
 
   save = () => {
-    //api request to save
+    this.state.uuid == "new"
+      ? this.save_new_playlist()
+      : this.update_playlist();
   };
 
   handleSubmit = (event) => {
@@ -51,8 +98,6 @@ class EditPlaylist extends Component {
       newTikToks: array,
       value: "",
     });
-    // all new tiktoks to add are saved array in state.newTikToks
-    // API Request to tik tok to get API
   };
 
   handleChange = (event) => {
@@ -67,12 +112,16 @@ class EditPlaylist extends Component {
     });
   };
 
+  tiktok_title_check = (title) => {
+    return title == "" ? "Untitled" : title;
+  };
+
   render() {
     let elements = [];
     for (let i = 0; i < this.state.tikToks.length; i++) {
       elements.push(
         <div className="tik-tok" key={i} id={"tikTok" + i}>
-          <h5>{this.state.tikToks[i].title}</h5>
+          <h5>{this.tiktok_title_check(this.state.tikToks[i].title)}</h5>
           <button
             className="delete-button"
             onClick={() => {
@@ -100,7 +149,6 @@ class EditPlaylist extends Component {
         <br></br>
         <input
           type="text"
-          value={this.state.title}
           onChange={this.handleChangeTitle}
           name="titleInput"
           placeholder={this.state.title}

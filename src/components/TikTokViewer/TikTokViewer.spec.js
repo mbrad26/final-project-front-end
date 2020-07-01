@@ -7,12 +7,14 @@ describe("TikTokViewer", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<TikTokViewer />);
+    wrapper = shallow(
+      <TikTokViewer required={true} match={{ params: { uuid: "new" } }} />
+    );
     wrapper.setState({
       tikToks: [
-        { title: "title1", video_url: "testUrl1" },
-        { title: "title2", video_url: "testUrl2" },
-        { title: "title3", video_url: "testUrl3" },
+        { title: "title1", mp4_url: "testUrl1" },
+        { title: "title2", mp4_url: "testUrl2" },
+        { title: "title3", mp4_url: "testUrl3" },
       ],
       currentClip: 0,
       title: "",
@@ -29,7 +31,9 @@ describe("TikTokViewer", () => {
   });
 
   it("runs component did mount function", () => {
-    wrapper = mount(<TikTokViewer />);
+    wrapper = mount(
+      <TikTokViewer required={true} match={{ params: { uuid: "new" } }} />
+    );
     const spy = jest.spyOn(wrapper.instance(), "componentDidMount");
     wrapper.instance().forceUpdate();
     wrapper.instance().componentDidMount();
