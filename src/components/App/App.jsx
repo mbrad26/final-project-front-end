@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
@@ -31,7 +31,7 @@ class App extends Component {
         <Router>
           <Switch>
             <Route
-              path="/tiktok/:uuid"
+              path="/view/:uuid"
               render={(props) => <TikTokViewer {...props} />}
             />
             <Route>
