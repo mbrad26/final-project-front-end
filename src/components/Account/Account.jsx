@@ -11,11 +11,13 @@ class Account extends Component {
   };
 
   componentDidMount = async () => {
-    let url = "http://localhost:3001/playlists_by_user";
+    let url = "http://chronomy.herokuapp.com/playlists_by_user";
     await axios
       .get(url, { withCredentials: true })
       .then((response) => {
-        console.log(response);
+        this.setState({
+          userPlaylists: response.data.playlists_by_user,
+        });
       })
       .catch(() => console.log("ERROR"));
   };

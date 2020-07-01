@@ -26,10 +26,18 @@ class EditPlaylist extends Component {
     // API CALL TO DELETE TiKTOK FROM PLAYLIST on DB goes here
   };
 
-  api = () => {
-    axios
-      .get("localhost:3001/playlists/" + this.state.uuid)
-      .then((response) => {});
+  api = async () => {
+    console.log(this.state.uuid);
+    let url = "http://chronomy.herokuapp.com/playlists/" + this.state.uuid;
+    await axios
+      .get(url, { withCredentials: true })
+      .then((response) => {
+        console.log(response.data.tiktoks);
+        this.setState({
+          tikToks: response.data.tiktoks,
+        });
+      })
+      .catch(() => console.log("ERROR"));
   };
 
   save = () => {
