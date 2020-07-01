@@ -13,6 +13,10 @@
   padding-top: 97.5%;
 }
 
+video {
+  border-radius: 5px;
+}
+
 .btn-block { 
   color: #ffffff; 
   background-color: #000000; 
