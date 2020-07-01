@@ -46,44 +46,45 @@ class EditPlaylist extends Component {
       .post(
         url,
         {
-          //json here
+          playlist: {
+            title: this.state.title,
+            tiktoks: this.state.newTikToks,
+          },
         },
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response.data.tiktoks);
+        console.log(response.data);
       })
       .catch((error) => console.log(error));
   };
 
   update_playlist = async () => {
+    let array = this.state.tikToks
+      .map((tiktok) => tiktok.original_url)
+      .concat(this.state.newTikToks);
     let url = "http://chronomy.herokuapp.com/playlists/" + this.state.uuid;
     await axios
       .put(
         url,
         {
-          //json here
+          playlist: {
+            title: this.state.title,
+            tiktoks: array,
+          },
         },
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response.data.tiktoks);
+        console.log(response.data);
       })
       .catch((error) => console.log(error));
   };
 
-  save = async () => {
-    let array = this.state.newTikToks;
-    console.log(this.state.tikToks);
-    this.state.tikToks.map((tiktok) => {
-      array.push(tiktok.original_url);
-    });
-    console.log(array);
-    //if this state uuid is new, do a post to /playlists
-    //else do a put to playlists/this.state.uuid
-    // this.state.uuid == "new"
-    //   ? this.save_new_playlist()
-    //   : this.update_playlist();
+  save = () => {
+    this.state.uuid == "new"
+      ? this.save_new_playlist()
+      : this.update_playlist();
   };
 
   handleSubmit = (event) => {
