@@ -58,7 +58,7 @@ class TikTokViewer extends Component {
         <div className="content">
           <div className="embed-responsive embed-responsive-9by16">
             <video className="embed-responsive-item" src={this.state.src} controls loop />
-            <div className="tik-tok-title bottom-left">{this.state.title} this is really long and goes over a lot of lines this is really long and goes over a lot of lines this is really long and goes over a lot of lines</div>
+            <div className="tik-tok-title bottom-left">{this.state.title}</div>
           </div>
           
         </div>
