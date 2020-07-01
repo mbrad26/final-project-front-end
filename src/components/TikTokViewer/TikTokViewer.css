@@ -12,3 +12,37 @@
   width: 55%;
   padding-top: 97.5%;
 }
+
+.btn-block { 
+  color: #ffffff; 
+  background-color: #000000; 
+  border-color: #000000;
+  padding: 20px;
+} 
+
+.arrow {
+  border: solid white;
+  border-width: 0 5px 5px 0;
+  display: inline-block;
+  padding: 10px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}

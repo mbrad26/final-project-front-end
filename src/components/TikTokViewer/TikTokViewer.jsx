@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import Buttons from "../Buttons/Buttons";
 import "./TikTokViewer.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import {FaCaretDown, FaCaretUp} from 'react-icons/fa/index';
+
+
 
 class TikTokViewer extends Component {
   state = {
@@ -54,13 +59,13 @@ class TikTokViewer extends Component {
   render = () => {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
-      <button className="previous" onClick={this.handlePrevious}>Previous</button>  
+      <button type="button" className="previous btn-block btn-lg" onClick={this.handlePrevious}><i class="arrow up"></i></button>  
         <div className="content">
           <div className="embed-responsive embed-responsive-9by16">
             <video className="embed-responsive-item" src={this.state.src} controls loop />
           </div>
         </div>
-        <button className="next" onClick={this.handleNext}>Next</button>
+        <button className="next btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
         <div className="tik-tok-title">{this.state.title}</div>
       </div>
     );
