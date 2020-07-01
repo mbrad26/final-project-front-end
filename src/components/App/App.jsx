@@ -29,42 +29,49 @@ class App extends Component {
     return (
       <div className="app-container">
         <Router>
-          <Navbar
-            userLogInStatus={this.state.userLogInStatus}
-            user={this.state.user}
-            handleUserLogInStatus={this.handleUserLogInStatus}
-          />
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <SignIn
-                  {...props}
-                  handleUserLogInStatus={this.handleUserLogInStatus}
-                />
-              )}
-            />
-            <Route
-              path="/signup"
-              render={(props) => (
-                <SignUp
-                  {...props}
-                  handleUserLogInStatus={this.handleUserLogInStatus}
-                />
-              )}
-            />
             <Route
               path="/tiktok/:uuid"
               render={(props) => <TikTokViewer {...props} />}
             />
-            <Route path="/account" render={(props) => <Account {...props} />} />
-            <Route
-              path="/editPlaylist/:uuid"
-              exact
-              render={(props) => <EditPlaylist {...props} />}
-            />
-            <Route component={Error} />
+            <Route>
+              <Navbar
+                userLogInStatus={this.state.userLogInStatus}
+                user={this.state.user}
+                handleUserLogInStatus={this.handleUserLogInStatus}
+              />
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={(props) => (
+                    <SignIn
+                      {...props}
+                      handleUserLogInStatus={this.handleUserLogInStatus}
+                    />
+                  )}
+                />
+                <Route
+                  path="/signup"
+                  render={(props) => (
+                    <SignUp
+                      {...props}
+                      handleUserLogInStatus={this.handleUserLogInStatus}
+                    />
+                  )}
+                />
+                <Route
+                  path="/account"
+                  render={(props) => <Account {...props} />}
+                />
+                <Route
+                  path="/editPlaylist/:uuid"
+                  exact
+                  render={(props) => <EditPlaylist {...props} />}
+                />
+                <Route component={Error} />
+              </Switch>
+            </Route>
           </Switch>
         </Router>
       </div>
