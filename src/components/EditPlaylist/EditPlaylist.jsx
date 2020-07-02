@@ -121,7 +121,7 @@ class EditPlaylist extends Component {
         <div className="tik-tok" key={i} id={"tikTok" + i}>
           <h5>{this.tiktok_title_check(this.state.tikToks[i].title)}</h5>
           <button
-            className="delete-button"
+            className="delete-button patsbutton"
             onClick={() => {
               this.delete(i);
             }}
@@ -143,7 +143,8 @@ class EditPlaylist extends Component {
 
     return (
       <div className="edit-playlist">
-        <label>Playlist Title: {this.state.title}</label>
+        <label>Playlist Title: </label>
+        <br></br>
         <br></br>
         <input
           type="text"
@@ -152,9 +153,13 @@ class EditPlaylist extends Component {
           placeholder={this.state.title}
           id="title"
         />
+        <br></br>
+        <br></br>
         <div className="add">
           <form onSubmit={this.handleSubmit}>
             <label>Unsaved TikToks:</label>
+            <br></br>
+            <br></br>
             <input
               type="text"
               value={this.state.value}
@@ -164,14 +169,16 @@ class EditPlaylist extends Component {
               required
               id="input"
             />
-            <button type="submit" id="submit">
+            <button type="submit" id="submit" className="patsbutton">
               Add
             </button>
           </form>
+          <br></br>
           <div className="added-tik-toks">
-            <h5>Added Tik-Toks:</h5>
+            <p>Added Tik-Toks:</p>
+            <br></br>
             <div>{added}</div>
-            <button className="save-button" onClick={this.save}>
+            <button className="save-button patsbutton" onClick={this.save}>
               Save/Update Playlist
             </button>
           </div>
