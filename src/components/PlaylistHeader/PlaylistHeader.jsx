@@ -25,7 +25,7 @@ class PlaylistHeader extends Component {
   };
 
   copy = () => {
-    copy(this.state.uuid);
+    copy(window.location.protocol + "//" + window.location.host + "/view/" + this.state.uuid);
   };
 
   render() {
@@ -41,7 +41,7 @@ class PlaylistHeader extends Component {
         </button>
         <br></br>
         <button onClick={this.copy} className="patsbutton uuid">
-          <small>Copy UUID to clipboard</small>
+          <small>Copy shareable link to clipboard</small>
         </button>
       </div>
     );
