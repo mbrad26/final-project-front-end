@@ -120,7 +120,6 @@ class TikTokViewer extends Component {
               <p className=" play centered" onClick={this.playVideo.bind(this)}>{this.showPlay()}</p>
             </div>
           </div>   
-          <FontAwesomeIcon icon={faPlay} /><FontAwesomeIcon icon={faPause} /> <FontAwesomeIcon icon={faVolumeUp} /> <FontAwesomeIcon icon={faVolumeMute } />     
          <p className="next" onClick={this.handleNext}><i className="arrow down"></i></p>
         </div>
       </div>
