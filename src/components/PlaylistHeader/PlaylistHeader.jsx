@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import copy from "copy-to-clipboard";
 import axios from "axios";
 import "./PlaylistHeader.css";
 
@@ -24,18 +24,24 @@ class PlaylistHeader extends Component {
     this.props.history.push("/editPlaylist/" + this.state.uuid);
   };
 
+  copy = () => {
+    copy(this.state.uuid);
+  };
+
   render() {
     return (
       <div className="playlistHeader">
-        <p className="title">{this.state.title}</p>
-        <p className="uuid">
-          <small>UUID: {this.state.uuid}</small>
-        </p>
+        <p className="tik-tok-title">{this.state.title}</p>
+
         <button className="button patsbutton" onClick={this.delete}>
           Delete
         </button>
         <button className="button patsbutton" onClick={this.edit}>
           Edit
+        </button>
+        <br></br>
+        <button onClick={this.copy} className="patsbutton uuid">
+          <small>Copy UUID to clipboard</small>
         </button>
       </div>
     );
