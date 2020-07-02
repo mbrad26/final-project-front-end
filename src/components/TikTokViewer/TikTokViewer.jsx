@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Buttons from "../Buttons/Buttons";
 import "./TikTokViewer.css";
-import { faPlay, faPause, faVolumeUp, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faPause, faVolumeUp, faVolumeMute, faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -118,12 +118,12 @@ class TikTokViewer extends Component {
             <div className="bottom-fade">
             <video className="embed-responsive-item " ref="vidRef" src={this.state.src} loop playsInline autoPlay muted />
             </div>
-            <div className="tik-tok-title bottom-left">{this.state.title}<br /><br /><br /></div>
+            <div className="tik-tok-title bottom-left">{this.state.title}<div className="title-spacer"></div></div>
             <div className="controls">
-              <p className="previous top-center" onClick={this.handlePrevious}><i className="arrow up"></i></p>
+              <p className="previous top-center" onClick={this.handlePrevious}><FontAwesomeIcon icon={faCaretUp} /></p>
               <div className="mute-container top-right"><p className=" mute " onClick={this.muteVideo.bind(this)}>{this.showMute()}</p></div>
               <p className=" play centered" onClick={this.playVideo.bind(this)}>{this.showPlay()}</p>
-              <p className="next bottom-center" onClick={this.handleNext}><i className="arrow down"></i></p>
+              <p className="next bottom-center" onClick={this.handleNext}><FontAwesomeIcon icon={faCaretDown} /></p>
             </div>
           </div>   
          
