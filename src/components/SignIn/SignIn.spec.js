@@ -141,16 +141,15 @@ describe('#handleSubmit', () => {
   describe('when signin successful', () => {
     it("should redirect to '/account'", async () => {
       let data = { "status": 200 };
-      let response = jest.fn(() => data);
-      wrapper.find('button').simulate('submit', event);
-      await axios.post.mockImplementation(() => response);
-      // wrapper.instance().forceUpdate();
+      let then = jest.fn();
 
+      await axios.post.mockImplementationOnce(() => Promise.resolve({ data: data }));
       console.log(axios.post.mock.results)
 
-      // expect(propsTest.history.location.pathname).toContain('/account');
-      // expect(propsTest.handleUserLogInStatus).toHaveBeenCalledWith(true);
-      expect(axios.post).toHaveBeenCalledTimes(1);
+      return wrapper.instance().handleSubmit(event).then(response => {
+        expect(propsTest.history.location.pathname).toContain('/account');
+        expect(propsTest.handleUserLogInStatus).toHaveBeenCalledWith(true);
+      })
     });
   });
 });
