@@ -37,7 +37,7 @@ class SignUp extends Component {
         this.props.handleUserLogInStatus(true);
         this.props.history.push("/account");
       })
-      .catch((error) => { throw new Error("Sign Up failed!") });
+      .catch((error) => {console.log(error)});
   };
 
   render = () => {

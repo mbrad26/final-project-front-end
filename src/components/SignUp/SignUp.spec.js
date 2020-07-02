@@ -159,6 +159,8 @@ describe("#handleSubmit", () => {
       const errorMessage = new Error("Sign Up failed!");
       jest.spyOn(axios, 'post').mockRejectedValue(errorMessage);
 
+      wrapper.instance().handleSubmit(event);
+
       await expect(axios.post()).rejects.toThrow(errorMessage);
     });
   });

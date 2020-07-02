@@ -129,12 +129,12 @@ describe('#handleSubmit', () => {
 
   describe('when signin unsuccessful', () => {
     it("should render '/'", async () => {
-      const error = new Error('Sign In failed!');
-      await axios.post.mockRejectedValueOnce();
+      const errorMessage = new Error("Sign In failed!");
+      jest.spyOn(axios, 'post').mockRejectedValue(errorMessage);
 
       wrapper.instance().handleSubmit(event);
 
-      expect(axios.post).toHaveBeenCalledTimes(1);
+      await expect(axios.post()).rejects.toThrow(errorMessage);
     });
   });
 
@@ -144,7 +144,6 @@ describe('#handleSubmit', () => {
       let then = jest.fn();
 
       await axios.post.mockImplementationOnce(() => Promise.resolve({ data: data }));
-      console.log(propsTest.history)
 
       wrapper.instance().handleSubmit(event).then(response => {
         expect(propsTest.history.location.pathname).toContain('/account');
