@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PlaylistHeader from "../PlaylistHeader/PlaylistHeader.jsx";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import "./Account.css";
 
 class Account extends Component {
   state = {
@@ -66,10 +67,12 @@ class Account extends Component {
     } else {
       return (
         <div className="account">
-          <button className="button" onClick={this.addPlaylist}>
+          <p className="pageTitle">My Playlists</p>
+          <button className="button patsbutton" onClick={this.addPlaylist}>
             Add Playlist
           </button>
-          <h3 className="pageTitle">My Playlists</h3>
+          <br></br>
+          <br></br>
           <div className="playlists">{elements}</div>
         </div>
       );

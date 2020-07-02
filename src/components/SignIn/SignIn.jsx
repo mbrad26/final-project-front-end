@@ -37,12 +37,34 @@ class SignIn extends Component {
 
   render = () => {
     return (
-      <div className='form-container'>
-        Sign In
-        <form className='signin-form' onSubmit={this.handleSubmit}>
-          <input type='text' value={this.state.username} onChange={this.handleChange} name='username' placeholder='Username' required />
-          <input type='password' value={this.state.password} onChange={this.handleChange} name='password' placeholder='Password' minLength='6' required />
-          <button type="submit" id='signin'>Sign In</button>
+      <div className="form-container">
+        <p>Sign In</p>
+        <form className="signin-form" onSubmit={this.handleSubmit}>
+          <br></br>
+          <input
+            type="text"
+            value={this.state.username}
+            onChange={this.handleChange}
+            name="username"
+            placeholder="Username"
+            required
+          />
+          <br></br>
+          <br></br>
+          <input
+            type="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            name="password"
+            placeholder="Password"
+            minLength="6"
+            required
+          />
+          <br></br>
+          <br></br>
+          <button type="submit" id="signin" className="patsbutton">
+            Sign In
+          </button>
         </form>
       </div>
     );
