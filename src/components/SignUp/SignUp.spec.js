@@ -156,12 +156,10 @@ describe("#handleSubmit", () => {
 
   describe("when signup unsuccessful", () => {
     it("should render '/signup'", async () => {
-      const error = new Error("Sign Up failed!");
-      await axios.post.mockRejectedValueOnce({ status: 401, error: error });
+      const errorMessage = new Error("Sign Up failed!");
+      jest.spyOn(axios, 'post').mockRejectedValue(errorMessage);
 
-      wrapper.instance().handleSubmit(event);
-
-      expect(axios.post).toHaveBeenCalledTimes(1);
+      await expect(axios.post()).rejects.toThrow(errorMessage);
     });
   });
 
