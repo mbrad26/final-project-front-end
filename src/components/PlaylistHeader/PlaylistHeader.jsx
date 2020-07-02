@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import copy from "copy-to-clipboard";
 import axios from "axios";
+import "./PlaylistHeader.css";
 
 class PlaylistHeader extends Component {
   state = {
     id: this.props.id,
     title: this.props.title,
     uuid: this.props.uuid,
-    redirect: null,
   };
 
   delete = async () => {
@@ -21,27 +21,30 @@ class PlaylistHeader extends Component {
   };
 
   edit = () => {
-    this.setState({
-      redirect: "/editPlaylist/" + this.state.uuid,
-    });
+    this.props.history.push("/editPlaylist/" + this.state.uuid);
+  };
+
+  copy = () => {
+    copy(this.state.uuid);
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
-    } else
-      return (
-        <div className="playlistHeader">
-          <h4 className="title">{this.state.title}</h4>
-          <h5 className="uuid">UUID: {this.state.uuid}</h5>
-          <button className="button" onClick={this.delete}>
-            Delete
-          </button>
-          <button className="button" onClick={this.edit}>
-            Edit
-          </button>
-        </div>
-      );
+    return (
+      <div className="playlistHeader">
+        <p className="tik-tok-title">{this.state.title}</p>
+
+        <button className="button patsbutton" onClick={this.delete}>
+          Delete
+        </button>
+        <button className="button patsbutton" onClick={this.edit}>
+          Edit
+        </button>
+        <br></br>
+        <button onClick={this.copy} className="patsbutton uuid">
+          <small>Copy UUID to clipboard</small>
+        </button>
+      </div>
+    );
   }
 }
 

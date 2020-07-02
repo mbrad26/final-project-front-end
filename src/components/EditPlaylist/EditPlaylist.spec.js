@@ -41,7 +41,7 @@ describe("EditPlaylist", () => {
   });
 
   it("contains titles of tiktoks in playlist", () => {
-    expect(wrapper.find(".tik-tok").first().text().includes("testTitle1")).toBe(
+    expect(wrapper.find(".element").first().text().includes("testTitle1")).toBe(
       true
     );
     expect(wrapper.find(".tik-tok").last().text().includes("testTitle2")).toBe(
@@ -111,11 +111,7 @@ describe("EditPlaylist", () => {
   describe("added tiktoks", () => {
     it("contains Added TikToks text", () => {
       expect(
-        wrapper
-          .find(".added-tik-toks")
-          .first()
-          .text()
-          .includes("Added Tik-Toks")
+        wrapper.find(".unsaved").first().text().includes("Unsaved Tik-Toks:")
       ).toBe(true);
     });
     it("adds new tiktok urls to the page", () => {
@@ -124,7 +120,7 @@ describe("EditPlaylist", () => {
         preventDefault: jest.fn(),
       });
       expect(
-        wrapper.find(".added-tik-toks").first().text().includes("changedvalue")
+        wrapper.find(".unsaved").first().text().includes("Unsaved Tik-Toks: 1")
       ).toBe(true);
     });
   });
@@ -132,7 +128,7 @@ describe("EditPlaylist", () => {
   describe("save/update", () => {
     it("has save button", () => {
       expect(
-        wrapper.find(".save-button").text().includes("Save/Update Playlist")
+        wrapper.find(".save-button").text().includes("Click here to save")
       ).toBe(true);
     });
     it("calls save function when pressed", () => {

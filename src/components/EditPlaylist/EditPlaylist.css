@@ -1,0 +1,25 @@
+.edit-playlist {
+  text-align: center;
+}
+
+.added {
+  color: grey;
+}
+
+.tik-tok {
+  border: 1px solid #262626;
+  background-color: #424242;
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  margin: auto;
+  -webkit-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.38);
+  margin: auto;
+  margin-top: 20px;
+}
+
+p {
+  margin: 0px;
+}

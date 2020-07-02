@@ -37,14 +37,17 @@ class SignUp extends Component {
         this.props.handleUserLogInStatus(true);
         this.props.history.push("/account");
       })
-      .catch((error) => {console.log(error)});
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   render = () => {
     return (
       <div className="form-container">
-        Sign Up
+        <p>Sign Up</p>
         <form onSubmit={this.handleSubmit}>
+          <br></br>
           <input
             type="text"
             value={this.state.username}
@@ -53,6 +56,8 @@ class SignUp extends Component {
             placeholder="Username"
             required
           />
+          <br></br>
+          <br></br>
           <input
             type="email"
             value={this.state.email}
@@ -61,6 +66,8 @@ class SignUp extends Component {
             placeholder="Email"
             required
           />
+          <br></br>
+          <br></br>
           <input
             type="password"
             value={this.state.password}
@@ -70,6 +77,8 @@ class SignUp extends Component {
             minLength="6"
             required
           />
+          <br></br>
+          <br></br>
           <input
             type="password"
             value={this.state.password_confirmation}
@@ -79,7 +88,9 @@ class SignUp extends Component {
             minLength="6"
             required
           />
-          <button type="submit" id="signup">
+          <br></br>
+          <br></br>
+          <button type="submit" id="signup" className="patsbutton">
             Sign Up
           </button>
         </form>
