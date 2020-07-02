@@ -144,9 +144,9 @@ describe('#handleSubmit', () => {
       let then = jest.fn();
 
       await axios.post.mockImplementationOnce(() => Promise.resolve({ data: data }));
-      console.log(axios.post.mock.results)
+      console.log(propsTest.history)
 
-      return wrapper.instance().handleSubmit(event).then(response => {
+      wrapper.instance().handleSubmit(event).then(response => {
         expect(propsTest.history.location.pathname).toContain('/account');
         expect(propsTest.handleUserLogInStatus).toHaveBeenCalledWith(true);
       })

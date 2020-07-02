@@ -167,14 +167,14 @@ describe("#handleSubmit", () => {
 
   describe("when sign up successful", () => {
     it("should redirect to '/account'", async () => {
-      // const history = { push: jest.fn() };
-      // const pushSpy = jest.spyOn(history, 'push');
+      let then = jest.fn();
 
-      wrapper.find('button').simulate('submit', event);
-      await axios.post.mockResolvedValue();
+      await axios.post.mockImplementationOnce(() => Promise.resolve({}));
 
-      expect(props.handleUserLogInStatus).toHaveBeenCalledWith(true);
-      // expect(props.history.push).toHaveBeenCalledWith('/account');
+      wrapper.instance().handleSubmit(event).then(response => {
+        expect(props.handleUserLogInStatus).toHaveBeenCalledWith(true);
+        expect(props.history.location.pathname).toContain('/account');
+      });
     });
   });
 });
