@@ -25,7 +25,7 @@ select:focus {
     
   text-align:center;
   overflow:hidden;
-    width:45vh;
+    width:35vh;
  /*   min-height: 500px;*/
 
     /*max-height:178vh;*/
@@ -53,7 +53,7 @@ select:focus {
     border: 0;
 }
 
-video {
+/*video {
   border-radius: 5px;
 }
 
@@ -65,7 +65,7 @@ video {
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
-}
+}*/
 
 
 /*input[type="button"] {
@@ -73,10 +73,13 @@ video {
     box-shadow: none !important;
 } */
 
-.mute {
-  font-size: 200px;
+.mute, .play {
+  font-size: 80px;
 }
 
+.play {
+  font-size: 140px;
+}
 
 .btn-block { 
   color: #ffffff; 
@@ -132,26 +135,35 @@ video {
   transform: translate(-50%, -50%);
 }
 
-.top-right {
-  position: absolute;
-  top: 8px;
-  right: 16px;
+.controls {
   background-color: transparent;
   text-align: center;
   font-weight: bold;
   font-size: 100%;
   text-shadow: 0 1px 0 black;
+/*  font-size: 50px;*/
+}
+
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+/*  background-color: transparent;
+  text-align: center;
+  font-weight: bold;
+  font-size: 100%;
+  text-shadow: 0 1px 0 black;*/
 }
 
 .top-left {
   position: absolute;
   top: 8px;
   left: 16px;
-  background-color: transparent;
+/*  background-color: transparent;
   text-align: center;
   font-weight: bold;
   font-size: 100%;
-  text-shadow: 0 1px 0 black;
+  text-shadow: 0 1px 0 black;*/
 }
 
 .bottom-left {
