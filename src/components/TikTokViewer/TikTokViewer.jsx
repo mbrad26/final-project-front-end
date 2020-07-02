@@ -10,8 +10,9 @@ class TikTokViewer extends Component {
     title: "",
     src: "",
     uuid: this.props.match.params.uuid,
-    playPause: "PLAY",
-    muteUnmute: "UNMUTE"
+    // playPause: "PLAY",
+    playPause: "UNMUTE",
+    muted: "UNMUTE"
   };
 
   handleNext = () => {
@@ -57,9 +58,11 @@ class TikTokViewer extends Component {
     this.setState({
       playing: !this.state.playing
     });
-    this.state.playing ? this.refs.vidRef.pause() : this.refs.vidRef.play();
+    this.state.playing ? this.refs.vidRef.muted=false : this.refs.vidRef.muted=true;
+    // this.state.playing ? this.refs.vidRef.pause() : this.refs.vidRef.play();
     // this.state.playing ? this.refs.vidRef.volume = 1 : this.refs.vidRef.volume = 0;
-    this.state.playing ? this.state.playPause="PLAY" : this.state.playPause="PAUSE"
+    // this.state.playing ? this.state.playPause="PLAY" : this.state.playPause="PAUSE"
+    this.state.playing ? this.state.playPause="MUTE" : this.state.playPause="UNMUTE"
     // this.refs.vidRef.play();
   }
 
@@ -88,7 +91,7 @@ class TikTokViewer extends Component {
           </div>
           
         </div>
-        
+        <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
         <button className="next btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
         
       </div>
