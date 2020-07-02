@@ -7,6 +7,16 @@ select:focus {
   padding: 10px;
 }*/
 
+body {
+  background: black;
+/*        margin:0 auto;
+    
+  text-align:center;
+  overflow:hidden;
+    width:45vh;*/
+
+}
+
 .tik-tok-viewer {
 /*  background: black;
         margin:0 auto;
