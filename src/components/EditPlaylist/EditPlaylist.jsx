@@ -55,8 +55,7 @@ class EditPlaylist extends Component {
         { withCredentials: true }
       )
       .then((response) => {
-        //redirect
-        console.log(response.data);
+        this.props.history.push("/account");
       })
       .catch((error) => console.log(error));
   };
@@ -78,8 +77,7 @@ class EditPlaylist extends Component {
         { withCredentials: true }
       )
       .then((response) => {
-        //redirect
-        console.log(response.data);
+        this.props.history.push("/account");
       })
       .catch((error) => console.log(error));
   };

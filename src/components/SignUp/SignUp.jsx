@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./SignUp.css";
 import axios from "axios";
 
@@ -9,7 +9,6 @@ class SignUp extends Component {
     email: "",
     password: "",
     password_confirmation: "",
-    redirect: null,
   };
 
   handleChange = (event) => {
@@ -20,7 +19,7 @@ class SignUp extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const url = "http://chronomy.herokuapp.com/registrations";
+    const url = "http://localhost:3001";
     await axios
       .post(
         url,
@@ -35,66 +34,57 @@ class SignUp extends Component {
         { withCredentials: true }
       )
       .then((response) => {
-        if (response.data.status === 200) {
-          this.setState({ redirect: "/" });
-        }
+        this.props.handleUserLogInStatus(true);
+        this.props.history.push("/account");
       })
-      .catch(() => console.log("ERROR"));
+      .catch((error) => console.log(error));
   };
 
   render = () => {
-    if (this.state.redirect) {
-      return (
-        <Router>
-          <Redirect to={this.state.redirect} />
-        </Router>
-      );
-    } else {
-      return (
-        <div className="form-container">
-          Sign Up
-          <form onSubmit={this.handleSubmit}>
-            <input
-              type="text"
-              value={this.state.username}
-              onChange={this.handleChange}
-              name="username"
-              placeholder="Username"
-              required
-            />
-            <input
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              name="email"
-              placeholder="Email"
-              required
-            />
-            <input
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              name="password"
-              placeholder="Password"
-              minLength="6"
-              required
-            />
-            <input
-              type="password"
-              value={this.state.password_confirmation}
-              onChange={this.handleChange}
-              name="password_confirmation"
-              placeholder="Password Confirmation"
-              minLength="6"
-              required
-            />
-            <button type="submit" id="signup">
-              Sign Up
-            </button>
-          </form>
-        </div>
-      );
-    }
+    return (
+      <div className="form-container">
+        Sign Up
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            value={this.state.username}
+            onChange={this.handleChange}
+            name="username"
+            placeholder="Username"
+            required
+          />
+          <input
+            type="email"
+            value={this.state.email}
+            onChange={this.handleChange}
+            name="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            name="password"
+            placeholder="Password"
+            minLength="6"
+            required
+          />
+          <input
+            type="password"
+            value={this.state.password_confirmation}
+            onChange={this.handleChange}
+            name="password_confirmation"
+            placeholder="Password Confirmation"
+            minLength="6"
+            required
+          />
+          <button type="submit" id="signup">
+            Sign Up
+          </button>
+        </form>
+      </div>
+    );
   };
 }
 

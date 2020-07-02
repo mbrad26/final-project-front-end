@@ -1,8 +1,9 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { Redirect, BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import SignIn from './SignIn';
 import * as axios from 'axios';
+import { createMemoryHistory } from 'history'
 
 jest.mock('axios');
 
@@ -93,9 +94,7 @@ describe('#handleSubmit', () => {
 
   beforeEach(() => {
     event = { preventDefault: jest.fn() };
-    propsTest = {
-      userLogInStatus: false,
-    };
+    propsTest = { handleUserLogInStatus: jest.fn(), history: createMemoryHistory('/') };
     wrapper = mount(<SignIn {...propsTest} />);
     jest.clearAllMocks();
   });
@@ -129,28 +128,29 @@ describe('#handleSubmit', () => {
   });
 
   describe('when signin unsuccessful', () => {
-    it("should render '/'", () => {
+    it("should render '/'", async () => {
       const error = new Error('Sign In failed!');
-      axios.post.mockRejectedValueOnce({ status: 401, error: error });
+      await axios.post.mockRejectedValueOnce();
 
       wrapper.instance().handleSubmit(event);
 
-      expect(wrapper.containsMatchingElement(<Redirect to={'/account'} />)).toEqual(false);
       expect(axios.post).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('when signin successful', () => {
-    it("should redirect to '/account'", () => {
-      wrapper.setState({ redirect: '/account' });
-      // propsTest.userLogInStatus = true;
-      // wrapper = mount(<SignIn {...propsTest} />);
+    it("should redirect to '/account'", async () => {
+      let data = { "status": 200 };
+      let response = jest.fn(() => data);
+      wrapper.find('button').simulate('submit', event);
+      await axios.post.mockImplementation(() => response);
+      // wrapper.instance().forceUpdate();
 
-      expect(wrapper.containsMatchingElement(
-        <Router>
-          <Redirect to={'/account'} />
-        </Router>
-      )).toEqual(true);
+      console.log(axios.post.mock.results)
+
+      // expect(propsTest.history.location.pathname).toContain('/account');
+      // expect(propsTest.handleUserLogInStatus).toHaveBeenCalledWith(true);
+      expect(axios.post).toHaveBeenCalledTimes(1);
     });
   });
 });

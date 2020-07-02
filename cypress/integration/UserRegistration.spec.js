@@ -1,6 +1,6 @@
 describe('User registration', () => {
   it('register a new user account', () => {
-    cy.visit("http://localhost:3000");
+    cy.visit("http://chronomy.herokuapp.com/registrations");
 
     cy.get('#register-account').click();
     cy.location('pathname').should('eq', '/signup');

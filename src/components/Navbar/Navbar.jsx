@@ -1,32 +1,38 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import './Navbar.css';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import "./Navbar.css";
 
-const Navbar = (props) => {
+class Navbar extends Component {
+  state = {};
 
-  console.log('User userLogInStatus: ' + props.userLogInStatus);
-  if(props.userLogInStatus) {
-    return (
-      <nav>
-        <NavLink to='/'>Home</NavLink>
-        <NavLink to='/' id='sign-out'>Sign Out</NavLink>
-      </nav>
-    );
-  } else {
-    return (
-      <nav>
-        <NavLink to='/'>Home</NavLink>
-        <NavLink to='/signup' id='register-account'>Sign Up</NavLink>
-      </nav>
-    );
+  render() {
+    console.log(this.props.userLogInStatus);
+    if (this.props.userLogInStatus) {
+      return (
+        <nav>
+          <NavLink to="/account">Home</NavLink>
+          <NavLink
+            to="/"
+            id="sign-out"
+            onClick={() => {
+              this.props.handleUserLogInStatus(false);
+            }}
+          >
+            Sign Out
+          </NavLink>
+        </nav>
+      );
+    } else {
+      return (
+        <nav>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/signup" id="register-account">
+            Sign Up
+          </NavLink>
+        </nav>
+      );
+    }
   }
-
-  // return (
-  //     <nav>
-  //       <NavLink to='/'>Home</NavLink>
-  //       <NavLink to='/signup' id='register-account'>Sign Up</NavLink>
-  //     </nav>
-  //   );
 }
 
 export default Navbar;
