@@ -116,7 +116,7 @@ class TikTokViewer extends Component {
             <video className="embed-responsive-item" ref="vidRef" src={this.state.src} loop playsInline autoPlay muted />
             <div className="tik-tok-title bottom-left">{this.state.title}</div>
             <div className="controls">
-              <p className=" mute top-right" onClick={this.muteVideo.bind(this)}>{this.showMute()}</p>
+              <div className="mute-container top-right"><p className=" mute " onClick={this.muteVideo.bind(this)}>{this.showMute()}</p></div>
               <p className=" play centered" onClick={this.playVideo.bind(this)}>{this.showPlay()}</p>
             </div>
           </div>   

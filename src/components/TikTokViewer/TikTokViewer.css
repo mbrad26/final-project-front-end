@@ -86,13 +86,16 @@ video {
 } */
 
 .mute {
+  text-align: left;
+  width: 54px;
+
    transition: 0.4s;
    opacity: 0.5;
-  font-size: 80px;
+  font-size: 48px;
 }
 
 .mute:hover {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .play {
@@ -103,7 +106,7 @@ video {
 }
 
 .play:hover {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .btn-block { 
@@ -176,9 +179,10 @@ video {
 }
 
 .top-right {
+
   position: absolute;
-  top: 8px;
-  right: 16px;
+  top: -8px;
+  right: 8px;
 /*  background-color: transparent;
   text-align: center;
   font-weight: bold;
