@@ -11,7 +11,7 @@ class TikTokViewer extends Component {
     src: "",
     uuid: this.props.match.params.uuid,
     // playPause: "PLAY",
-    playPause: "UNMUTE",
+    playPause: "PAUSE",
     // playPause: "<i className='fas fa-volume-mute'></i>",
     muteUnmute: "UNMUTE",
   };
@@ -59,12 +59,12 @@ class TikTokViewer extends Component {
     this.setState({
       playing: !this.state.playing
     });
-    this.state.playing ? this.refs.vidRef.muted=false : this.refs.vidRef.muted=true;
-    // this.state.playing ? this.refs.vidRef.pause() : this.refs.vidRef.play();
+    // this.state.playing ? this.refs.vidRef.muted=false : this.refs.vidRef.muted=true;
+    this.state.playing ? this.refs.vidRef.pause() : this.refs.vidRef.play();
     // this.state.playing ? this.refs.vidRef.volume = 1 : this.refs.vidRef.volume = 0;
-    // this.state.playing ? this.state.playPause="PLAY" : this.state.playPause="PAUSE"
+    this.state.playing ? this.state.playPause="PLAY" : this.state.playPause="PAUSE"
     // this.state.playing ? this.state.playPause="<i className='fas fa-volume-up'></i>" : this.state.playPause="<i className='fas fa-volume-mute'></i>"
-    this.state.playing ? this.state.playPause="MUTE" : this.state.playPause="UNMUTE"
+    // this.state.playing ? this.state.playPause="MUTE" : this.state.playPause="UNMUTE"
     // this.refs.vidRef.play();
   }
 
@@ -95,7 +95,7 @@ class TikTokViewer extends Component {
         </div>
 
         <button className="next btn btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
-        
+        <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
       </div>
     );
   };
