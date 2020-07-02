@@ -10,6 +10,8 @@ class TikTokViewer extends Component {
     title: "",
     src: "",
     uuid: this.props.match.params.uuid,
+    playPause: "PLAY",
+    muteUnmute: "UNMUTE"
   };
 
   handleNext = () => {
@@ -51,17 +53,42 @@ class TikTokViewer extends Component {
       .catch((error) => console.log(error));
   };
 
+  playVideo() {
+    this.setState({
+      playing: !this.state.playing
+    });
+    this.state.playing ? this.refs.vidRef.pause() : this.refs.vidRef.play();
+    // this.state.playing ? this.refs.vidRef.volume = 1 : this.refs.vidRef.volume = 0;
+    this.state.playing ? this.state.playPause="PLAY" : this.state.playPause="PAUSE"
+    // this.refs.vidRef.play();
+  }
+
+  muteVdeo() {
+    // this.setState({
+    //   muted: !this.state.muted
+    // });
+    // this.state.muted ? this.refs.vidRef.volume = 1 : this.refs.vidRef.volume = 0 ;
+    // this.state.muted ? this.state.muteUnmute="MUTE" : this.state.muteUnmute="UNMUTE"
+    this.refs.vidRef.volume = 1;
+  }
+
+        // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>PLAY</button>
+        // <button className="play btn-block btn-lg" onClick={this.muteVideo.bind(this)}>{this.state.muteUnmute}</button>
+// <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
+        // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
+        
   render = () => {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
         <button type="button" className="previous btn-block btn-lg" onClick={this.handlePrevious}><i class="arrow up"></i></button>  
         <div className="content">
           <div className="embed-responsive embed-responsive-9by16">
-            <video className="embed-responsive-item" src={this.state.src} controls loop />
+            <video className="embed-responsive-item" ref="vidRef" src={this.state.src} loop playsInline autoPlay muted />
             <div className="tik-tok-title bottom-left">{this.state.title}</div>
           </div>
           
         </div>
+        
         <button className="next btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
         
       </div>
