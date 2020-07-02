@@ -10,10 +10,13 @@ class Navbar extends Component {
     if (this.props.userLogInStatus) {
       return (
         <nav>
-          <NavLink to="/account">Home</NavLink>
+          <NavLink to="/account" className="patsbutton nav-button">
+            Home
+          </NavLink>
           <NavLink
             to="/"
             id="sign-out"
+            className="patsbutton nav-button"
             onClick={() => {
               this.props.handleUserLogInStatus(false);
             }}
@@ -36,6 +39,7 @@ class Navbar extends Component {
             >
               Sign Up
             </NavLink>
+            <p className="chronomy">chronomy</p>
           </nav>
           <hr></hr>
         </div>

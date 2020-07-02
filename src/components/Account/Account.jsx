@@ -34,9 +34,7 @@ class Account extends Component {
   };
 
   addPlaylist = () => {
-    this.setState({
-      redirect: "/editPlaylist/new",
-    });
+    this.props.history.push("/editPlaylist/new");
   };
 
   remove_playlist = (uuid) => {
@@ -58,25 +56,22 @@ class Account extends Component {
           title={this.state.userPlaylists[i].title}
           uuid={this.state.userPlaylists[i].uuid}
           remove_playlist={this.remove_playlist}
+          history={this.props.history}
         />
       );
     }
 
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
-    } else {
-      return (
-        <div className="account">
-          <p className="pageTitle">My Playlists</p>
-          <button className="button patsbutton" onClick={this.addPlaylist}>
-            Add Playlist
-          </button>
-          <br></br>
-          <br></br>
-          <div className="playlists">{elements}</div>
-        </div>
-      );
-    }
+    return (
+      <div className="account">
+        <p className="pageTitle">My Playlists</p>
+        <button className="button patsbutton" onClick={this.addPlaylist}>
+          Add Playlist
+        </button>
+        <br></br>
+        <br></br>
+        <div className="playlists">{elements}</div>
+      </div>
+    );
   }
 }
 
