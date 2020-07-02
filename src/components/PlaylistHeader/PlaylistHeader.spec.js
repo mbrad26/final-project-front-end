@@ -19,7 +19,11 @@ describe("App", () => {
 
   it("should contain copy UUID to clipboard which calls copy when clicked", () => {
     expect(
-      wrapper.find(".uuid").first().text().includes("Copy UUID to clipboard")
+      wrapper
+        .find(".uuid")
+        .first()
+        .text()
+        .includes("Copy shareable link to clipboard")
     ).toBe(true);
     // const spy = jest.spyOn(wrapper.instance(), "copy");
     // wrapper.find(".uuid").first().simulate("click");

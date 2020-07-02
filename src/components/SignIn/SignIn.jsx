@@ -29,8 +29,13 @@ class SignIn extends Component {
         { withCredentials: true }
       )
       .then((response) => {
-        this.props.handleUserLogInStatus(true);
-        this.props.history.push("/account");
+        if (response.data.status == 200) {
+          this.props.handleUserLogInStatus(true);
+          this.props.history.push("/account");
+          console.log(response);
+        } else {
+          alert("Incorrect credentials.");
+        }
       })
       .catch((error) => console.log(error));
   };
