@@ -32,11 +32,12 @@ body {
   position: relative;
   color: white;
 
-      margin:0 auto;
+  margin:0px auto;
     
   text-align:center;
   overflow:hidden;
-    width:39vh;
+    width:45vh;
+    /*height: 100%;*/
  /*   min-height: 500px;*/
 
 
@@ -49,6 +50,8 @@ body {
   height: 0;
   padding: 0;
   overflow: hidden;
+  /*padding-left: 30%;*/
+  /*padding: -20%;*/
 }
 
 .embed-responsive-9by16 {

@@ -125,7 +125,7 @@ class TikTokViewer extends Component {
           </div>   
          <p className="next" onClick={this.handleNext}><i className="arrow down"></i></p>
         </div>
-                <style>
+        <style>
           {
             "\
           body{\
