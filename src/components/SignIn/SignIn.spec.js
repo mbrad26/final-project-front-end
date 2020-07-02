@@ -1,8 +1,9 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { Redirect, BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import SignIn from './SignIn';
 import * as axios from 'axios';
+import { createMemoryHistory } from 'history'
 
 jest.mock('axios');
 
@@ -93,9 +94,7 @@ describe('#handleSubmit', () => {
 
   beforeEach(() => {
     event = { preventDefault: jest.fn() };
-    propsTest = {
-      userLogInStatus: false,
-    };
+    propsTest = { handleUserLogInStatus: jest.fn(), history: createMemoryHistory('/') };
     wrapper = mount(<SignIn {...propsTest} />);
     jest.clearAllMocks();
   });
@@ -129,28 +128,27 @@ describe('#handleSubmit', () => {
   });
 
   describe('when signin unsuccessful', () => {
-    it("should render '/'", () => {
-      const error = new Error('Sign In failed!');
-      axios.post.mockRejectedValueOnce({ status: 401, error: error });
+    it("should render '/'", async () => {
+      const errorMessage = new Error("Sign In failed!");
+      jest.spyOn(axios, 'post').mockRejectedValue(errorMessage);
 
       wrapper.instance().handleSubmit(event);
 
-      expect(wrapper.containsMatchingElement(<Redirect to={'/account'} />)).toEqual(false);
-      expect(axios.post).toHaveBeenCalledTimes(1);
+      await expect(axios.post()).rejects.toThrow(errorMessage);
     });
   });
 
   describe('when signin successful', () => {
-    it("should redirect to '/account'", () => {
-      wrapper.setState({ redirect: '/account' });
-      // propsTest.userLogInStatus = true;
-      // wrapper = mount(<SignIn {...propsTest} />);
+    it("should redirect to '/account'", async () => {
+      let data = { "status": 200 };
+      let then = jest.fn();
 
-      expect(wrapper.containsMatchingElement(
-        <Router>
-          <Redirect to={'/account'} />
-        </Router>
-      )).toEqual(true);
+      await axios.post.mockImplementationOnce(() => Promise.resolve({ data: data }));
+
+      wrapper.instance().handleSubmit(event).then(response => {
+        expect(propsTest.history.location.pathname).toContain('/account');
+        expect(propsTest.handleUserLogInStatus).toHaveBeenCalledWith(true);
+      })
     });
   });
 });
