@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import Buttons from "../Buttons/Buttons";
 import "./TikTokViewer.css";
+import { faPlay, faPause, faVolumeUp, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 class TikTokViewer extends Component {
   state = {
@@ -10,8 +13,11 @@ class TikTokViewer extends Component {
     title: "",
     src: "",
     uuid: this.props.match.params.uuid,
-    playPause: "||",
+    playPause: "<FontAwesomeIcon icon={faVolumeUp} />",
+    // playPause: "P",
+
     // muteUnmute: "<i className='fas fa-volume-mute'></i>",
+    // muteUnmute: "<FontAwesomeIcon icon={faPlay} />",
     muteUnmute: "U",
   };
 
@@ -72,7 +78,8 @@ class TikTokViewer extends Component {
       muted: !this.state.muted
     });
     this.state.muted ? this.refs.vidRef.muted=false : this.refs.vidRef.muted=true;
-    this.state.muted ? this.state.muteUnmute="M" : this.state.muteUnmute="U"
+    // this.state.muted ? this.state.muteUnmute="M" : this.state.muteUnmute="U"
+    console.log()
   }
 
         // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>PLAY</button>
@@ -84,6 +91,21 @@ class TikTokViewer extends Component {
         // <button type="button" className="previous btn btn-block btn-lg" onClick={this.handlePrevious}><i class="arrow up"></i></button>  
         // <button className="next btn btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
 
+  showMute() {
+    if (this.state.muted === false){
+      return (<FontAwesomeIcon icon={faVolumeUp} />)
+    } else {
+      return (<FontAwesomeIcon icon={faVolumeMute} />)
+    }
+  }
+
+  showPlay() {
+    if (this.state.playing === true){
+      return (<FontAwesomeIcon icon={faPause} />)
+    } else {
+      return (<FontAwesomeIcon icon={faPlay} />)
+    }
+  }
 
   render = () => {
     return (
@@ -94,10 +116,11 @@ class TikTokViewer extends Component {
             <video className="embed-responsive-item" ref="vidRef" src={this.state.src} loop playsInline autoPlay muted />
             <div className="tik-tok-title bottom-left">{this.state.title}</div>
             <div className="controls">
-              <p className=" mute top-right" onClick={this.muteVideo.bind(this)}>{this.state.muteUnmute}</p>
-              <p className=" play centered" onClick={this.playVideo.bind(this)}>{this.state.playPause}</p>
+              <p className=" mute top-right" onClick={this.muteVideo.bind(this)}>{this.showMute()}</p>
+              <p className=" play centered" onClick={this.playVideo.bind(this)}>{this.showPlay()}</p>
             </div>
-          </div>        
+          </div>   
+          <FontAwesomeIcon icon={faPlay} /><FontAwesomeIcon icon={faPause} /> <FontAwesomeIcon icon={faVolumeUp} /> <FontAwesomeIcon icon={faVolumeMute } />     
          <p className="next" onClick={this.handleNext}><i className="arrow down"></i></p>
         </div>
       </div>
