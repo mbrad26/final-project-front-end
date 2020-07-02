@@ -3,8 +3,18 @@ select:focus {
   outline: none !important;
 }
 
+/*.arrow {
+  padding: 10px;
+}*/
+
 .tik-tok-viewer {
-  background: black;
+/*  background: black;
+        margin:0 auto;
+    
+  text-align:center;
+  overflow:hidden;
+    width:45vh;*/
+
 }
 
 .content {
@@ -12,10 +22,13 @@ select:focus {
   position: relative;
   color: white;
       margin:0 auto;
-    /*max-height:178vh;*/
+    
   text-align:center;
   overflow:hidden;
-    width:35vh;
+    width:45vh;
+ /*   min-height: 500px;*/
+
+    /*max-height:178vh;*/
 }
 
 .embed-responsive {
@@ -60,6 +73,11 @@ video {
     box-shadow: none !important;
 } */
 
+.mute {
+  font-size: 200px;
+}
+
+
 .btn-block { 
   color: #ffffff; 
   background-color: #000000; 
@@ -80,6 +98,7 @@ video {
   border-width: 0 5px 5px 0;
   display: inline-block;
   padding: 10px;
+  margin-top: 23px;
 }
 
 .right {
@@ -117,6 +136,17 @@ video {
   position: absolute;
   top: 8px;
   right: 16px;
+  background-color: transparent;
+  text-align: center;
+  font-weight: bold;
+  font-size: 100%;
+  text-shadow: 0 1px 0 black;
+}
+
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
   background-color: transparent;
   text-align: center;
   font-weight: bold;
