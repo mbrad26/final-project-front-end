@@ -10,8 +10,9 @@ class TikTokViewer extends Component {
     title: "",
     src: "",
     uuid: this.props.match.params.uuid,
-    playPause: "PLAY",
-    muteUnmute: "UNMUTE",
+    playPause: "||",
+    // muteUnmute: "<i className='fas fa-volume-mute'></i>",
+    muteUnmute: "U",
   };
 
   handleNext = () => {
@@ -55,56 +56,50 @@ class TikTokViewer extends Component {
 
   playVideo() {
     this.setState({
-      playing: !this.state.playing,
+      playing: !this.state.playing
     });
+    // this.state.playing ? this.refs.vidRef.muted=false : this.refs.vidRef.muted=true;
     this.state.playing ? this.refs.vidRef.pause() : this.refs.vidRef.play();
     // this.state.playing ? this.refs.vidRef.volume = 1 : this.refs.vidRef.volume = 0;
-    this.state.playing
-      ? (this.state.playPause = "PLAY")
-      : (this.state.playPause = "PAUSE");
+    this.state.playing ? this.state.playPause=">" : this.state.playPause="||"
+    // this.state.playing ? this.state.playPause="<i className='fas fa-volume-up'></i>" : this.state.playPause="<i className='fas fa-volume-mute'></i>"
+    // this.state.playing ? this.state.playPause="MUTE" : this.state.playPause="UNMUTE"
     // this.refs.vidRef.play();
   }
 
-  muteVdeo() {
-    // this.setState({
-    //   muted: !this.state.muted
-    // });
-    // this.state.muted ? this.refs.vidRef.volume = 1 : this.refs.vidRef.volume = 0 ;
-    // this.state.muted ? this.state.muteUnmute="MUTE" : this.state.muteUnmute="UNMUTE"
-    this.refs.vidRef.volume = 1;
+  muteVideo() {
+    this.setState({
+      muted: !this.state.muted
+    });
+    this.state.muted ? this.refs.vidRef.muted=false : this.refs.vidRef.muted=true;
+    this.state.muted ? this.state.muteUnmute="M" : this.state.muteUnmute="U"
   }
 
-  // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>PLAY</button>
-  // <button className="play btn-block btn-lg" onClick={this.muteVideo.bind(this)}>{this.state.muteUnmute}</button>
-  // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
-  // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
+        // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>PLAY</button>
+        // <button className="play btn-block btn-lg" onClick={this.muteVideo.bind(this)}>{this.state.muteUnmute}</button>
+// <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
+        // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
+        //         <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
+
+        // <button type="button" className="previous btn btn-block btn-lg" onClick={this.handlePrevious}><i class="arrow up"></i></button>  
+        // <button className="next btn btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
+
 
   render = () => {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
-        <button
-          type="button"
-          className="previous btn-block btn-lg"
-          onClick={this.handlePrevious}
-        >
-          <i className="arrow up"></i>
-        </button>
         <div className="content">
+        <p className="previous" onClick={this.handlePrevious}><i className="arrow up"></i></p>  
           <div className="embed-responsive embed-responsive-9by16">
-            <video
-              className="embed-responsive-item"
-              ref="vidRef"
-              src={this.state.src}
-              loop
-              playsInline
-            />
+            <video className="embed-responsive-item" ref="vidRef" src={this.state.src} loop playsInline autoPlay muted />
             <div className="tik-tok-title bottom-left">{this.state.title}</div>
-          </div>
+            <div className="controls">
+              <p className=" mute top-right" onClick={this.muteVideo.bind(this)}>{this.state.muteUnmute}</p>
+              <p className=" play centered" onClick={this.playVideo.bind(this)}>{this.state.playPause}</p>
+            </div>
+          </div>        
+         <p className="next" onClick={this.handleNext}><i className="arrow down"></i></p>
         </div>
-
-        <button className="next btn-block btn-lg" onClick={this.handleNext}>
-          <i className="arrow down"></i>
-        </button>
       </div>
     );
   };
