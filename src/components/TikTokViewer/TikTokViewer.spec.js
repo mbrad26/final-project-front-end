@@ -23,11 +23,11 @@ describe("TikTokViewer", () => {
   });
 
   it("should render a div", () => {
-    expect(wrapper.find("div").length).toEqual(1);
+    expect(wrapper.find("div.tik-tok-viewer").length).toEqual(1);
   });
 
   it("should render Buttons component", () => {
-    expect(wrapper.containsMatchingElement(<Buttons />)).toEqual(true);
+    expect(wrapper.find("button").length).toEqual(2);
   });
 
   it("runs component did mount function", () => {
