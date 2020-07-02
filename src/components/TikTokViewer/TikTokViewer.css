@@ -83,12 +83,25 @@ video {
     box-shadow: none !important;
 } */
 
-.mute, .play {
+.mute {
+   transition: 0.4s;
+   opacity: 0.5;
   font-size: 80px;
 }
 
+.mute:hover {
+  opacity: 1;
+}
+
 .play {
+  transition: 0.4s;
+  /*display: none;*/
+  opacity: 0;
   font-size: 140px;
+}
+
+.play:hover {
+  opacity: 1;
 }
 
 .btn-block { 
