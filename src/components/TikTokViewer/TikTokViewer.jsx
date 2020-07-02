@@ -12,7 +12,8 @@ class TikTokViewer extends Component {
     uuid: this.props.match.params.uuid,
     // playPause: "PLAY",
     playPause: "UNMUTE",
-    muted: "UNMUTE"
+    // playPause: "<i className='fas fa-volume-mute'></i>",
+    muteUnmute: "UNMUTE",
   };
 
   handleNext = () => {
@@ -62,17 +63,17 @@ class TikTokViewer extends Component {
     // this.state.playing ? this.refs.vidRef.pause() : this.refs.vidRef.play();
     // this.state.playing ? this.refs.vidRef.volume = 1 : this.refs.vidRef.volume = 0;
     // this.state.playing ? this.state.playPause="PLAY" : this.state.playPause="PAUSE"
+    // this.state.playing ? this.state.playPause="<i className='fas fa-volume-up'></i>" : this.state.playPause="<i className='fas fa-volume-mute'></i>"
     this.state.playing ? this.state.playPause="MUTE" : this.state.playPause="UNMUTE"
     // this.refs.vidRef.play();
   }
 
-  muteVdeo() {
-    // this.setState({
-    //   muted: !this.state.muted
-    // });
-    // this.state.muted ? this.refs.vidRef.volume = 1 : this.refs.vidRef.volume = 0 ;
-    // this.state.muted ? this.state.muteUnmute="MUTE" : this.state.muteUnmute="UNMUTE"
-    this.refs.vidRef.volume = 1;
+  muteVideo() {
+    this.setState({
+      muted: !this.state.muted
+    });
+    this.state.muted ? this.refs.vidRef.muted=false : this.refs.vidRef.muted=true;
+    this.state.muted ? this.state.muteUnmute="MUTE" : this.state.muteUnmute="UNMUTE"
   }
 
         // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>PLAY</button>
@@ -83,16 +84,17 @@ class TikTokViewer extends Component {
   render = () => {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
-        <button type="button" className="previous btn-block btn-lg" onClick={this.handlePrevious}><i class="arrow up"></i></button>  
+        <button type="button" className="previous btn btn-block btn-lg" onClick={this.handlePrevious}><i class="arrow up"></i></button>  
         <div className="content">
           <div className="embed-responsive embed-responsive-9by16">
             <video className="embed-responsive-item" ref="vidRef" src={this.state.src} loop playsInline autoPlay muted />
             <div className="tik-tok-title bottom-left">{this.state.title}</div>
-          </div>
-          
+            <button className="mute btn btn-primary-outline bg-transparent top-right" onClick={this.muteVideo.bind(this)}>{this.state.muteUnmute}</button>
+          </div>        
+         
         </div>
-        <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>{this.state.playPause}</button>
-        <button className="next btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
+
+        <button className="next btn btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
         
       </div>
     );
