@@ -10,9 +10,9 @@ class TikTokViewer extends Component {
     title: "",
     src: "",
     uuid: this.props.match.params.uuid,
-    playPause: "PAUSE",
+    playPause: "||",
     // muteUnmute: "<i className='fas fa-volume-mute'></i>",
-    muteUnmute: "UNMUTE",
+    muteUnmute: "U",
   };
 
   handleNext = () => {
@@ -61,7 +61,7 @@ class TikTokViewer extends Component {
     // this.state.playing ? this.refs.vidRef.muted=false : this.refs.vidRef.muted=true;
     this.state.playing ? this.refs.vidRef.pause() : this.refs.vidRef.play();
     // this.state.playing ? this.refs.vidRef.volume = 1 : this.refs.vidRef.volume = 0;
-    this.state.playing ? this.state.playPause="PLAY" : this.state.playPause="PAUSE"
+    this.state.playing ? this.state.playPause=">" : this.state.playPause="||"
     // this.state.playing ? this.state.playPause="<i className='fas fa-volume-up'></i>" : this.state.playPause="<i className='fas fa-volume-mute'></i>"
     // this.state.playing ? this.state.playPause="MUTE" : this.state.playPause="UNMUTE"
     // this.refs.vidRef.play();
@@ -72,7 +72,7 @@ class TikTokViewer extends Component {
       muted: !this.state.muted
     });
     this.state.muted ? this.refs.vidRef.muted=false : this.refs.vidRef.muted=true;
-    this.state.muted ? this.state.muteUnmute="MUTE" : this.state.muteUnmute="UNMUTE"
+    this.state.muted ? this.state.muteUnmute="M" : this.state.muteUnmute="U"
   }
 
         // <button className="play btn-block btn-lg" onClick={this.playVideo.bind(this)}>PLAY</button>
