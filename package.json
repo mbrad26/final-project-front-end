@@ -24,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "deploy": "npm run build && mv build/index.html build/200.html && surge build chronomy.surge.sh",
+    "staging": "npm run build && mv build/index.html build/200.html && surge build staging.chronomy.net",
+    "deploy": "npm run build && mv build/index.html build/200.html && surge build chronomy.net",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "cypress:open": "cypress open"
