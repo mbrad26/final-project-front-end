@@ -1,6 +1,6 @@
 describe('User Sign In', () => {
   it('a user can sign in', () => {
-    cy.visit("http://localhost:30001/sessions");
+    cy.visit("http://localhost:3000");
 
     cy.get('form.signin-form');
     cy.get('input[name="username"]').type('username');
