@@ -46,6 +46,7 @@ video {
   padding: 20px;
 } 
 
+
 .arrow {
   border: solid white;
   border-width: 0 5px 5px 0;
@@ -95,4 +96,9 @@ video {
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0.6)
     )
+}
+
+body {
+  background: black;
+  color: white;
 }
