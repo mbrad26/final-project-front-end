@@ -113,17 +113,20 @@ class TikTokViewer extends Component {
   render = () => {
     return (
       <div className="tik-tok-viewer" data-cy="tik-tok">
-        <div className="content">
-        <p className="previous" onClick={this.handlePrevious}><i className="arrow up"></i></p>  
-          <div className="embed-responsive embed-responsive-9by16">
-            <video className="embed-responsive-item" ref="vidRef" src={this.state.src} loop playsInline autoPlay muted />
-            <div className="tik-tok-title bottom-left">{this.state.title}</div>
+        <div className="content">  
+          <div className="embed-responsive embed-responsive-9by16 ">
+            <div className="bottom-fade">
+            <video className="embed-responsive-item " ref="vidRef" src={this.state.src} loop playsInline autoPlay muted />
+            </div>
+            <div className="tik-tok-title bottom-left">{this.state.title}<br /><br /><br /></div>
             <div className="controls">
+              <p className="previous top-center" onClick={this.handlePrevious}><i className="arrow up"></i></p>
               <div className="mute-container top-right"><p className=" mute " onClick={this.muteVideo.bind(this)}>{this.showMute()}</p></div>
               <p className=" play centered" onClick={this.playVideo.bind(this)}>{this.showPlay()}</p>
+              <p className="next bottom-center" onClick={this.handleNext}><i className="arrow down"></i></p>
             </div>
           </div>   
-         <p className="next" onClick={this.handleNext}><i className="arrow down"></i></p>
+         
         </div>
         <style>
           {
