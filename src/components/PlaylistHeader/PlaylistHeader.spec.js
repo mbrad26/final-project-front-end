@@ -5,12 +5,16 @@ import { createMemoryHistory } from "history";
 
 describe("App", () => {
   let wrapper;
+  let props;
+  let event;
 
   beforeEach(() => {
-    wrapper = shallow(
-      <PlaylistHeader id="1" title="testTitle" uuid="testUuid" />
+    event = { preventDefault: jest.fn() };
+    props = { history: createMemoryHistory('/'), id: "1", title: "testTitle", uuid: "testUuid" }
+    wrapper = mount(
+      <PlaylistHeader id="1" title="testTitle" uuid="testUuid" history={ createMemoryHistory('/') } />
     );
-    // jest.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   it("should render a div", () => {
@@ -28,28 +32,49 @@ describe("App", () => {
   it("should contain delete button", () => {
     const spy = jest.spyOn(wrapper.instance(), "delete");
     wrapper.instance().forceUpdate();
-    expect(wrapper.find(".button").first().text().includes("Delete")).toBe(
-      true
-    );
+    expect(wrapper.find(".button").first().text().includes("Delete")).toBe(true);
     wrapper.find(".button").first().simulate("click");
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  // it("should contain edit button", () => {
-  //   let props = { history: { push: jest.fn() } };
-  //   wrapper = shallow(<PlaylistHeader {...props} />);
-  //   // const spy = jest.spyOn(wrapper.instance(), "edit");
-  //   wrapper.instance().forceUpdate();
-  //   expect(wrapper.find(".button").last().text().includes("Edit")).toBe(true);
-  //   wrapper.find(".button").last().simulate("click");
-  //   // expect(spy).toHaveBeenCalledTimes(1);
-  //   expect(wrapper.props.history.push).toHaveBeenCalledTimes(1);
-  // });
+  describe("delete", () => {
+
+
+    it("should contain edit button", () => {
+      let history = { push: jest.fn() };
+      // let push = jest.fn();
+      let spy = jest.spyOn(history, 'push');
+
+      console.log(wrapper.instance().props.history);
+      console.log("BUTTON", wrapper.find("button.edit").last());
+
+      wrapper.find("button.edit").simulate("click");
+
+      wrapper.instance().edit(event);
+
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
 
   describe("edit", () => {
-    it("updates redirect in state", () => {
-      wrapper.instance().edit();
-      expect(wrapper.state("redirect")).toEqual("/editPlaylist/testUuid");
+    // it("updates redirect in state", () => {
+    //   wrapper.instance().edit();
+    //   expect(wrapper.state("redirect")).toEqual("/editPlaylist/testUuid");
+    // });
+
+    it("should contain edit button", () => {
+      let history = { push: jest.fn() };
+      // let push = jest.fn();
+      let spy = jest.spyOn(history, 'push');
+
+      console.log(wrapper.instance().props.history);
+      console.log("BUTTON", wrapper.find("button.edit").last());
+
+      wrapper.find("button.edit").simulate("click");
+
+      wrapper.instance().edit(event);
+
+      expect(spy).toHaveBeenCalledTimes(1);
     });
   });
 });

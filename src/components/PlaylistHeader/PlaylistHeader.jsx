@@ -10,7 +10,8 @@ class PlaylistHeader extends Component {
     uuid: this.props.uuid,
   };
 
-  delete = async () => {
+  delete = async (event) => {
+    event.preventDefault();
     let url = "http://chronomy.herokuapp.com/playlists/" + this.state.uuid;
     await axios
       .delete(url, { withCredentials: true })
@@ -20,7 +21,8 @@ class PlaylistHeader extends Component {
       .catch((error) => console.log(error));
   };
 
-  edit = () => {
+  edit = (event) => {
+    event.preventDefault();
     this.props.history.push("/editPlaylist/" + this.state.uuid);
   };
 
@@ -31,10 +33,10 @@ class PlaylistHeader extends Component {
         <p className="uuid">
           <small>UUID: {this.state.uuid}</small>
         </p>
-        <button className="button patsbutton" onClick={this.delete}>
+        <button className="button delete" onClick={this.delete}>
           Delete
         </button>
-        <button className="button patsbutton" onClick={this.edit}>
+        <button className="button edit" onClick={this.edit}>
           Edit
         </button>
       </div>
