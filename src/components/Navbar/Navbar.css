@@ -13,4 +13,9 @@
   right: 0;
   padding-right: 30px;
   padding-top: 4px;
+  color: #bdbdbd;
+}
+
+body {
+  background: #404040;
 }
