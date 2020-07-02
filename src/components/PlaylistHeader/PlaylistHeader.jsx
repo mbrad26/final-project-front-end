@@ -32,12 +32,12 @@ class PlaylistHeader extends Component {
     } else
       return (
         <div className="playlistHeader">
-          <h4 className="title">{this.state.title}</h4>
-          <h5 className="uuid">UUID: {this.state.uuid}</h5>
-          <button className="button" onClick={this.delete}>
+          <p className="title">{this.state.title}</p>
+          <p className="uuid">UUID: {this.state.uuid}</p>
+          <button className="button patsbutton" onClick={this.delete}>
             Delete
           </button>
-          <button className="button" onClick={this.edit}>
+          <button className="button patsbutton" onClick={this.edit}>
             Edit
           </button>
         </div>

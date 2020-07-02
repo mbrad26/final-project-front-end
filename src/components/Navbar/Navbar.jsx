@@ -24,12 +24,21 @@ class Navbar extends Component {
       );
     } else {
       return (
-        <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/signup" id="register-account">
-            Sign Up
-          </NavLink>
-        </nav>
+        <div>
+          <nav className="nav">
+            <NavLink to="/" className="patsbutton nav-button">
+              Home
+            </NavLink>
+            <NavLink
+              to="/signup"
+              id="register-account"
+              className="patsbutton nav-button"
+            >
+              Sign Up
+            </NavLink>
+          </nav>
+          <hr></hr>
+        </div>
       );
     }
   }

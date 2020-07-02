@@ -39,8 +39,9 @@ class SignIn extends Component {
   render = () => {
     return (
       <div className="form-container">
-        Sign In
+        <p>Sign In</p>
         <form className="signin-form" onSubmit={this.handleSubmit}>
+          <br></br>
           <input
             type="text"
             value={this.state.username}
@@ -49,6 +50,8 @@ class SignIn extends Component {
             placeholder="Username"
             required
           />
+          <br></br>
+          <br></br>
           <input
             type="password"
             value={this.state.password}
@@ -58,7 +61,9 @@ class SignIn extends Component {
             minLength="6"
             required
           />
-          <button type="submit" id="signin">
+          <br></br>
+          <br></br>
+          <button type="submit" id="signin" className="patsbutton">
             Sign In
           </button>
         </form>
