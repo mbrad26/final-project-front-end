@@ -53,11 +53,11 @@ select:focus {
     border: 0;
 }
 
-/*video {
+video {
   border-radius: 5px;
 }
 
-.video {position: relative; width: 350px;}
+/*.video {position: relative; width: 350px;}
 .video video {display: block;}
 .video .controls {
   position: absolute; bottom: 0px; z-index: 1; width: 100%; text-align: center;
