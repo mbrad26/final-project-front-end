@@ -13,12 +13,15 @@ class TikTokViewer extends Component {
     title: "",
     src: "",
     uuid: this.props.match.params.uuid,
-    playPause: "<FontAwesomeIcon icon={faVolumeUp} />",
+    playPause: "",
+    playing: true,
     // playPause: "P",
 
     // muteUnmute: "<i className='fas fa-volume-mute'></i>",
     // muteUnmute: "<FontAwesomeIcon icon={faPlay} />",
-    muteUnmute: "U",
+
+    muteUnmute: "",
+    muted: true,
   };
 
   handleNext = () => {
@@ -92,10 +95,10 @@ class TikTokViewer extends Component {
         // <button className="next btn btn-block btn-lg" onClick={this.handleNext}><i class="arrow down"></i></button>
 
   showMute() {
-    if (this.state.muted === false){
-      return (<FontAwesomeIcon icon={faVolumeUp} />)
-    } else {
+    if (this.state.muted === true){
       return (<FontAwesomeIcon icon={faVolumeMute} />)
+    } else {
+      return (<FontAwesomeIcon icon={faVolumeUp} />)
     }
   }
 
