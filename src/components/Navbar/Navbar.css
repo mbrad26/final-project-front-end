@@ -6,3 +6,11 @@
 .nav {
   height: 19px;
 }
+
+.chronomy {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 30px;
+  padding-top: 4px;
+}

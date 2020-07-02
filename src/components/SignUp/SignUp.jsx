@@ -37,13 +37,14 @@ class SignUp extends Component {
         this.props.handleUserLogInStatus(true);
         this.props.history.push("/account");
       })
-      .catch((error) => {console.log(error)});
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   render = () => {
     return (
       <div className="form-container">
-        <br></br>
         <p>Sign Up</p>
         <form onSubmit={this.handleSubmit}>
           <br></br>

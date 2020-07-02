@@ -1,0 +1,8 @@
+.playlistHeader {
+  border: 1px solid #999999;
+  max-width: 300px;
+  padding: 15px;
+  border-radius: 3px;
+  margin: auto;
+  margin-bottom: 20px;
+}
