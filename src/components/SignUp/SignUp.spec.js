@@ -171,7 +171,7 @@ describe("#handleSubmit", () => {
 
       await axios.post.mockImplementationOnce(() => Promise.resolve({}));
 
-      wrapper.instance().handleSubmit(event).then(response => {
+      return wrapper.instance().handleSubmit(event).then(response => {
         expect(props.handleUserLogInStatus).toHaveBeenCalledWith(true);
         expect(props.history.location.pathname).toContain('/account');
       });

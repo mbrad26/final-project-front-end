@@ -19,7 +19,7 @@ class SignUp extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const url = "http://localhost:3001";
+    const url = "http://chronomy.herokuapp.com/registrations";
     await axios
       .post(
         url,

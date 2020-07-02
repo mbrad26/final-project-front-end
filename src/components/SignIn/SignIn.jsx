@@ -18,7 +18,7 @@ class SignIn extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const url = 'http://localhost:3001/sessions';
+    const url = 'http://chronomy.herokuapp.com/sessions';
     await axios.post(url, {
       user: {
         username: this.state.username,
