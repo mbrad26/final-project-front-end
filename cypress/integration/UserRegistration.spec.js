@@ -13,11 +13,11 @@ describe('User registration', () => {
     cy.server();
     cy.route(
       "POST",
-      'http://httpbin.org/post',
+      'http://localhost:3000',
       'fixture:userRegistration'
     )
     cy.get('#signup').click();
 
-    cy.location('pathname').should('eq', '/');
+    cy.location('pathname').should('eq', '/account');
   });
 });

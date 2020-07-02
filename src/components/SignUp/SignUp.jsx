@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./SignUp.css";
 import axios from "axios";
 
@@ -37,7 +37,7 @@ class SignUp extends Component {
         this.props.handleUserLogInStatus(true);
         this.props.history.push("/account");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {console.log(error)});
   };
 
   render = () => {

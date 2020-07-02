@@ -1,8 +1,10 @@
 import React from "react";
-import { Redirect, BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { shallow, mount } from "enzyme";
 import SignUp from "./SignUp";
+import SignIn from "../SignIn/SignIn.jsx";
 import * as axios from "axios";
+import { createMemoryHistory } from 'history'
 
 jest.mock("axios");
 
@@ -115,17 +117,19 @@ describe("SignUp", () => {
 describe("#handleSubmit", () => {
   let wrapper;
   let event;
+  let props;
 
   beforeEach(() => {
     event = { preventDefault: jest.fn() };
-    wrapper = mount(<SignUp />);
+    props = { handleUserLogInStatus: jest.fn(), history: createMemoryHistory('/') }
+    wrapper = mount(<SignUp {...props} />);
     jest.clearAllMocks();
   });
 
   it("should be called when form is being submited", () => {
     const spy = jest.spyOn(wrapper.instance(), "handleSubmit");
-    wrapper.instance().forceUpdate(); //force re-render
-    // wrapper.setState({}) //force re-render
+    wrapper.instance().forceUpdate();
+
     expect(spy).toHaveBeenCalledTimes(0);
 
     wrapper.find("button").simulate("submit", event);
@@ -150,27 +154,27 @@ describe("#handleSubmit", () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  describe("when signin unsuccessful", () => {
-    it("should render '/signup'", () => {
-      const error = new Error("Sign Up failed!");
-      axios.post.mockRejectedValueOnce({ status: 401, error: error });
+  describe("when signup unsuccessful", () => {
+    it("should render '/signup'", async () => {
+      const errorMessage = new Error("Sign Up failed!");
+      jest.spyOn(axios, 'post').mockRejectedValue(errorMessage);
 
       wrapper.instance().handleSubmit(event);
 
-      expect(wrapper.containsMatchingElement(<Redirect to={"/"} />)).toEqual(
-        false
-      );
-      expect(axios.post).toHaveBeenCalledTimes(1);
+      await expect(axios.post()).rejects.toThrow(errorMessage);
     });
   });
 
   describe("when sign up successful", () => {
     it("should redirect to '/account'", async () => {
-      let mockFn = jest.fn();
-      SignUp.prototype.handleUserLoginStatus = mockFn;
-      await axios.post.mockResolvedValueOnce({ status: 200, data: {} });
-      wrapper.instance().handleSubmit(event);
-      expect(global.window.location.pathname).toEqual("/account");
+      let then = jest.fn();
+
+      await axios.post.mockImplementationOnce(() => Promise.resolve({}));
+
+      return wrapper.instance().handleSubmit(event).then(response => {
+        expect(props.handleUserLogInStatus).toHaveBeenCalledWith(true);
+        expect(props.history.location.pathname).toContain('/account');
+      });
     });
   });
 });

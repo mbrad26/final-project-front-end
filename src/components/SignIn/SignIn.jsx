@@ -1,40 +1,39 @@
-import React, { Component } from "react";
-import { Redirect, BrowserRouter as Router } from "react-router-dom";
-import "./SignIn.css";
-import axios from "axios";
+import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import './SignIn.css';
+import axios from 'axios';
 
 class SignIn extends Component {
   state = {
-    username: "",
-    password: "",
-  };
+    username: '',
+    password: '',
+    redirect: null,
+  }
 
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
-    });
-  };
+    })
+  }
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const url = "http://chronomy.herokuapp.com/sessions";
-    await axios
-      .post(
-        url,
-        {
-          user: {
-            username: this.state.username,
-            password: this.state.password,
-          },
-        },
-        { withCredentials: true }
-      )
-      .then((response) => {
-        this.props.handleUserLogInStatus(true);
-        this.props.history.push("/account");
-      })
-      .catch((error) => console.log(error));
-  };
+    const url = 'http://chronomy.herokuapp.com/sessions';
+    await axios.post(url, {
+      user: {
+        username: this.state.username,
+        password: this.state.password,
+      }
+    }, { withCredentials: true }
+  )
+  .then(response => {
+    if (response.data.status === 200) {
+      this.props.handleUserLogInStatus(true);
+      this.props.history.push("/account");
+    }
+  })
+  .catch(() => console.log('ERROR'))
+  }
 
   render = () => {
     return (
@@ -69,7 +68,7 @@ class SignIn extends Component {
         </form>
       </div>
     );
-  };
+  }
 }
 
 export default SignIn;
