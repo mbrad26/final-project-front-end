@@ -2,6 +2,9 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import PlaylistHeader from "./PlaylistHeader.jsx";
 import { createMemoryHistory } from "history";
+import * as axios from 'axios';
+
+jest.mock('axios');
 
 describe("App", () => {
   let wrapper;
@@ -12,7 +15,7 @@ describe("App", () => {
     event = { preventDefault: jest.fn() };
     props = { history: createMemoryHistory('/'), id: "1", title: "testTitle", uuid: "testUuid" }
     wrapper = mount(
-      <PlaylistHeader id="1" title="testTitle" uuid="testUuid" history={ createMemoryHistory('/') } />
+      <PlaylistHeader {...props} />
     );
     jest.clearAllMocks();
   });
@@ -39,42 +42,28 @@ describe("App", () => {
 
   describe("delete", () => {
 
+    it("should make a delete request", async () => {
+      const mockData = { "status": 200, };
 
-    it("should contain edit button", () => {
-      let history = { push: jest.fn() };
-      // let push = jest.fn();
-      let spy = jest.spyOn(history, 'push');
+      wrapper.find('button.delete').simulate('submit', event);
+      axios.post.mockResolvedValue(mockData);
+      wrapper.instance().forceUpdate();
 
-      console.log(wrapper.instance().props.history);
-      console.log("BUTTON", wrapper.find("button.edit").last());
-
-      wrapper.find("button.edit").simulate("click");
-
-      wrapper.instance().edit(event);
-
-      expect(spy).toHaveBeenCalledTimes(1);
+      await expect(axios.post).toHaveBeenCalled();
     });
   });
 
   describe("edit", () => {
-    // it("updates redirect in state", () => {
-    //   wrapper.instance().edit();
-    //   expect(wrapper.state("redirect")).toEqual("/editPlaylist/testUuid");
-    // });
 
     it("should contain edit button", () => {
       let history = { push: jest.fn() };
-      // let push = jest.fn();
-      let spy = jest.spyOn(history, 'push');
 
       console.log(wrapper.instance().props.history);
       console.log("BUTTON", wrapper.find("button.edit").last());
 
-      wrapper.find("button.edit").simulate("click");
+      wrapper.find("button.edit").simulate("submit", event);
 
-      wrapper.instance().edit(event);
-
-      expect(spy).toHaveBeenCalledTimes(1);
+      expect(history.push).toHaveBeenCalled();
     });
   });
 });
