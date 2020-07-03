@@ -39,10 +39,11 @@ describe('App', () => {
 
   it('sends the correct props to the SignIn component', () => {
     wrapper = mount(<App />);
-
     wrapper.setState(propsTest);
 
-    expect(wrapper.find(Route).at(0).find(SignIn).props().userLogInStatus).toBe(propsTest.userLogInStatus);
+    console.log(wrapper.find(Route).at(1).find(SignIn).props());
+
+    expect(wrapper.find(Route).at(1).find(SignIn).props().handleUserLogInStatus).toBe(wrapper.instance().handleUserLogInStatus);
   });
 
   it('should render Navbar component', () => {
