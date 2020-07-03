@@ -95,8 +95,9 @@ video {
 } */
 
 .side {
-  font-size:400px;
-    opacity: 0;
+  font-size:2000%;
+  /*top: 20%;*/
+  opacity: 0;
 }
 
 .previous, .next {

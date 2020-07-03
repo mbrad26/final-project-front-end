@@ -122,9 +122,9 @@ class TikTokViewer extends Component {
             <div className="controls">
               <p className="previous top-center" onClick={this.handlePrevious}><FontAwesomeIcon icon={faCaretUp} /></p>
               <p className=" left-center side" onClick={this.handlePrevious}><FontAwesomeIcon icon={faCaretLeft} /></p>
-              <p className=" play centered" onClick={this.playVideo.bind(this)}>{this.showPlay()}</p>
               <p className="next bottom-center" onClick={this.handleNext}><FontAwesomeIcon icon={faCaretDown} /></p>
               <p className="right-center side" onClick={this.handleNext}><FontAwesomeIcon icon={faCaretRight} /></p>
+              <p className=" play centered" onClick={this.playVideo.bind(this)}>{this.showPlay()}</p>
               <div className="mute-container top-right"><p className=" mute " onClick={this.muteVideo.bind(this)}>{this.showMute()}</p></div>
               </div>
           </div>   
