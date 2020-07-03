@@ -8,6 +8,9 @@ import { MemoryRouter } from 'react-router';
 import SignUp from '../SignUp/SignUp';
 import SignIn from '../SignIn/SignIn.jsx';
 import Error from '../Error/Error.jsx';
+import * as axios from "axios";
+
+jest.mock("axios");
 
 describe('App', () => {
   let wrapper;
@@ -18,7 +21,7 @@ describe('App', () => {
       userLogInStatus: false,
       user: {},
     }
-    wrapper = shallow(<App />);
+    wrapper = shallow(<App {...propsTest}/>);
   });
 
   it("should render a div", () => {
@@ -41,13 +44,21 @@ describe('App', () => {
     wrapper = mount(<App />);
     wrapper.setState(propsTest);
 
-    console.log(wrapper.find(Route).at(1).find(SignIn).props());
-
     expect(wrapper.find(Route).at(1).find(SignIn).props().handleUserLogInStatus).toBe(wrapper.instance().handleUserLogInStatus);
   });
 
   it('should render Navbar component', () => {
     expect(wrapper.containsMatchingElement(<Navbar />)).toEqual(true);
+  });
+
+  describe('#api', () => {
+    it('makes an api request', async () => {
+      let bool = false;
+
+      wrapper.instance().handleUserLogInStatus(bool);
+
+      await expect(axios.delete).toHaveBeenCalled();
+    });
   });
 });
 
