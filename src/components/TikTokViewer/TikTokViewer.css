@@ -94,6 +94,11 @@ video {
     box-shadow: none !important;
 } */
 
+.side {
+  font-size:400px;
+    opacity: 0;
+}
+
 .previous, .next {
      transition: 0.4s;
    opacity: 0.5;
@@ -234,6 +239,26 @@ video {
   left: 0%;
     width: 100%;
   top: 0px;
+  /*right: 8px;*/
+
+}
+
+.left-center {
+
+  position: absolute;
+  left: 0%;
+    height: 100%;
+  bottom: 0px;
+  /*right: 8px;*/
+
+}
+
+.right-center {
+
+  position: absolute;
+  right: 0%;
+    height: 100%;
+  bottom: 0px;
   /*right: 8px;*/
 
 }
