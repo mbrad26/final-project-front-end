@@ -8,7 +8,7 @@ describe("Viewing Tik Tok", () => {
       'fixture:tikTok'
     ).as("tikToks");
 
-    cy.visit("http://localhost:3000");
+    cy.visit("http://localhost:3000/");
 
     cy.wait("@tikToks").then((xhr) => {
       cy.get("[data-cy=tik-tok]").should(
