@@ -1,16 +1,24 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 import PlaylistHeader from "./PlaylistHeader.jsx";
+import { createMemoryHistory } from "history";
+import * as axios from 'axios';
 import copy from "copy-to-clipboard";
+
+jest.mock('axios');
 
 describe("App", () => {
   let wrapper;
+  let props;
+  let event;
 
   beforeEach(() => {
-    wrapper = shallow(
-      <PlaylistHeader id="1" title="testTitle" uuid="testUuid" />
+    event = { preventDefault: jest.fn() };
+    props = { history: createMemoryHistory('/'), id: "1", title: "testTitle", uuid: "testUuid" }
+    wrapper = mount(
+      <PlaylistHeader {...props} />
     );
-    // jest.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   it("should render a div", () => {
@@ -39,23 +47,37 @@ describe("App", () => {
   it("should contain delete button", () => {
     const spy = jest.spyOn(wrapper.instance(), "delete");
     wrapper.instance().forceUpdate();
-    expect(wrapper.find(".button").first().text().includes("Delete")).toBe(
-      true
-    );
+    expect(wrapper.find(".button").first().text().includes("Delete")).toBe(true);
     wrapper.find(".button").first().simulate("click");
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  // it("should contain edit button", () => {
-  //   let props = { history: { push: jest.fn() } };
-  //   wrapper = shallow(<PlaylistHeader {...props} />);
-  //   // const spy = jest.spyOn(wrapper.instance(), "edit");
-  //   wrapper.instance().forceUpdate();
-  //   expect(wrapper.find(".button").last().text().includes("Edit")).toBe(true);
-  //   wrapper.find(".button").last().simulate("click");
-  //   // expect(spy).toHaveBeenCalledTimes(1);
-  //   expect(wrapper.props.history.push).toHaveBeenCalledTimes(1);
-  // });
+  describe("delete", () => {
+
+    it("should make a delete request", async () => {
+      const mockData = { "status": 200, };
+
+      wrapper.find('button.delete').simulate('submit', event);
+      axios.delete.mockResolvedValue(mockData);
+      wrapper.instance().forceUpdate();
+
+      await expect(axios.delete).toHaveBeenCalled();
+    });
+  });
+
+  describe("edit", () => {
+
+    it("should contain edit button", () => {
+      let history = { push: jest.fn() };
+
+      console.log(wrapper.instance().props.history);
+      console.log("BUTTON", wrapper.find("button.edit").last());
+
+      wrapper.find("button.edit").simulate("submit", event);
+
+      expect(history.push).toHaveBeenCalled();
+    });
+  });
 
   // describe("edit", () => {
   //   it("updates redirects when edit clicked", () => {
