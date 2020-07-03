@@ -120,7 +120,11 @@ class EditPlaylist extends Component {
     for (let i = 0; i < this.state.tikToks.length; i++) {
       elements.push(
         <div className="tik-tok element" key={i} id={"tikTok" + i}>
-          <p>{this.tiktok_title_check(this.state.tikToks[i].title)}</p>
+          <p className="title-text">
+            <strong>
+              {this.tiktok_title_check(this.state.tikToks[i].title)}
+            </strong>
+          </p>
           <button
             className="delete-button patsbutton"
             onClick={() => {
@@ -139,7 +143,9 @@ class EditPlaylist extends Component {
           Click here to save
         </button>
         <div className="tik-tok">
-          <label>Playlist Title: {this.state.title}</label>
+          <label className="title-text">
+            Playlist Title: <strong>{this.state.title}</strong>
+          </label>
           <br></br>
           <input
             type="text"
@@ -160,6 +166,7 @@ class EditPlaylist extends Component {
               required
               id="input"
             />
+            <br></br>
             <button type="submit" id="submit" className="patsbutton">
               Click here to add Tik-Tok
             </button>

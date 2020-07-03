@@ -23,7 +23,9 @@ class Navbar extends Component {
           >
             Sign Out
           </NavLink>
-          <p className="chronomy">Chronomy</p>
+          <p className="chronomy">
+            <strong>Chronomy</strong>
+          </p>
         </nav>
       );
     } else {
@@ -40,7 +42,9 @@ class Navbar extends Component {
             >
               Sign Up
             </NavLink>
-            <p className="chronomy">Chronomy</p>
+            <p className="chronomy">
+              <strong>Chronomy</strong>
+            </p>
           </nav>
           <hr></hr>
         </div>
