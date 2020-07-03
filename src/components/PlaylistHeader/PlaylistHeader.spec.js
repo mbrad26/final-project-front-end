@@ -3,6 +3,7 @@ import { shallow, mount } from "enzyme";
 import PlaylistHeader from "./PlaylistHeader.jsx";
 import { createMemoryHistory } from "history";
 import * as axios from 'axios';
+import copy from "copy-to-clipboard";
 
 jest.mock('axios');
 
@@ -24,12 +25,23 @@ describe("App", () => {
     expect(wrapper.find("div.playlistHeader").length).toEqual(1);
   });
 
-  it("should contain uuid", () => {
-    expect(wrapper.find(".uuid").text().includes("UUID: testUuid")).toBe(true);
+  it("should contain copy UUID to clipboard which calls copy when clicked", () => {
+    expect(
+      wrapper
+        .find(".uuid")
+        .first()
+        .text()
+        .includes("Copy shareable link to clipboard")
+    ).toBe(true);
+    // const spy = jest.spyOn(wrapper.instance(), "copy");
+    // wrapper.find(".uuid").first().simulate("click");
+    // expect(spy).toHaveBeenCalledTimes(1);
   });
 
   it("should contain title", () => {
-    expect(wrapper.find(".title").text().includes("testTitle")).toBe(true);
+    expect(
+      wrapper.find(".tik-tok-title").first().text().includes("testTitle")
+    ).toBe(true);
   });
 
   it("should contain delete button", () => {
@@ -46,10 +58,10 @@ describe("App", () => {
       const mockData = { "status": 200, };
 
       wrapper.find('button.delete').simulate('submit', event);
-      axios.post.mockResolvedValue(mockData);
+      axios.delete.mockResolvedValue(mockData);
       wrapper.instance().forceUpdate();
 
-      await expect(axios.post).toHaveBeenCalled();
+      await expect(axios.delete).toHaveBeenCalled();
     });
   });
 
@@ -66,4 +78,11 @@ describe("App", () => {
       expect(history.push).toHaveBeenCalled();
     });
   });
+
+  // describe("edit", () => {
+  //   it("updates redirects when edit clicked", () => {
+  //     wrapper.instance().edit();
+  //     expect(global.window.location.pathname).toEqual("/editPlaylist/testUuid");
+  //   });
+  // });
 });

@@ -34,8 +34,12 @@ class SignUp extends Component {
         { withCredentials: true }
       )
       .then((response) => {
-        this.props.handleUserLogInStatus(true);
-        this.props.history.push("/account");
+        if (response.data.status == 200) {
+          this.props.handleUserLogInStatus(true);
+          this.props.history.push("/account");
+        } else {
+          alert("There was a problem signing up.");
+        }
       })
       .catch((error) => {
         console.log(error);

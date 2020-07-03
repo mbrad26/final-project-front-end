@@ -9,6 +9,7 @@ import SignIn from "../SignIn/SignIn.jsx";
 import Error from "../Error/Error.jsx";
 import Account from "../Account/Account.jsx";
 import EditPlaylist from "../EditPlaylist/EditPlaylist.jsx";
+import axios from "axios";
 
 class App extends Component {
   constructor(props) {
@@ -20,14 +21,31 @@ class App extends Component {
   }
 
   handleUserLogInStatus = (bool) => {
-    this.setState({
-      userLogInStatus: bool,
-    });
+    if (bool == false) {
+      this.api();
+    } else {
+      this.setState({
+        userLogInStatus: bool,
+      });
+    }
+  };
+
+  api = async () => {
+    let url = "http://chronomy.herokuapp.com/logout";
+    await axios
+      .delete(url, { withCredentials: true })
+      .then((response) => {
+        this.setState({
+          userLogInStatus: false,
+        });
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
   };
 
   render = () => {
     return (
-      <div className="app-container">
+      <div className="container">
         <Router>
           <Switch>
             <Route

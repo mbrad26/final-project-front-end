@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "./EditPlaylist.css";
 
 class EditPlaylist extends Component {
   state = {
@@ -118,48 +119,38 @@ class EditPlaylist extends Component {
     let elements = [];
     for (let i = 0; i < this.state.tikToks.length; i++) {
       elements.push(
-        <div className="tik-tok" key={i} id={"tikTok" + i}>
-          <h5>{this.tiktok_title_check(this.state.tikToks[i].title)}</h5>
+        <div className="tik-tok element" key={i} id={"tikTok" + i}>
+          <p>{this.tiktok_title_check(this.state.tikToks[i].title)}</p>
           <button
             className="delete-button patsbutton"
             onClick={() => {
               this.delete(i);
             }}
           >
-            Delete
+            Click here to delete Tik-Tok
           </button>
-        </div>
-      );
-    }
-
-    let added = [];
-    for (let i = 0; i < this.state.newTikToks.length; i++) {
-      added.push(
-        <div className="aded" key={i} id={"added" + i}>
-          <p>{this.state.newTikToks[i]}</p>
         </div>
       );
     }
 
     return (
       <div className="edit-playlist">
-        <label>Playlist Title: </label>
-        <br></br>
-        <br></br>
-        <input
-          type="text"
-          onChange={this.handleChangeTitle}
-          name="titleInput"
-          placeholder={this.state.title}
-          id="title"
-        />
-        <br></br>
-        <br></br>
-        <div className="add">
-          <form onSubmit={this.handleSubmit}>
-            <label>Unsaved TikToks:</label>
-            <br></br>
-            <br></br>
+        <button className="save-button patsbutton" onClick={this.save}>
+          Click here to save
+        </button>
+        <div className="tik-tok">
+          <label>Playlist Title: {this.state.title}</label>
+          <br></br>
+          <input
+            type="text"
+            onChange={this.handleChangeTitle}
+            name="titleInput"
+            placeholder="Change title"
+            id="title"
+          />
+        </div>
+        <div className="tik-tok">
+          <form className="form" onSubmit={this.handleSubmit}>
             <input
               type="text"
               value={this.state.value}
@@ -170,19 +161,14 @@ class EditPlaylist extends Component {
               id="input"
             />
             <button type="submit" id="submit" className="patsbutton">
-              Add
+              Click here to add Tik-Tok
             </button>
           </form>
-          <br></br>
-          <div className="added-tik-toks">
-            <p>Added Tik-Toks:</p>
-            <br></br>
-            <div>{added}</div>
-            <button className="save-button patsbutton" onClick={this.save}>
-              Save/Update Playlist
-            </button>
-          </div>
+          <p className="unsaved">
+            <small>Unsaved Tik-Toks: {this.state.newTikToks.length}</small>
+          </p>
         </div>
+
         {elements}
       </div>
     );

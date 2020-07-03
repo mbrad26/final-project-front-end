@@ -26,10 +26,6 @@ describe("TikTokViewer", () => {
     expect(wrapper.find("div.tik-tok-viewer").length).toEqual(1);
   });
 
-  it("should render Buttons component", () => {
-    expect(wrapper.find("button").length).toEqual(2);
-  });
-
   it("runs component did mount function", () => {
     wrapper = mount(
       <TikTokViewer required={true} match={{ params: { uuid: "new" } }} />

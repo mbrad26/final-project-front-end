@@ -9,8 +9,13 @@
 
 .chronomy {
   position: absolute;
-  top: 0;
+  top: 1px;
   right: 0;
   padding-right: 30px;
   padding-top: 4px;
+  color: #bdbdbd;
+}
+
+body {
+  background: #f5f5f5;
 }
