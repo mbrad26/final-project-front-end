@@ -52,32 +52,32 @@ describe("App", () => {
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  describe("delete", () => {
-
-    it("should make a delete request", async () => {
-      const mockData = { "status": 200, };
-
-      wrapper.find('button.delete').simulate('submit', event);
-      axios.delete.mockResolvedValue(mockData);
-      wrapper.instance().forceUpdate();
-
-      await expect(axios.delete).toHaveBeenCalled();
-    });
-  });
-
-  describe("edit", () => {
-
-    it("should contain edit button", () => {
-      let history = { push: jest.fn() };
-
-      console.log(wrapper.instance().props.history);
-      console.log("BUTTON", wrapper.find("button.edit").last());
-
-      wrapper.find("button.edit").simulate("submit", event);
-
-      expect(history.push).toHaveBeenCalled();
-    });
-  });
+  // describe("delete", () => {
+  //
+  //   it("should make a delete request", async () => {
+  //     const mockData = { "status": 200, };
+  //
+  //     wrapper.find('button.delete').simulate('submit', event);
+  //     axios.delete.mockResolvedValue(mockData);
+  //     wrapper.instance().forceUpdate();
+  //
+  //     await expect(axios.delete).toHaveBeenCalled();
+  //   });
+  // });
+  //
+  // describe("edit", () => {
+  //
+  //   it("should contain edit button", () => {
+  //     let history = { push: jest.fn() };
+  //
+  //     console.log(wrapper.instance().props.history);
+  //     console.log("BUTTON", wrapper.find("button.edit").last());
+  //
+  //     wrapper.find("button").at(1).simulate("submit", event);
+  //
+  //     expect(history.push).toHaveBeenCalled();
+  //   });
+  // });
 
   // describe("edit", () => {
   //   it("updates redirects when edit clicked", () => {

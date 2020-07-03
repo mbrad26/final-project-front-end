@@ -172,14 +172,14 @@ describe("#handleSubmit", () => {
     it("should redirect to '/account'", async () => {
       let then = jest.fn();
 
-      await axios.post.mockImplementationOnce(() => Promise.resolve({}));
+      await axios.post.mockImplementationOnce(() => Promise.resolve({ data: { status: 200 } }));
 
       return wrapper
         .instance()
         .handleSubmit(event)
         .then((response) => {
-          // expect(props.handleUserLogInStatus).toHaveBeenCalledWith(true);
-          // expect(props.history.location.pathname).toContain("/account");
+          expect(props.handleUserLogInStatus).toHaveBeenCalledWith(true);
+          expect(props.history.location.pathname).toContain("/account");
         });
     });
   });
