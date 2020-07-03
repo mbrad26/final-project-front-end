@@ -11,8 +11,13 @@ import Error from '../Error/Error.jsx';
 
 describe('App', () => {
   let wrapper;
+  let propsTest;
 
   beforeEach(() => {
+    propsTest = {
+      userLogInStatus: false,
+      user: {},
+    }
     wrapper = shallow(<App />);
   });
 
@@ -26,26 +31,19 @@ describe('App', () => {
   });
 
   it('sends the correct props to the Navbar component', () => {
-    const propsTest = {
-      userLogInStatus: false,
-      user: {},
-    }
     wrapper.setState(propsTest);
 
     expect(wrapper.find(Navbar).props().userLogInStatus).toBe(propsTest.userLogInStatus);
     expect(wrapper.find(Navbar).props().user).toBe(propsTest.user);
   });
 
-  // it('sends the correct props to the SignIn component', () => {
-  //   wrapper = mount(<App />);
-  //   const propsTest = {
-  //     userLogInStatus: false,
-  //     user: {},
-  //   }
-  //   wrapper.setState(propsTest);
-  //
-  //   expect(wrapper.find(Route).at(0).find(SignIn).props().userLogInStatus).toBe(propsTest.userLogInStatus);
-  // });
+  it('sends the correct props to the SignIn component', () => {
+    wrapper = mount(<App />);
+
+    wrapper.setState(propsTest);
+
+    expect(wrapper.find(Route).at(0).find(SignIn).props().userLogInStatus).toBe(propsTest.userLogInStatus);
+  });
 
   it('should render Navbar component', () => {
     expect(wrapper.containsMatchingElement(<Navbar />)).toEqual(true);
