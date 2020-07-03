@@ -29,7 +29,7 @@ describe("App", () => {
     expect(
       wrapper
         .find(".uuid")
-        .first()
+        .last()
         .text()
         .includes("Copy shareable link to clipboard")
     ).toBe(true);
