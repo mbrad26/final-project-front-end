@@ -8,6 +8,7 @@ import { MemoryRouter } from 'react-router';
 import SignUp from '../SignUp/SignUp';
 import SignIn from '../SignIn/SignIn.jsx';
 import Error from '../Error/Error.jsx';
+import EditPlaylist from "../EditPlaylist/EditPlaylist.jsx";
 import * as axios from "axios";
 
 jest.mock("axios");
@@ -59,10 +60,20 @@ describe('App', () => {
 
         expect(axios.delete).toHaveBeenCalled();
       });
+
+      // it('sets the userLogInStatus to false', () => {
+      //   let bool = false;
+      //   // wrapper = mount(<App />);
+      //   wrapper.instance().handleUserLogInStatus(bool);
+      //
+      //   jest.spyOn(axios, 'delete').mockResolvedValue(() => {});
+      //
+      //   expect(wrapper.instance().state.userLogInStatus).toEqual(false);
+      // });
     });
 
     describe('when true', () => {
-      it('makes an api request', () => {
+      it('sets the userLogInStatus to true', () => {
         let bool = true;
         wrapper.instance().handleUserLogInStatus(bool);
 
@@ -107,4 +118,17 @@ describe('Mounted App', () => {
 
     expect(wrapper.containsMatchingElement(<Error />)).toEqual(true);
   });
+
+  it('should render EditPlaylist component', () => {
+    const wrapper = mount(
+                  <MemoryRouter initialEntries={["/editPlaylist/:uuid"]}>
+                    <Route
+                      path="/editPlaylist/:uuid"
+                      exact
+                      render={(props) => <EditPlaylist {...props} />}
+                    />
+                  </MemoryRouter>
+                );
+    expect(wrapper.containsMatchingElement(<EditPlaylist />)).toEqual(true);
+  })
 });
