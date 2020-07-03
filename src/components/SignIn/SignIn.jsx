@@ -44,7 +44,6 @@ class SignIn extends Component {
     return (
       <div className="form-container">
         <div className="inner">
-          <p>Sign In</p>
           <form className="signin-form" onSubmit={this.handleSubmit}>
             <br></br>
             <input

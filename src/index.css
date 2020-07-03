@@ -9,12 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-body {overflow: hidden; }
-body::-webkit-scrollbar { width: 0 !important; }
-body { overflow: -moz-scrollbars-none; }
-body { -ms-overflow-style: none; }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

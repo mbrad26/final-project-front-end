@@ -1,6 +1,6 @@
 .playlistHeader {
   background-color: #e8e8e8;
-  width: 300px;
+  width: 500px;
   padding: 20px;
   border-radius: 5px;
   margin: auto;
@@ -14,4 +14,6 @@
 .tik-tok-title {
   padding-bottom: 5px;
   color: inherit;
+  font-weight: bold;
+  font-size: 20px;
 }
