@@ -9,6 +9,7 @@ import SignUp from '../SignUp/SignUp';
 import SignIn from '../SignIn/SignIn.jsx';
 import Error from '../Error/Error.jsx';
 import EditPlaylist from "../EditPlaylist/EditPlaylist.jsx";
+import Account from "../Account/Account.jsx";
 import * as axios from "axios";
 
 jest.mock("axios");
@@ -131,4 +132,17 @@ describe('Mounted App', () => {
                 );
     expect(wrapper.containsMatchingElement(<EditPlaylist />)).toEqual(true);
   })
+
+  it('should render Account component', () => {
+    const wrapper = mount(
+                  <MemoryRouter initialEntries={["/account"]}>
+                    <Route
+                      path="/account"
+                      render={(props) => <Account {...props} />}
+                    />
+                  </MemoryRouter>
+                );
+
+    expect(wrapper.containsMatchingElement(<Account />)).toEqual(true);
+  });
 });
