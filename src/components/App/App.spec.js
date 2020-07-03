@@ -17,7 +17,7 @@ describe('App', () => {
   });
 
   it("should render a div", () => {
-    expect(wrapper.find("div.app-container").length).toEqual(1);
+    expect(wrapper.find("div.container").length).toEqual(1);
   });
 
   it('has an initial state', () => {
