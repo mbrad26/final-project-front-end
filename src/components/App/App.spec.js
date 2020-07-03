@@ -62,15 +62,15 @@ describe('App', () => {
         expect(axios.delete).toHaveBeenCalled();
       });
 
-      // it('sets the userLogInStatus to false', () => {
-      //   let bool = false;
-      //   // wrapper = mount(<App />);
-      //   wrapper.instance().handleUserLogInStatus(bool);
-      //
-      //   jest.spyOn(axios, 'delete').mockResolvedValue(() => {});
-      //
-      //   expect(wrapper.instance().state.userLogInStatus).toEqual(false);
-      // });
+      it('sets the userLogInStatus to false', () => {
+        let bool = false;
+        // wrapper = mount(<App />);
+        wrapper.instance().handleUserLogInStatus(bool);
+
+        jest.spyOn(axios, 'delete').mockResolvedValue(() => {});
+
+        expect(wrapper.instance().state.userLogInStatus).toEqual(false);
+      });
     });
 
     describe('when true', () => {
@@ -130,7 +130,7 @@ describe('Mounted App', () => {
                     />
                   </MemoryRouter>
                 );
-    expect(wrapper.containsMatchingElement(<EditPlaylist />)).toEqual(true);
+    expect(wrapper.find(EditPlaylist)).toHaveLength(1);
   })
 
   it('should render Account component', () => {
@@ -143,6 +143,6 @@ describe('Mounted App', () => {
                   </MemoryRouter>
                 );
 
-    expect(wrapper.containsMatchingElement(<Account />)).toEqual(true);
+    expect(wrapper.find(Account)).toHaveLength(1);
   });
 });
