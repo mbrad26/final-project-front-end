@@ -51,13 +51,23 @@ describe('App', () => {
     expect(wrapper.containsMatchingElement(<Navbar />)).toEqual(true);
   });
 
-  describe('#api', () => {
-    it('makes an api request', async () => {
-      let bool = false;
+  describe('#handleUserLogInStatus', () => {
+    describe('when false', () => {
+      it('makes an api request', () => {
+        let bool = false;
+        wrapper.instance().handleUserLogInStatus(bool);
 
-      wrapper.instance().handleUserLogInStatus(bool);
+        expect(axios.delete).toHaveBeenCalled();
+      });
+    });
 
-      await expect(axios.delete).toHaveBeenCalled();
+    describe('when true', () => {
+      it('makes an api request', () => {
+        let bool = true;
+        wrapper.instance().handleUserLogInStatus(bool);
+
+        expect(wrapper.instance().state.userLogInStatus).toEqual(true);
+      });
     });
   });
 });
@@ -76,7 +86,12 @@ describe('Mounted App', () => {
   it("should render SignUp component", () => {
     const wrapper = mount(
       <MemoryRouter initialEntries={["/signup"]}>
-        <Route path="/signup" component={SignUp} />
+        <Route path="/signup" render={(props) => (
+          <SignUp
+            {...props}
+            handleUserLogInStatus={App.prototype.handleUserLogInStatus}
+          />
+        )} />
       </MemoryRouter>
     );
 

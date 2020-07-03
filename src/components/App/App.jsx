@@ -38,7 +38,6 @@ class App extends Component {
         this.setState({
           userLogInStatus: false,
         });
-        console.log(response);
       })
       .catch((error) => console.log(error));
   };
